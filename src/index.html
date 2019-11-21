@@ -3,11 +3,24 @@
   <head>
     <meta charset="utf-8" />
   </head>
+  <style>
+    #container {
+      display: inline-block;
+    }
+  </style>
   <body>
-    <div class="mermaid"></div>
+    <div id="container"></div>
     <script src="../node_modules/mermaid/dist/mermaid.min.js"></script>
     <script>
-      mermaid.initialize({ startOnLoad: true });
+      const container = document.querySelector('#container');
+      const render = (definition, config) =>
+        new Promise((resolve, reject) => {
+          mermaid.initialize({ ...config, startOnLoad: false });
+          mermaid.render('mermaid-svg', definition, svgCode => {
+            container.innerHTML = svgCode;
+            resolve(svgCode);
+          });
+        });
     </script>
   </body>
 </html>
