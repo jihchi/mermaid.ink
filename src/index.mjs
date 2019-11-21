@@ -21,33 +21,46 @@ app.use(
 
 app.use(
   route.get('/img/:encodedCode', async (ctx, encodedCode) => {
-    console.log('start to render: %o', encodedCode);
+    let page;
+    try {
+      console.log('start to render: %o', encodedCode);
 
-    const { page } = ctx;
-    const { code, mermaid: config } = getOptionsFromCode(encodedCode);
+      const { browser } = ctx;
+      const { code, mermaid: config } = getOptionsFromCode(encodedCode);
 
-    console.log('code: %o, config: %o', code, config);
+      console.log('code: %o, config: %o', code, config);
 
-    console.log('invoke mermaid to render SVG in DOM');
-    await page.evaluate(
-      (definition, config) => render(definition, config),
-      code,
-      config
-    );
+      console.log('create new blank page');
+      page = await browser.newPage();
 
-    console.log('select the container');
-    const container = await page.$('#container');
+      console.log('load local mermaid page');
+      await page.goto(`file://${indexHTML}`);
 
-    console.log('take screenshot form container');
-    const image = await container.screenshot({
-      type: 'jpeg',
-      quality: 90,
-      omitBackground: true,
-    });
+      console.log('invoke mermaid to render SVG in DOM');
+      await page.evaluate(
+        (definition, config) => render(definition, config),
+        code,
+        config
+      );
 
-    console.log('respond image size: %o', image.length);
-    ctx.type = 'jpeg';
-    ctx.body = image;
+      console.log('select the container');
+      const container = await page.$('#container');
+
+      console.log('take screenshot form container');
+      const image = await container.screenshot({
+        type: 'jpeg',
+        quality: 90,
+        omitBackground: true,
+      });
+
+      console.log('respond image size: %o', image.length);
+      ctx.type = 'jpeg';
+      ctx.body = image;
+    } catch (e) {
+      throw e;
+    } finally {
+      if (page) await page.close();
+    }
   })
 );
 
@@ -75,14 +88,7 @@ app.use(
         '--disable-sync',
       ],
     });
-
-    console.log('create new blank page');
-    const page = await browser.newPage();
-
-    console.log('load local web page');
-    await page.goto(`file://${indexHTML}`);
-
-    app.context.page = page;
+    app.context.browser = browser;
 
     await app.listen(PORT);
     console.log(`server listening on ${PORT}`);
