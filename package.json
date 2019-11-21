@@ -2,9 +2,9 @@
   "name": "mermaid.ink",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/index.mjs",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node --experimental-modules src/index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/jihchi/mermaid.ink/issues"
   },
-  "homepage": "https://github.com/jihchi/mermaid.ink#readme"
+  "homepage": "https://github.com/jihchi/mermaid.ink#readme",
+  "dependencies": {
+    "koa": "^2.11.0",
+    "koa-route": "^3.2.0",
+    "mermaid": "^8.4.2",
+    "puppeteer": "^2.0.0"
+  }
 }
