@@ -1,3 +1,4 @@
+// copied from https://github.com/mermaidjs/mermaid-live-editor/blob/master/src/utils.js
 function getOptionsFromCode(base64) {
   const theme = 'default';
   const str = Buffer.from(base64, 'base64').toString('utf8');
