@@ -1,6 +1,6 @@
-export function getOptionsFromCode(base64) {
+function getOptionsFromCode(base64) {
   const theme = 'default';
-	const str = Buffer.from(base64, 'base64').toString('utf8');
+  const str = Buffer.from(base64, 'base64').toString('utf8');
   let state;
   try {
     state = JSON.parse(str);
@@ -13,3 +13,7 @@ export function getOptionsFromCode(base64) {
   }
   return state;
 }
+
+module.exports = {
+  getOptionsFromCode,
+};

@@ -1,15 +1,11 @@
-import Koa from 'koa';
-import route from 'koa-route';
-import puppeteer from 'puppeteer';
-import { fileURLToPath } from 'url';
-import { resolve, dirname } from 'path';
-import { getOptionsFromCode } from './shared.mjs';
+const Koa = require('koa');
+const route = require('koa-route');
+const path = require('path');
+const puppeteer = require('puppeteer');
+const { getOptionsFromCode } = require('./shared');
 
 const DEBUG_MODE = process.env.hasOwnProperty('DEBUG_MODE');
-const PORT = process.env.PORT || 3000;
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const indexHTML = resolve(__dirname, './index.html');
+const indexHTML = path.resolve(__dirname, './index.html');
 
 const app = new Koa();
 
@@ -64,8 +60,13 @@ app.use(
   })
 );
 
-(async () => {
+module.exports = async () => {
   let browser;
+  const shutdown = async () => {
+    console.log('shutdown server');
+    if (browser) await browser.close();
+  };
+
   try {
     console.log('launch headless browser instance');
     browser = await puppeteer.launch({
@@ -90,13 +91,16 @@ app.use(
     });
     app.context.browser = browser;
 
-    await app.listen(PORT);
-    console.log(`server listening on ${PORT}`);
+    return {
+      app,
+      shutdown,
+    };
   } catch (e) {
     console.error('*** caught exception ***');
     console.error(e);
-
-    if (browser) await browser.close();
+    await shutdown();
     process.exit(1);
   }
-})();
+
+  return null;
+};
