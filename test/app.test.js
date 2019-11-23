@@ -1,5 +1,5 @@
 const supertest = require('supertest');
-const createApp = require('./app');
+const createApp = require('../src/app');
 
 describe('app', () => {
   let request;
@@ -31,9 +31,9 @@ describe('app', () => {
       '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
     );
     expect(resp.status).toEqual(200);
-    expect(resp.type).toEqual('image/jpeg');
-    expect(resp.body.length).toEqual(17571);
-	});
+		expect(resp.type).toEqual('image/jpeg');
+    expect(resp.body.length).toBeGreaterThan(10000);
+  });
 
   test('GET sequence diagram', async () => {
     const resp = await request.get(
@@ -41,6 +41,6 @@ describe('app', () => {
     );
     expect(resp.status).toEqual(200);
     expect(resp.type).toEqual('image/jpeg');
-    expect(resp.body.length).toEqual(33054);
+    expect(resp.body.length).toBeGreaterThan(10000);
   });
 });

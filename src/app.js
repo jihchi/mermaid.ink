@@ -39,18 +39,18 @@ app.use(
         config
       );
 
-      console.log('select the container');
-      const container = await page.$('#container');
+      console.log('select the svg');
+      const svg = await page.$('#container > svg');
 
       console.log('take screenshot form container');
-      const image = await container.screenshot({
+      const image = await svg.screenshot({
         type: 'jpeg',
         quality: 90,
         omitBackground: true,
       });
 
       console.log('respond image size: %o', image.length);
-      ctx.type = 'jpeg';
+      ctx.type = 'image/jpeg';
       ctx.body = image;
     } catch (e) {
       throw e;

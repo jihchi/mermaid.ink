@@ -1,14 +1,14 @@
 {
   "name": "mermaid.ink",
   "version": "1.0.0",
-	"description": "https://mermain.ink",
-	"engines": {
-		"node": ">= 13.2.0"
-	},
+  "description": "https://mermain.ink",
+  "engines": {
+    "node": ">= 13.2.0"
+  },
   "main": "src/index.js",
   "scripts": {
-		"test:ci": "yarn test --bail --ci",
-		"test:watch": "yarn test --watch",
+    "test:ci": "yarn test --bail --ci",
+    "test:watch": "yarn test --watch",
     "docker:build": "docker build . -t jihchi/mermaid.ink:$npm_package_version",
     "docker:publish": "docker push jihchi/mermaid.ink:$npm_package_version",
     "docker:run": "docker run --rm --cap-add=SYS_ADMIN -p 3000:3000 jihchi/mermaid.ink:$npm_package_version",
