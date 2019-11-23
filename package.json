@@ -4,6 +4,9 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
+    "docker:build": "docker build . -t jihchi/mermaid.ink",
+    "docker:publish": "docker push jihchi/mermaid.ink:$npm_package_version",
+    "docker:run": "docker run --rm --cap-add=SYS_ADMIN -p 3000:3000 jihchi/mermaid.ink",
     "start": "node src/index.js",
     "test": "jest",
     "test:watch": "yarn test --watch"
