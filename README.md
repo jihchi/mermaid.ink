@@ -1,5 +1,7 @@
 # [mermaid.ink](https://mermaid.ink)
 
+[![Travis build status](https://travis-ci.org/jihchi/mermaid.ink.svg?branch=master)](https://travis-ci.org/jihchi/mermaid.ink)
+
 ## Getting Started
 
 ```
