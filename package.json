@@ -1,6 +1,6 @@
 {
   "name": "mermaid.ink",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "https://mermain.ink",
   "engines": {
     "node": ">= 13.2.0"
