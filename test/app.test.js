@@ -43,4 +43,9 @@ describe('app', () => {
     expect(resp.type).toEqual('image/jpeg');
     expect(resp.body.length).toBeGreaterThan(10000);
   });
+
+  test('GET 400 when encoded code is invalid', async () => {
+    const resp = await request.get('/img/eyJjb2RlIjoiZ3JhcGgg');
+    expect(resp.status).toEqual(400);
+  });
 });

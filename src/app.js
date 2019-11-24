@@ -32,12 +32,17 @@ app.use(
       console.log('load local mermaid page');
       await page.goto(`file://${indexHTML}`);
 
-      console.log('invoke mermaid to render SVG in DOM');
-      await page.evaluate(
-        (definition, config) => render(definition, config),
-        code,
-        config
-      );
+      try {
+        console.log('invoke mermaid to render SVG in DOM');
+        await page.evaluate(
+          (definition, config) => render(definition, config),
+          code,
+          config
+        );
+      } catch (e) {
+        console.log('mermaid failed to render SVG: %o', e);
+        ctx.throw(400, 'invalid encoded code');
+      }
 
       console.log('select the svg');
       const svg = await page.$('#container > svg');
