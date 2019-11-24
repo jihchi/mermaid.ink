@@ -7,13 +7,14 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "test:ci": "yarn test --bail --ci",
-    "test:watch": "yarn test --watch",
     "docker:build": "docker build . -t jihchi/mermaid.ink:$npm_package_version",
     "docker:publish": "docker push jihchi/mermaid.ink:$npm_package_version",
     "docker:run": "docker run --rm --cap-add=SYS_ADMIN -p 3000:3000 jihchi/mermaid.ink:$npm_package_version",
+    "format": "prettier --write src \"{app,test}/**/*.js\"",
     "start": "node src/index.js",
-    "test": "jest"
+    "test": "jest",
+    "test:ci": "yarn test --bail --ci",
+    "test:watch": "yarn test --watch"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "jest": "^24.9.0",
+    "prettier": "^1.19.1",
     "supertest": "^4.0.2"
   }
 }
