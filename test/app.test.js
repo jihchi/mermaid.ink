@@ -17,8 +17,9 @@ describe('app', () => {
 
   test('GET /', async () => {
     const resp = await request.get('/');
-    expect(resp.status).toEqual(200);
-    expect(resp.body).toEqual({ hello: 'mermaid.ink' });
+		expect(resp.status).toEqual(200);
+    expect(resp.type).toEqual('text/html');
+    expect(resp.charset).toEqual('utf-8');
   });
 
   test('GET /img without encoded code', async () => {

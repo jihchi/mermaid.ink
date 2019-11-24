@@ -2,20 +2,104 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <title>Mermaid Ink</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-140917669-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-140917669-1');
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/spectre.css/dist/spectre.min.css"
+    />
   </head>
   <body>
-    <div id="container"></div>
-    <script src="../node_modules/mermaid/dist/mermaid.min.js"></script>
-    <script>
-      const container = document.querySelector('#container');
-      const render = (definition, config) =>
-        new Promise((resolve, reject) => {
-          mermaid.initialize({ ...config, startOnLoad: false });
-          mermaid.render('mermaid-svg', definition, svgCode => {
-            container.innerHTML = svgCode;
-            resolve(svgCode);
-          });
-        });
-    </script>
+    <div class="container grid-lg">
+      <div class="columns">
+        <div class="column col-12">
+          <header class="navbar">
+            <section class="navbar-section">
+              <a href="https://mermaid.ink" class="navbar-brand mr-2"
+                >Mermaid Ink</a
+              >
+            </section>
+            <section class="navbar-section">
+              <a
+                href="https://github.com/jihchi/mermaid.ink/issues/"
+                class="btn btn-link"
+                target="_blank"
+                ><img
+                  alt="GitHub issues"
+                  src="https://img.shields.io/github/issues/jihchi/mermaid.ink"
+              /></a>
+            </section>
+          </header>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="columns">
+        <div class="column col-12">
+          <h3>Getting Started</h3>
+          <ol>
+            <li>
+              Go to
+              <a
+                href="https://mermaidjs.github.io/mermaid-live-editor/"
+                target="_blank"
+                >mermaid-live-editor</a
+              >
+            </li>
+            <li>
+              Once you have finished the chart on
+              <a
+                href="https://mermaidjs.github.io/mermaid-live-editor/"
+                target="_blank"
+                >mermaid-live-editor</a
+              >, you'll get a base64 encoded string from browser URL, for
+              example:
+              <pre
+                class="code"
+                data-lang="URL"
+              ><code><a href="https://mermaidjs.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ">https://mermaidjs.github.io/mermaid-live-editor/#/edit/<mark>eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ</mark></a></code></pre>
+            </li>
+            <li>
+              Copy the base64 encoded string, append after
+              <code>https://mermaid.ink/img/</code>. for example, base64 encoded
+              string from above is:
+              <pre
+                class="code"
+                data-lang="base64"
+              ><code><mark>eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ</mark></code></pre>
+              then your URL of image would be:
+              <pre
+                class="code"
+                data-lang="URL"
+              ><code><a href="/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ">https://mermaid.ink/img/<mark>eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ</mark></a></code></pre>
+            </li>
+            <li>
+              You could embed it like an image:
+              <pre
+                class="code"
+                data-lang="HTML"
+              ><code>&lt;img src="https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ" /&gt;</code></pre>
+              <img
+                class="img-responsive"
+                src="/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ"
+                alt="mermaid chart example"
+              />
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

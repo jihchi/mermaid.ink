@@ -1,22 +1,27 @@
 const Koa = require('koa');
+const { promises: fs } = require('fs');
 const route = require('koa-route');
 const path = require('path');
 const puppeteer = require('puppeteer');
 const { getOptionsFromCode } = require('./shared');
 
 const DEBUG_MODE = process.env.hasOwnProperty('DEBUG_MODE');
-const indexHTML = path.resolve(__dirname, './index.html');
+const indexHTML = fs.readFile(path.resolve(__dirname, './index.html'), {
+  encoding: 'utf-8',
+});
+const mermaidHTML = path.resolve(__dirname, './mermaid.html');
 
 const app = new Koa();
 
 app.use(
-  route.get('/', async (ctx, next) => {
-    ctx.body = { hello: 'mermaid.ink' };
+  route.get('/', async (ctx, _next) => {
+    ctx.type = 'text/html';
+    ctx.body = await indexHTML;
   })
 );
 
 app.use(
-  route.get('/img/:encodedCode', async (ctx, encodedCode) => {
+  route.get('/img/:encodedCode', async (ctx, encodedCode, _next) => {
     let page;
     try {
       console.log('start to render: %o', encodedCode);
@@ -30,7 +35,7 @@ app.use(
       page = await browser.newPage();
 
       console.log('load local mermaid page');
-      await page.goto(`file://${indexHTML}`);
+      await page.goto(`file://${mermaidHTML}`);
 
       try {
         console.log('invoke mermaid to render SVG in DOM');

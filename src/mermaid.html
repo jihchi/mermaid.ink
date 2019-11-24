@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="../node_modules/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      const container = document.querySelector('#container');
+      const render = (definition, config) =>
+        new Promise((resolve, reject) => {
+          mermaid.initialize({ ...config, startOnLoad: false });
+          mermaid.render('mermaid-svg', definition, svgCode => {
+            container.innerHTML = svgCode;
+            resolve(svgCode);
+          });
+        });
+    </script>
+  </body>
+</html>
