@@ -1,4 +1,5 @@
 const Koa = require('koa');
+const createDebug = require('debug');
 const { promises: fs } = require('fs');
 const route = require('koa-route');
 const path = require('path');
@@ -10,7 +11,7 @@ const indexHTML = fs.readFile(path.resolve(__dirname, './index.html'), {
   encoding: 'utf-8',
 });
 const mermaidHTML = path.resolve(__dirname, './mermaid.html');
-
+const debug = createDebug('app:server');
 const app = new Koa();
 
 app.use(
@@ -24,42 +25,42 @@ app.use(
   route.get('/img/:encodedCode', async (ctx, encodedCode, _next) => {
     let page;
     try {
-      console.log('start to render: %o', encodedCode);
+      debug('start to render: %o', encodedCode);
 
       const { browser } = ctx;
       const { code, mermaid: config } = getOptionsFromCode(encodedCode);
 
-      console.log('code: %o, config: %o', code, config);
+      debug('code: %o, config: %o', code, config);
 
-      console.log('create new blank page');
+      debug('create new blank page');
       page = await browser.newPage();
 
-      console.log('load local mermaid page');
+      debug('load local mermaid page');
       await page.goto(`file://${mermaidHTML}`);
 
       try {
-        console.log('invoke mermaid to render SVG in DOM');
+        debug('invoke mermaid to render SVG in DOM');
         await page.evaluate(
           (definition, config) => render(definition, config),
           code,
           config
         );
       } catch (e) {
-        console.log('mermaid failed to render SVG: %o', e);
+        debug('mermaid failed to render SVG: %o', e);
         ctx.throw(400, 'invalid encoded code');
       }
 
-      console.log('select the svg');
+      debug('select the svg');
       const svg = await page.$('#container > svg');
 
-      console.log('take screenshot form container');
+      debug('take screenshot form container');
       const image = await svg.screenshot({
         type: 'jpeg',
         quality: 90,
         omitBackground: true,
       });
 
-      console.log('respond image size: %o', image.length);
+      debug('respond image size: %o', image.length);
       ctx.type = 'image/jpeg';
       ctx.body = image;
     } catch (e) {
@@ -73,12 +74,12 @@ app.use(
 module.exports = async () => {
   let browser;
   const shutdown = async () => {
-    console.log('shutdown server');
+    debug('shutdown server');
     if (browser) await browser.close();
   };
 
   try {
-    console.log('launch headless browser instance');
+    debug('launch headless browser instance');
     browser = await puppeteer.launch({
       headless: !DEBUG_MODE,
       devtools: DEBUG_MODE,
@@ -106,8 +107,8 @@ module.exports = async () => {
       shutdown,
     };
   } catch (e) {
-    console.error('*** caught exception ***');
-    console.error(e);
+    debug('*** caught exception ***');
+    debug(e);
     await shutdown();
     process.exit(1);
   }

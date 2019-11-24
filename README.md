@@ -11,7 +11,7 @@
 git clone https://github.com/jihchi/mermaid.ink.git
 cd mermaid.ink
 yarn
-yarn start
+DEBUG=app:* yarn start
 ```
 
 Open `demo.html` in your browser.
