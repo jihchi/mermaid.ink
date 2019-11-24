@@ -1,6 +1,6 @@
 {
   "name": "mermaid.ink",
-  "version": "1.0.2",
+  "version": "1.2.0",
   "description": "https://mermain.ink",
   "engines": {
     "node": ">= 13"
