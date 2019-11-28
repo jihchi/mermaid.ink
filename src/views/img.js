@@ -1,5 +1,7 @@
 const createDebug = require('debug');
-const { openMermaidPage, renderSVG, getSVG } = require('../shared');
+const openMermaidPage = require('../shared/openMermaidPage');
+const renderSVG = require('../shared/renderSVG');
+const getSVG = require('../shared/getSVG');
 
 const debug = createDebug('app:img');
 

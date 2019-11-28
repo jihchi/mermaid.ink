@@ -1,7 +1,7 @@
 const { promises: fs } = require('fs');
 const path = require('path');
 
-const indexHTML = fs.readFile(path.resolve(__dirname, '../index.html'), {
+const indexHTML = fs.readFile(path.resolve(__dirname, '../static/index.html'), {
   encoding: 'utf-8',
 });
 
