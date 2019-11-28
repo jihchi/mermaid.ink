@@ -1,10 +1,43 @@
 const createDebug = require('debug');
-const getEncodedCodeFromURL = require('../shared/getEncodedCodeFromURL');
+const pathToRegexp = require('path-to-regexp');
 const openMermaidPage = require('../shared/openMermaidPage');
 const renderSVG = require('../shared/renderSVG');
 const getSVG = require('../shared/getSVG');
 
 const debug = createDebug('app:services:oembed');
+
+const parseAndValidateURL = inputURL => {
+  let url;
+
+  try {
+    url = new URL(inputURL);
+  } catch (e) {
+    debug('invalid URL: %o', e);
+    throw new Error('Invalid URL');
+  }
+
+  const { protocol, hostname } = url;
+
+  if (protocol !== 'https:') {
+    throw new Error('URL protocol supported: https');
+  } else if (hostname !== 'mermaid.ink') {
+    throw new Error('URL hostname supported: mermaid.ink');
+  }
+
+  return url;
+};
+
+const getEncodedCodeFromURL = ({ pathname }) => {
+  const regexp = pathToRegexp('/img/:encodedCode');
+  const matches = regexp.exec(pathname);
+
+  if (!matches) {
+    throw new Error('URL pathname supported: /img/:code, /svg/:code');
+  }
+
+  const [, encodedCode] = matches;
+  return encodedCode;
+};
 
 module.exports = async (ctx, _next) => {
   const {
@@ -16,7 +49,13 @@ module.exports = async (ctx, _next) => {
     return;
   }
 
-  const encodedCode = getEncodedCodeFromURL(url);
+  let encodedCode = '';
+  try {
+    encodedCode = getEncodedCodeFromURL(parseAndValidateURL(url));
+  } catch (e) {
+    ctx.throw(404, `${e}`);
+    return;
+  }
   let page;
   try {
     page = await openMermaidPage(ctx);

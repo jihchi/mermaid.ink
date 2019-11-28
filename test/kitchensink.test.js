@@ -29,6 +29,40 @@ describe('app', () => {
       expect(resp.text).toMatchInlineSnapshot(`"query \\"url\\" is required"`);
     });
 
+    test('returns 404 when url is invalid', async () => {
+      const url = encodeURIComponent('abc');
+      const resp = await request.get(`/services/oembed?url=${url}`);
+      expect(resp.status).toEqual(404);
+      expect(resp.text).toMatchInlineSnapshot(`"Error: Invalid URL"`);
+    });
+
+    test('returns 404 when protocol is unsupported', async () => {
+      const url = encodeURIComponent('http://mermaid.ink');
+      const resp = await request.get(`/services/oembed?url=${url}`);
+      expect(resp.status).toEqual(404);
+      expect(resp.text).toMatchInlineSnapshot(
+        `"Error: URL protocol supported: https"`
+      );
+    });
+
+    test('returns 404 when hostname is unsupported', async () => {
+      const url = encodeURIComponent('https://github.com');
+      const resp = await request.get(`/services/oembed?url=${url}`);
+      expect(resp.status).toEqual(404);
+      expect(resp.text).toMatchInlineSnapshot(
+        `"Error: URL hostname supported: mermaid.ink"`
+      );
+    });
+
+    test('returns 404 when pathname is unsupported', async () => {
+      const url = encodeURIComponent('https://mermaid.ink/foo/bar');
+      const resp = await request.get(`/services/oembed?url=${url}`);
+      expect(resp.status).toEqual(404);
+      expect(resp.text).toMatchInlineSnapshot(
+        `"Error: URL pathname supported: /img/:code, /svg/:code"`
+      );
+    });
+
     test('returns correct response', async () => {
       const url = encodeURIComponent(
         'https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtBXSAtLT4gQihCKVxuXHRcdCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19'
