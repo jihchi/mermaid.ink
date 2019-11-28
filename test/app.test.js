@@ -31,7 +31,7 @@ describe('app', () => {
 
     test('returns correct response', async () => {
       const url = encodeURIComponent(
-        'https://mermaid.ink/services/oembed?url=https%3A%2F%2Fmermaid.ink%2Fimg%2FeyJjb2RlIjoiZ3JhcGggVERcbiAgQVtBXSAtLT4gQihCKVxuXHRcdCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19'
+        'https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtBXSAtLT4gQihCKVxuXHRcdCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19'
       );
       const resp = await request.get(`/services/oembed?url=${url}`);
 
@@ -40,13 +40,13 @@ describe('app', () => {
       expect(resp.charset).toEqual('utf-8');
       expect(resp.body).toMatchInlineSnapshot(`
         Object {
-          "height": 600,
+          "height": 142,
           "provider_name": "Mermaid Ink",
           "provider_url": "https://mermaid.ink",
           "type": "photo",
-          "url": "https://mermaid.ink/services/oembed?url=https%3A%2F%2Fmermaid.ink%2Fimg%2FeyJjb2RlIjoiZ3JhcGggVERcbiAgQVtBXSAtLT4gQihCKVxuXHRcdCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19",
+          "url": "https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtBXSAtLT4gQihCKVxuXHRcdCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19",
           "version": "1.0",
-          "width": 800,
+          "width": 47.5625,
         }
       `);
     });
