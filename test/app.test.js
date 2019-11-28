@@ -17,9 +17,39 @@ describe('app', () => {
 
   test('GET /', async () => {
     const resp = await request.get('/');
-		expect(resp.status).toEqual(200);
+    expect(resp.status).toEqual(200);
     expect(resp.type).toEqual('text/html');
     expect(resp.charset).toEqual('utf-8');
+  });
+
+  describe('GET /services/oembed', () => {
+    test('returns 400 when url is missing', async () => {
+      const resp = await request.get('/services/oembed');
+      expect(resp.status).toEqual(400);
+      expect(resp.text).toMatchInlineSnapshot(`"query \\"url\\" is required"`);
+    });
+
+    test('returns correct response', async () => {
+      const url = encodeURIComponent(
+        'https://mermaid.ink/services/oembed?url=https%3A%2F%2Fmermaid.ink%2Fimg%2FeyJjb2RlIjoiZ3JhcGggVERcbiAgQVtBXSAtLT4gQihCKVxuXHRcdCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19'
+      );
+      const resp = await request.get(`/services/oembed?url=${url}`);
+
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('application/json');
+      expect(resp.charset).toEqual('utf-8');
+      expect(resp.body).toMatchInlineSnapshot(`
+        Object {
+          "height": 600,
+          "provider_name": "Mermaid Ink",
+          "provider_url": "https://mermaid.ink",
+          "type": "photo",
+          "url": "https://mermaid.ink/services/oembed?url=https%3A%2F%2Fmermaid.ink%2Fimg%2FeyJjb2RlIjoiZ3JhcGggVERcbiAgQVtBXSAtLT4gQihCKVxuXHRcdCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19",
+          "version": "1.0",
+          "width": 800,
+        }
+      `);
+    });
   });
 
   test('GET /img without encoded code', async () => {

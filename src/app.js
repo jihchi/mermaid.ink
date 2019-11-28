@@ -22,6 +22,30 @@ app.use(
 );
 
 app.use(
+  route.get('/services/oembed', async (ctx, _next) => {
+    const {
+      query: { url = '' },
+    } = ctx;
+
+    if (!url) {
+      ctx.throw(400, 'query "url" is required');
+      return;
+    }
+
+    ctx.type = 'application/json';
+    ctx.body = {
+      version: '1.0',
+      type: 'photo',
+      provider_name: 'Mermaid Ink',
+      provider_url: 'https://mermaid.ink',
+      url,
+      width: 800,
+      height: 600,
+    };
+  })
+);
+
+app.use(
   route.get('/img/:encodedCode', async (ctx, encodedCode, _next) => {
     let page;
     try {
