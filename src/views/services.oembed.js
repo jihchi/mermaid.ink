@@ -43,7 +43,6 @@ module.exports = async (ctx, _next) => {
   const {
     query: { url = '' },
   } = ctx;
-
   if (!url) {
     ctx.throw(400, 'query "url" is required');
     return;
@@ -55,7 +54,8 @@ module.exports = async (ctx, _next) => {
   } catch (e) {
     ctx.throw(404, `${e}`);
     return;
-  }
+	}
+
   let page;
   try {
     page = await openMermaidPage(ctx);
