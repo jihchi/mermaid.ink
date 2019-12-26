@@ -16,6 +16,31 @@ DEBUG=app:* yarn start
 
 Open `demo.html` in your browser.
 
+## Demo
+
+Given a mermaid code: 
+
+```
+graph TD
+  A[Christmas] -->|Get money| B(Go shopping)
+  B --> C{Let me think}
+  C -->|One| D[Laptop]
+  C -->|Two| E[iPhone]
+  C -->|Three| F[fa:fa-car Car]
+```
+
+Paste it onto [mermaid-live-editor](https://mermaid-js.github.io/mermaid-live-editor), you'll get a encoded string:
+
+```
+eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ
+```
+
+Append encoded string to service URL, for example `https://mermaid.ink/img/<encoded_string>`, you'll get an image:
+
+![Flowchart](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ)
+
+You could embed this image everywhere you want.
+
 ## Test
 
 ```
