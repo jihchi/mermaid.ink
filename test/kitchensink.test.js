@@ -73,14 +73,14 @@ describe('app', () => {
       expect(resp.type).toEqual('application/json');
       expect(resp.charset).toEqual('utf-8');
       expect(resp.body).toMatchObject({
-        height: 142,
+        height:expect.any(Number),
         provider_name: 'Mermaid Ink',
         provider_url: 'https://mermaid.ink',
         type: 'photo',
         url:
           'https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtBXSAtLT4gQihCKVxuXHRcdCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19',
         version: '1.0',
-        width: 46.671875,
+        width: expect.any(Number),
       });
     });
   });
