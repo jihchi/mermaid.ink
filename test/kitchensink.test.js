@@ -80,7 +80,7 @@ describe('app', () => {
         url:
           'https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtBXSAtLT4gQihCKVxuXHRcdCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19',
         version: '1.0',
-        width: 47.5625,
+        width: 46.671875,
       });
     });
   });
