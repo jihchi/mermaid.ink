@@ -1,8 +1,8 @@
 const createDebug = require('debug');
 const pathToRegexp = require('path-to-regexp');
-const openMermaidPage = require('../shared/openMermaidPage');
-const renderSVG = require('../shared/renderSVG');
-const getSVG = require('../shared/getSVG');
+const openMermaidPage = require('openMermaidPage');
+const renderSVG = require('renderSVG');
+const getSVG = require('getSVG');
 
 const debug = createDebug('app:services:oembed');
 

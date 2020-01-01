@@ -3,8 +3,8 @@ const createDebug = require('debug');
 const route = require('koa-route');
 const puppeteer = require('puppeteer');
 const views = require('./views');
+const DEBUG_MODE = require('debugMode');
 
-const DEBUG_MODE = process.env.hasOwnProperty('DEBUG_MODE');
 const debug = createDebug('app:main');
 const app = new Koa();
 

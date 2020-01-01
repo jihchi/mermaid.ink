@@ -1,7 +1,8 @@
 const createDebug = require('debug');
-const openMermaidPage = require('../shared/openMermaidPage');
-const renderSVG = require('../shared/renderSVG');
-const getSVG = require('../shared/getSVG');
+const openMermaidPage = require('openMermaidPage');
+const renderSVG = require('renderSVG');
+const getSVG = require('getSVG');
+const DEBUG_MODE = require('debugMode');
 
 const debug = createDebug('app:img');
 
@@ -34,6 +35,8 @@ module.exports = async (ctx, encodedCode, _next) => {
     ctx.type = 'image/jpeg';
     ctx.body = image;
   } finally {
-    if (page) await page.close();
+    if (!DEBUG_MODE) {
+      if (page) await page.close();
+    }
   }
 };
