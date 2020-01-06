@@ -26,19 +26,25 @@ module.exports = async () => {
       devtools: DEBUG_MODE,
       // https://peter.sh/experiments/chromium-command-line-switches/
       args: [
-        // Disables syncing browser data to a Google Account.
-        '--disable-sync',
-        // Skip First Run tasks, whether or not it's actually the First Run.
-        '--no-first-run',
-        // Prevent infobars from appearing.
-        '--disable-infobars',
-        // Disable task throttling of timer tasks from background pages.
-        '--disable-background-timer-throttling',
-        '--disable-backgrounding-occluded-windows',
-        // Prevent renderer process backgrounding when set.
-        '--disable-renderer-backgrounding',
+        '--disable-background-timer-throttling', // Disable task throttling of timer tasks from background pages.
+        '--disable-backgrounding-occluded-windows', // Prevent renderer process backgrounding when set.
         '--disable-extensions',
-        '--disable-sync',
+        '--disable-infobars', // Prevent infobars from appearing.
+        '--disable-notifications',
+        '--disable-offer-store-unmasked-wallet-cards',
+        '--disable-offer-upload-credit-cards',
+        '--disable-renderer-backgrounding',
+        '--disable-sync', // Disables syncing browser data to a Google Account.
+        '--enable-async-dns',
+        '--enable-simple-cache-backend',
+        '--enable-tcp-fast-open',
+        '--media-cache-size=33554432',
+        '--no-default-browser-check',
+        '--no-first-run', // Skip First Run tasks, whether or not it's actually the First Run.
+        '--no-pings',
+        '--no-sandbox',
+        '--no-zygote',
+        '--prerender-from-omnibox=disabled',
       ],
     });
     app.context.browser = browser;
