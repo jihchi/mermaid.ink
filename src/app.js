@@ -28,6 +28,7 @@ module.exports = async () => {
       args: [
         '--disable-background-timer-throttling', // Disable task throttling of timer tasks from background pages.
         '--disable-backgrounding-occluded-windows', // Prevent renderer process backgrounding when set.
+        '--disable-dev-shm-usage',
         '--disable-extensions',
         '--disable-infobars', // Prevent infobars from appearing.
         '--disable-notifications',
