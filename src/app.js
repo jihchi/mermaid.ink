@@ -13,6 +13,11 @@ app.use(route.get('/services/oembed', views.servicesOembed));
 app.use(route.get('/img/:encodedCode', views.img));
 
 async function setup() {
+  if (app.context.shutdown) {
+		debug("application is shutting down, won't re-launch browser");
+		return;
+  }
+
   debug('launch headless browser instance');
 
   app.context.browser = await puppeteer.launch({
@@ -48,6 +53,7 @@ async function setup() {
 
 async function shutdown() {
 	debug('shutdown server');
+	app.context.shutdown = true;
 
   if (app.context.browser) {
     debug('shutdown browser');
