@@ -2,7 +2,6 @@ const createDebug = require('debug');
 const pathToRegexp = require('path-to-regexp');
 const openMermaidPage = require('openMermaidPage');
 const renderSVG = require('renderSVG');
-const getSVG = require('getSVG');
 
 const debug = createDebug('app:services:oembed');
 
@@ -69,12 +68,12 @@ module.exports = async (ctx, _next) => {
       ctx.throw(400, 'invalid encoded code');
     }
 
-    const svg = await getSVG(page);
+    const svg = await page.$('#container > svg');
     debug('got the svg element');
 
     const { width, height } = await svg.boundingBox();
     debug(
-      'took bounding box from element, width: %o, height: %o',
+      'took bounding box from the element, width: %o, height: %o',
       width,
       height
     );

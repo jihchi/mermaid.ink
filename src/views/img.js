@@ -1,9 +1,9 @@
 const createDebug = require('debug');
 const openMermaidPage = require('openMermaidPage');
 const renderSVG = require('renderSVG');
-const getSVG = require('getSVG');
 
 const debug = createDebug('app:img');
+const pptr = createDebug('app:pptr');
 
 module.exports = async (ctx, encodedCode, _next) => {
   debug('start to render');
@@ -21,7 +21,7 @@ module.exports = async (ctx, encodedCode, _next) => {
       ctx.throw(400, 'invalid encoded code');
     }
 
-    const svg = await getSVG(page);
+    const svg = await page.$('#container > svg');
     debug('got the svg element');
 
     const image = await svg.screenshot({
@@ -29,12 +29,12 @@ module.exports = async (ctx, encodedCode, _next) => {
       quality: 90,
       omitBackground: true,
     });
-    debug('took screenshot form element, size: %o', image.length);
+    debug('took a screenshot from the element, file size: %o', image.length);
 
     ctx.type = 'image/jpeg';
     ctx.body = image;
   } finally {
-    if (!createDebug.enabled('app:*')) {
+    if (!pptr.enabled) {
       if (page) await page.close();
     }
   }

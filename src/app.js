@@ -5,6 +5,7 @@ const puppeteer = require('puppeteer');
 const views = require('./views');
 
 const debug = createDebug('app:main');
+const pptr = createDebug('app:pptr');
 const app = new Koa();
 
 app.use(route.get('/', views.home));
@@ -21,8 +22,8 @@ module.exports = async () => {
   try {
     debug('launch headless browser instance');
     browser = await puppeteer.launch({
-      headless: !createDebug.enabled('app:*'),
-      devtools: createDebug.enabled('app:*'),
+      headless: !pptr.enabled,
+      devtools: pptr.enabled,
       // https://peter.sh/experiments/chromium-command-line-switches/
       args: [
         '--disable-background-timer-throttling', // Disable task throttling of timer tasks from background pages.
@@ -54,8 +55,8 @@ module.exports = async () => {
       shutdown,
     };
   } catch (e) {
-    debug('*** caught exception ***');
-    debug(e);
+    console.error('*** caught exception ***');
+    console.error(e);
     await shutdown();
     process.exit(1);
   }
