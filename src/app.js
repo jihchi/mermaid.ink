@@ -3,7 +3,6 @@ const createDebug = require('debug');
 const route = require('koa-route');
 const puppeteer = require('puppeteer');
 const views = require('./views');
-const DEBUG_MODE = require('debugMode');
 
 const debug = createDebug('app:main');
 const app = new Koa();
@@ -22,8 +21,8 @@ module.exports = async () => {
   try {
     debug('launch headless browser instance');
     browser = await puppeteer.launch({
-      headless: !DEBUG_MODE,
-      devtools: DEBUG_MODE,
+      headless: !createDebug.enabled('app:*'),
+      devtools: createDebug.enabled('app:*'),
       // https://peter.sh/experiments/chromium-command-line-switches/
       args: [
         '--disable-background-timer-throttling', // Disable task throttling of timer tasks from background pages.
