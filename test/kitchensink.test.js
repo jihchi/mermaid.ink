@@ -3,16 +3,16 @@ const createApp = require('../src/app');
 
 describe('app', () => {
   let request;
-  let cleanup;
+  let shutdown;
 
   beforeAll(async () => {
-    const { app, shutdown } = await createApp();
+    const { app, shutdown: rawShutdown } = await createApp();
     request = supertest(app.callback());
-    cleanup = shutdown;
+    shutdown = rawShutdown;
   });
 
   afterAll(async () => {
-    await cleanup();
+    await shutdown();
   });
 
   test('GET /', async () => {
@@ -73,7 +73,7 @@ describe('app', () => {
       expect(resp.type).toEqual('application/json');
       expect(resp.charset).toEqual('utf-8');
       expect(resp.body).toMatchObject({
-        height:expect.any(Number),
+        height: expect.any(Number),
         provider_name: 'Mermaid Ink',
         provider_url: 'https://mermaid.ink',
         type: 'photo',
@@ -111,5 +111,13 @@ describe('app', () => {
   test('GET 400 when encoded code is invalid', async () => {
     const resp = await request.get('/img/eyJjb2RlIjoiZ3JhcGgg');
     expect(resp.status).toEqual(400);
+	});
+
+  test('GET 500 when browser is crashed or disconnected', async () => {
+		await shutdown();
+    const resp = await request.get(
+      '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
+    );
+    expect(resp.status).toEqual(500);
   });
 });

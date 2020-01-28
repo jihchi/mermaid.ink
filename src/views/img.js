@@ -33,6 +33,14 @@ module.exports = async (ctx, encodedCode, _next) => {
 
     ctx.type = 'image/jpeg';
     ctx.body = image;
+  } catch (e) {
+    // here don't throw 500 if exception has already been thrown inside try-catch
+    if (!ctx.headerSent) {
+      debug('*** caught exception ***');
+      debug(e);
+
+      ctx.throw(500, e);
+    }
   } finally {
     if (!pptr.enabled) {
       if (page) await page.close();

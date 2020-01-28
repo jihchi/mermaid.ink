@@ -12,42 +12,54 @@ app.use(route.get('/', views.home));
 app.use(route.get('/services/oembed', views.servicesOembed));
 app.use(route.get('/img/:encodedCode', views.img));
 
+async function launchBrowser() {
+  return await puppeteer.launch({
+    headless: !pptr.enabled,
+    devtools: pptr.enabled,
+    // https://peter.sh/experiments/chromium-command-line-switches/
+    args: [
+      '--disable-background-timer-throttling', // Disable task throttling of timer tasks from background pages.
+      '--disable-backgrounding-occluded-windows', // Prevent renderer process backgrounding when set.
+      '--disable-dev-shm-usage',
+      '--disable-extensions',
+      '--disable-infobars', // Prevent infobars from appearing.
+      '--disable-notifications',
+      '--disable-offer-store-unmasked-wallet-cards',
+      '--disable-offer-upload-credit-cards',
+      '--disable-renderer-backgrounding',
+      '--disable-sync', // Disables syncing browser data to a Google Account.
+      '--enable-async-dns',
+      '--enable-simple-cache-backend',
+      '--enable-tcp-fast-open',
+      '--media-cache-size=33554432',
+      '--no-default-browser-check',
+      '--no-first-run', // Skip First Run tasks, whether or not it's actually the First Run.
+      '--no-pings',
+      '--no-sandbox',
+      '--no-zygote',
+      '--prerender-from-omnibox=disabled',
+    ],
+  });
+}
+
 module.exports = async () => {
-  let browser;
+	let browser;
+
   const shutdown = async () => {
     debug('shutdown server');
-    if (browser) await browser.close();
-  };
+    if (browser) {
+      debug('shutdown browser');
+      await browser.close();
+    }
+	};
 
   try {
-    debug('launch headless browser instance');
-    browser = await puppeteer.launch({
-      headless: !pptr.enabled,
-      devtools: pptr.enabled,
-      // https://peter.sh/experiments/chromium-command-line-switches/
-      args: [
-        '--disable-background-timer-throttling', // Disable task throttling of timer tasks from background pages.
-        '--disable-backgrounding-occluded-windows', // Prevent renderer process backgrounding when set.
-        '--disable-dev-shm-usage',
-        '--disable-extensions',
-        '--disable-infobars', // Prevent infobars from appearing.
-        '--disable-notifications',
-        '--disable-offer-store-unmasked-wallet-cards',
-        '--disable-offer-upload-credit-cards',
-        '--disable-renderer-backgrounding',
-        '--disable-sync', // Disables syncing browser data to a Google Account.
-        '--enable-async-dns',
-        '--enable-simple-cache-backend',
-        '--enable-tcp-fast-open',
-        '--media-cache-size=33554432',
-        '--no-default-browser-check',
-        '--no-first-run', // Skip First Run tasks, whether or not it's actually the First Run.
-        '--no-pings',
-        '--no-sandbox',
-        '--no-zygote',
-        '--prerender-from-omnibox=disabled',
-      ],
-    });
+		debug('launch headless browser instance');
+
+    browser = await launchBrowser();
+    browser.on('disconnected', function disconnected() {
+      debug('browser is disconnected!');
+		});
     app.context.browser = browser;
 
     return {
@@ -60,6 +72,4 @@ module.exports = async () => {
     await shutdown();
     process.exit(1);
   }
-
-  return null;
 };
