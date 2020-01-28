@@ -12,8 +12,10 @@ app.use(route.get('/', views.home));
 app.use(route.get('/services/oembed', views.servicesOembed));
 app.use(route.get('/img/:encodedCode', views.img));
 
-async function launchBrowser() {
-  return await puppeteer.launch({
+async function setup() {
+  debug('launch headless browser instance');
+
+  app.context.browser = await puppeteer.launch({
     headless: !pptr.enabled,
     devtools: pptr.enabled,
     // https://peter.sh/experiments/chromium-command-line-switches/
@@ -40,28 +42,22 @@ async function launchBrowser() {
       '--prerender-from-omnibox=disabled',
     ],
   });
+
+  app.context.browser.on('disconnected', setup);
+}
+
+async function shutdown() {
+	debug('shutdown server');
+
+  if (app.context.browser) {
+    debug('shutdown browser');
+    await app.context.browser.close();
+  }
 }
 
 module.exports = async () => {
-	let browser;
-
-  const shutdown = async () => {
-    debug('shutdown server');
-    if (browser) {
-      debug('shutdown browser');
-      await browser.close();
-    }
-	};
-
   try {
-		debug('launch headless browser instance');
-
-    browser = await launchBrowser();
-    browser.on('disconnected', function disconnected() {
-      debug('browser is disconnected!');
-		});
-    app.context.browser = browser;
-
+    await setup();
     return {
       app,
       shutdown,
