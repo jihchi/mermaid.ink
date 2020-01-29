@@ -9,7 +9,7 @@
   "scripts": {
     "docker:build": "docker build . -t jihchi/mermaid.ink:$npm_package_version",
     "docker:publish": "docker push jihchi/mermaid.ink:$npm_package_version",
-    "docker:run": "docker run --rm --cap-add=SYS_ADMIN -p 3000:3000 jihchi/mermaid.ink:$npm_package_version",
+    "docker:run": "docker run --rm --cap-add=SYS_ADMIN -p 3000:3000 -e DEBUG=app:* jihchi/mermaid.ink:$npm_package_version",
     "format": "prettier --write src \"{app,test}/**/*.{js,html}\"",
     "start": "node src/index.js",
     "test": "jest",
