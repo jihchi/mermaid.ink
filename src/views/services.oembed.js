@@ -5,7 +5,7 @@ const renderSVG = require('renderSVG');
 
 const debug = createDebug('app:services:oembed');
 
-const parseAndValidateURL = inputURL => {
+const parseAndValidateURL = (inputURL) => {
   let url;
 
   try {
@@ -53,7 +53,7 @@ module.exports = async (ctx, _next) => {
   } catch (e) {
     ctx.throw(404, `${e}`);
     return;
-	}
+  }
 
   let page;
   try {

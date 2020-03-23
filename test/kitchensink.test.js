@@ -123,16 +123,16 @@ describe('app', () => {
   });
 
   test.skip('GET 200 even though browser is crashed or disconnected', async () => {
-		// this will trigger 'disconnected' event and app will try to re-launch browser
+    // this will trigger 'disconnected' event and app will try to re-launch browser
     await app.context.browser.close();
     const resp = await request.get(
       '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
     );
-		expect(resp.status).toEqual(500);
-		// TODO: figure out how to "observe" browser has been re-created
+    expect(resp.status).toEqual(500);
+    // TODO: figure out how to "observe" browser has been re-created
     const ok = await request.get(
       '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
     );
-		expect(ok.status).toEqual(200);
+    expect(ok.status).toEqual(200);
   });
 });

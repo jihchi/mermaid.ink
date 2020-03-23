@@ -14,8 +14,8 @@ app.use(route.get('/:type(img|svg)/:encodedCode', views.img));
 
 async function setup() {
   if (app.context.shutdown) {
-		debug("application is shutting down, won't re-launch browser");
-		return;
+    debug("application is shutting down, won't re-launch browser");
+    return;
   }
 
   debug('launch headless browser instance');
@@ -52,8 +52,8 @@ async function setup() {
 }
 
 async function shutdown() {
-	debug('shutdown server');
-	app.context.shutdown = true;
+  debug('shutdown server');
+  app.context.shutdown = true;
 
   if (app.context.browser) {
     debug('shutdown browser');
