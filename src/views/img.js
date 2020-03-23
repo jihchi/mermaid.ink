@@ -5,7 +5,7 @@ const renderSVG = require('renderSVG');
 const debug = createDebug('app:img');
 const pptr = createDebug('app:pptr');
 
-module.exports = async (ctx, encodedCode, _next) => {
+module.exports = async (ctx, type, encodedCode, _next) => {
   debug('start to render');
 
   let page;
@@ -21,18 +21,24 @@ module.exports = async (ctx, encodedCode, _next) => {
       ctx.throw(400, 'invalid encoded code');
     }
 
-    const svg = await page.$('#container > svg');
-    debug('got the svg element');
+    if (type === 'svg') {
+      const svg = await page.$eval('#container > svg', e => e.outerHTML);
+      ctx.type = 'image/svg+xml';
+      ctx.body = svg;
+    } else {
+      const svg = await page.$('#container > svg');
+      debug('got the svg element');
 
-    const image = await svg.screenshot({
-      type: 'jpeg',
-      quality: 90,
-      omitBackground: true,
-    });
-    debug('took a screenshot from the element, file size: %o', image.length);
+      const image = await svg.screenshot({
+        type: 'jpeg',
+        quality: 90,
+        omitBackground: true,
+      });
+      debug('took a screenshot from the element, file size: %o', image.length);
 
-    ctx.type = 'image/jpeg';
-    ctx.body = image;
+      ctx.type = 'image/jpeg';
+      ctx.body = image;
+    }
   } catch (e) {
     // here don't throw 500 if exception has already been thrown inside try-catch
     if (!ctx.headerSent) {
