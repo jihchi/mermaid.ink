@@ -1,55 +1,21 @@
 const createDebug = require('debug');
-const openMermaidPage = require('openMermaidPage');
-const renderSVG = require('renderSVG');
+const renderImgOrSvg = require('renderImgOrSvg');
 
-const debug = createDebug('app:img');
-const pptr = createDebug('app:pptr');
+const debug = createDebug('app:views:img');
 
-module.exports = async (ctx, type, encodedCode, _next) => {
-  debug('start to render');
+const img = async (ctx, page) => {
+  const svg = await page.$('#container > svg');
+  debug('got the svg element');
 
-  let page;
-  try {
-    page = await openMermaidPage(ctx);
-    debug('loaded local mermaid page');
+  const image = await svg.screenshot({
+    type: 'jpeg',
+    quality: 90,
+    omitBackground: true,
+  });
+  debug('took a screenshot from the element, file size: %o', image.length);
 
-    try {
-      await renderSVG({ page, encodedCode });
-      debug('rendered SVG in DOM');
-    } catch (e) {
-      debug('mermaid failed to render SVG: %o', e);
-      ctx.throw(400, 'invalid encoded code');
-    }
-
-    if (type === 'svg') {
-      const svg = await page.$eval('#container > svg', (e) => e.outerHTML);
-      ctx.type = 'image/svg+xml';
-      ctx.body = svg;
-    } else {
-      const svg = await page.$('#container > svg');
-      debug('got the svg element');
-
-      const image = await svg.screenshot({
-        type: 'jpeg',
-        quality: 90,
-        omitBackground: true,
-      });
-      debug('took a screenshot from the element, file size: %o', image.length);
-
-      ctx.type = 'image/jpeg';
-      ctx.body = image;
-    }
-  } catch (e) {
-    // here don't throw 500 if exception has already been thrown inside try-catch
-    if (!ctx.headerSent) {
-      debug('*** caught exception ***');
-      debug(e);
-
-      ctx.throw(500, e);
-    }
-  } finally {
-    if (!pptr.enabled) {
-      if (page) await page.close();
-    }
-  }
+  ctx.type = 'image/jpeg';
+  ctx.body = image;
 };
+
+module.exports = renderImgOrSvg(img);

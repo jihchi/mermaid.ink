@@ -10,7 +10,8 @@ const app = new Koa();
 
 app.use(route.get('/', views.home));
 app.use(route.get('/services/oembed', views.servicesOembed));
-app.use(route.get('/:type(img|svg)/:encodedCode', views.img));
+app.use(route.get('/img/:encodedCode', views.img));
+app.use(route.get('/svg/:encodedCode', views.svg));
 
 async function setup() {
   if (app.context.shutdown) {
