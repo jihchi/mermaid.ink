@@ -22,7 +22,7 @@ module.exports = async (ctx, type, encodedCode, _next) => {
     }
 
     if (type === 'svg') {
-      const svg = await page.$eval('#container > svg', e => e.outerHTML);
+      const svg = await page.$eval('#container > svg', (e) => e.outerHTML);
       ctx.type = 'image/svg+xml';
       ctx.body = svg;
     } else {
