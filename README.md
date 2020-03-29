@@ -2,7 +2,7 @@
 
 [![GitHub](https://img.shields.io/github/license/jihchi/mermaid.ink)](./LICENSE)
 [![Travis build status](https://travis-ci.org/jihchi/mermaid.ink.svg?branch=master)](https://travis-ci.org/jihchi/mermaid.ink)
-[![Docker Automated build](https://img.shields.io/docker/automated/jihchi/mermaid.ink)](https://hub.docker.com/r/jihchi/mermaid.ink/builds)
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/jihchi/mermaid.ink)](https://hub.docker.com/r/jihchi/mermaid.ink/builds)
 [![Docker Pulls](https://img.shields.io/docker/pulls/jihchi/mermaid.ink)](https://hub.docker.com/r/jihchi/mermaid.ink)
 
 ## Getting Started
