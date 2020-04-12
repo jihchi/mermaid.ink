@@ -147,6 +147,15 @@ describe('app', () => {
       expect(resp.body.length).toBeGreaterThan(21 * KB);
     });
 
+    test('ER diagram', async () => {
+      const resp = await request.get(
+        '/img/eyJjb2RlIjoiZXJEaWFncmFtXG4gICAgICAgIENVU1RPTUVSIH18Li58eyBERUxJVkVSWS1BRERSRVNTIDogaGFzXG4gICAgICAgIENVU1RPTUVSIHx8LS1veyBPUkRFUiA6IHBsYWNlc1xuICAgICAgICBDVVNUT01FUiB8fC0tb3sgSU5WT0lDRSA6IFwibGlhYmxlIGZvclwiXG4gICAgICAgIERFTElWRVJZLUFERFJFU1MgfHwtLW97IE9SREVSIDogcmVjZWl2ZXNcbiAgICAgICAgSU5WT0lDRSB8fC0tfHsgT1JERVIgOiBjb3ZlcnNcbiAgICAgICAgT1JERVIgfHwtLXx7IE9SREVSLUlURU0gOiBpbmNsdWRlc1xuICAgICAgICBQUk9EVUNULUNBVEVHT1JZIHx8LS18eyBQUk9EVUNUIDogY29udGFpbnNcbiAgICAgICAgUFJPRFVDVCB8fC0tb3sgT1JERVItSVRFTSA6IFwib3JkZXJlZCBpblwiXG5cdFx0XHRcdFx0IiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifSwidXBkYXRlRWRpdG9yIjp0cnVlfQ'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/jpeg');
+      expect(resp.body.length).toBeGreaterThan(28 * KB);
+    });
+
     test('returns 400 when encoded code is invalid', async () => {
       const resp = await request.get('/img/eyJjb2RlIjoiZ3JhcGgg');
       expect(resp.status).toEqual(400);
@@ -211,6 +220,15 @@ describe('app', () => {
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
       expect(resp.body.length).toBeGreaterThan(9 * KB);
+    });
+
+    test('ER diagram', async () => {
+      const resp = await request.get(
+        '/svg/eyJjb2RlIjoiZXJEaWFncmFtXG4gICAgICAgIENVU1RPTUVSIH18Li58eyBERUxJVkVSWS1BRERSRVNTIDogaGFzXG4gICAgICAgIENVU1RPTUVSIHx8LS1veyBPUkRFUiA6IHBsYWNlc1xuICAgICAgICBDVVNUT01FUiB8fC0tb3sgSU5WT0lDRSA6IFwibGlhYmxlIGZvclwiXG4gICAgICAgIERFTElWRVJZLUFERFJFU1MgfHwtLW97IE9SREVSIDogcmVjZWl2ZXNcbiAgICAgICAgSU5WT0lDRSB8fC0tfHsgT1JERVIgOiBjb3ZlcnNcbiAgICAgICAgT1JERVIgfHwtLXx7IE9SREVSLUlURU0gOiBpbmNsdWRlc1xuICAgICAgICBQUk9EVUNULUNBVEVHT1JZIHx8LS18eyBQUk9EVUNUIDogY29udGFpbnNcbiAgICAgICAgUFJPRFVDVCB8fC0tb3sgT1JERVItSVRFTSA6IFwib3JkZXJlZCBpblwiXG5cdFx0XHRcdFx0IiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifSwidXBkYXRlRWRpdG9yIjp0cnVlfQ'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/svg+xml');
+      expect(resp.body.length).toBeGreaterThan(18 * KB);
     });
 
     test('returns 400 when encoded code is invalid', async () => {

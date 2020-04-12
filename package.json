@@ -31,7 +31,7 @@
     "font-awesome": "^4.7.0",
     "koa": "^2.11.0",
     "koa-route": "^3.2.0",
-    "mermaid": "^8.4.8",
+    "mermaid": "^8.5.0",
     "puppeteer": "^2.1.1"
   },
   "devDependencies": {
