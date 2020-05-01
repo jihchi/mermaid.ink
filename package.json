@@ -32,7 +32,7 @@
     "koa": "^2.11.0",
     "koa-route": "^3.2.0",
     "mermaid": "^8.5.0",
-    "puppeteer": "^2.1.1"
+    "puppeteer": "^3.0.2"
   },
   "devDependencies": {
     "jest": "^25.5.3",
