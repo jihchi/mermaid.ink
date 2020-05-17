@@ -26,25 +26,42 @@ async function setup() {
     devtools: pptr.enabled,
     // https://peter.sh/experiments/chromium-command-line-switches/
     args: [
-      '--disable-background-timer-throttling', // Disable task throttling of timer tasks from background pages.
-      '--disable-backgrounding-occluded-windows', // Prevent renderer process backgrounding when set.
+      '--disable-background-timer-throttling',
+      '--disable-backgrounding-occluded-windows',
+      '--disable-breakpad',
+      '--disable-component-update',
+      '--disable-default-apps',
       '--disable-dev-shm-usage',
+      '--disable-device-discovery-notifications',
       '--disable-extensions',
-      '--disable-infobars', // Prevent infobars from appearing.
+      '--disable-hang-monitor',
+      '--disable-infobars',
+      '--disable-ipc-flooding-protection',
+      '--disable-new-avatar-menu',
+      '--disable-new-profile-management',
       '--disable-notifications',
       '--disable-offer-store-unmasked-wallet-cards',
       '--disable-offer-upload-credit-cards',
+      '--disable-password-generation',
+      '--disable-popup-blocking',
+      '--disable-prompt-on-repost',
       '--disable-renderer-backgrounding',
-      '--disable-sync', // Disables syncing browser data to a Google Account.
+      '--disable-renderer-throttling',
+      '--disable-restore-session-state',
+      '--disable-save-password-bubble',
+      '--disable-single-click-autofill',
+      '--disable-sync',
+      '--disable-translate',
       '--enable-async-dns',
       '--enable-simple-cache-backend',
       '--enable-tcp-fast-open',
       '--media-cache-size=33554432',
       '--no-default-browser-check',
-      '--no-first-run', // Skip First Run tasks, whether or not it's actually the First Run.
+      '--no-first-run',
       '--no-pings',
       '--no-sandbox',
       '--no-zygote',
+      '--noerrdialogs',
       '--prerender-from-omnibox=disabled',
     ],
   });
