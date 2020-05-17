@@ -108,7 +108,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
-      expect(resp.body.length).toBeGreaterThan(32 * KB);
+      expect(resp.body.length).toBeGreaterThan(31 * KB);
     });
 
     test('class diagram', async () => {
@@ -117,7 +117,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
-      expect(resp.body.length).toBeGreaterThan(13 * KB);
+      expect(resp.body.length).toBeGreaterThan(11 * KB);
     });
 
     test('state diagram', async () => {
