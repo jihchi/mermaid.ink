@@ -235,6 +235,14 @@ describe('app', () => {
       const resp = await request.get('/svg/eyJjb2RlIjoiZ3JhcGgg');
       expect(resp.status).toEqual(400);
     });
+
+    test('should replace <br> by <br/>', async () => {
+      const resp = await request.get(
+        '/svg/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCw8YnIgLz5jb25zZWN0ZXR1ciBhZGlwaXNjaW5nIGVsaXQuXSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19'
+      );
+      const body = resp.body.toString();
+      expect(body).not.toContain('<br>');
+    });
   });
 
   test.skip('GET 200 even though browser is crashed or disconnected', async () => {
