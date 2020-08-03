@@ -236,7 +236,7 @@ describe('app', () => {
       expect(resp.status).toEqual(400);
     });
 
-    test('should replace <br> to <br/>', async () => {
+    test('should replace <br> by <br/>', async () => {
       const resp = await request.get(
         '/svg/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCw8YnIgLz5jb25zZWN0ZXR1ciBhZGlwaXNjaW5nIGVsaXQuXSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19'
       );
