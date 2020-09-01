@@ -192,7 +192,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
-      expect(resp.body.length).toBeGreaterThan(7 * KB);
+      expect(resp.body.length).toBeGreaterThan(6 * KB);
     });
 
     test('state diagram', async () => {
