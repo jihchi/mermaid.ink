@@ -174,7 +174,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
-      expect(resp.body.length).toBeGreaterThan(15 * KB);
+      expect(resp.body.length).toBeGreaterThan(9 * KB);
     });
 
     test('sequence diagram', async () => {
@@ -183,7 +183,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
-      expect(resp.body.length).toBeGreaterThan(13 * KB);
+      expect(resp.body.length).toBeGreaterThan(8 * KB);
     });
 
     test('class diagram', async () => {
@@ -192,7 +192,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
-      expect(resp.body.length).toBeGreaterThan(12 * KB);
+      expect(resp.body.length).toBeGreaterThan(7 * KB);
     });
 
     test('state diagram', async () => {
@@ -201,7 +201,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
-      expect(resp.body.length).toBeGreaterThan(11 * KB);
+      expect(resp.body.length).toBeGreaterThan(6 * KB);
     });
 
     test('gantt chart', async () => {
@@ -210,7 +210,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
-      expect(resp.body.length).toBeGreaterThan(11 * KB);
+      expect(resp.body.length).toBeGreaterThan(6 * KB);
     });
 
     test('pie chart', async () => {
@@ -219,7 +219,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
-      expect(resp.body.length).toBeGreaterThan(9 * KB);
+      expect(resp.body.length).toBeGreaterThan(2 * KB);
     });
 
     test('ER diagram', async () => {
@@ -228,7 +228,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
-      expect(resp.body.length).toBeGreaterThan(18 * KB);
+      expect(resp.body.length).toBeGreaterThan(11 * KB);
     });
 
     test('returns 400 when encoded code is invalid', async () => {
