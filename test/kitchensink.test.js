@@ -126,7 +126,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
-      expect(resp.body.length).toBeGreaterThan(10 * KB);
+      expect(resp.body.length).toBeGreaterThan(5 * KB);
     });
 
     test('gantt chart', async () => {
