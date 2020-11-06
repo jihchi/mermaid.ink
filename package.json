@@ -38,5 +38,9 @@
     "jest": "^26.6.3",
     "prettier": "^2.1.2",
     "supertest": "^6.0.1"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": true
   }
 }
