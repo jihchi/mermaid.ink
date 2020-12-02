@@ -27,16 +27,16 @@
   },
   "homepage": "https://github.com/jihchi/mermaid.ink#readme",
   "dependencies": {
-    "debug": "^4.2.0",
+    "debug": "^4.3.1",
     "font-awesome": "^4.7.0",
     "koa": "^2.13.0",
     "koa-route": "^3.2.0",
     "mermaid": "^8.8.3",
-    "puppeteer": "^5.4.1"
+    "puppeteer": "^5.5.0"
   },
   "devDependencies": {
     "jest": "^26.6.3",
-    "prettier": "^2.1.2",
+    "prettier": "^2.2.1",
     "supertest": "^6.0.1"
   },
   "prettier": {
