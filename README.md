@@ -53,7 +53,7 @@ yarn test
 
 **Note that you may encounter DoS if you increase `--max-http-header-size`!**
 
-> Thanks [@ryepup](https://github.com/ryepup) for the analysis and work-arounds (#12)
+> Thanks [@ryepup](https://github.com/ryepup) for the analysis and work-arounds ([#12](https://github.com/jihchi/mermaid.ink/issues/12))
 
 * If running locally, add `--max-http-header-size` to the start script in package.json
   * e.g. `"start": "node --max-http-header-size=102400000 src/index.js"`
