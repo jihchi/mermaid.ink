@@ -46,3 +46,19 @@ You could treat it as normal image and embed everywhere you want.
 ```
 yarn test
 ```
+
+## Troubleshooting
+
+### I'm getting back `HTTP 431 Request Header Fields Too Large` error
+
+**Note that you may encounter DoS if you increase `--max-http-header-size`!**
+
+> Thanks [@ryepup](https://github.com/ryepup) for the analysis and work-arounds (#12)
+
+* If running locally, add `--max-http-header-size` to the start script in package.json
+  * e.g. `"start": "node --max-http-header-size=102400000 src/index.js"`
+
+* If running via docker, use [`NODE_OPTIONS`](https://nodejs.org/api/cli.html#cli_node_options_options) to increase `--max-http-header-size`
+  * e.g. `docker run --rm -it -e 'NODE_OPTIONS="--max-http-header-size=102400000"' -p 3000:3000 jihchi/mermaid.ink`
+
+Or, If running locally, run `NODE_OPTIONS="--max-http-header-size=102400000" npm start` to increase `--max-http-header-size`
