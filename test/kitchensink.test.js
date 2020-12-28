@@ -153,7 +153,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
-      expect(resp.body.length).toBeGreaterThan(36 * KB);
+      expect(resp.body.length).toBeGreaterThan(34 * KB);
     });
 
     test('returns 400 when encoded code is invalid', async () => {
