@@ -1,7 +1,7 @@
 # [mermaid.ink](https://mermaid.ink)
 
 [![GitHub](https://img.shields.io/github/license/jihchi/mermaid.ink)](./LICENSE)
-[![Travis build status](https://travis-ci.org/jihchi/mermaid.ink.svg?branch=master)](https://travis-ci.org/jihchi/mermaid.ink)
+[![Node.js CI](https://github.com/jihchi/mermaid.ink/workflows/Node.js%20CI/badge.svg)](https://github.com/jihchi/mermaid.ink/actions)
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/jihchi/mermaid.ink)](https://hub.docker.com/r/jihchi/mermaid.ink/builds)
 [![Docker Pulls](https://img.shields.io/docker/pulls/jihchi/mermaid.ink)](https://hub.docker.com/r/jihchi/mermaid.ink)
 
