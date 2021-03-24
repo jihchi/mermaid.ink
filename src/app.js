@@ -22,7 +22,9 @@ async function setup() {
   debug('launch headless browser instance');
 
   app.context.browser = await puppeteer.launch({
-    executablePath: 'google-chrome-stable',
+    executablePath: process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
+      ? 'google-chrome-stable'
+      : undefined,
     headless: !pptr.enabled,
     devtools: pptr.enabled,
     // https://peter.sh/experiments/chromium-command-line-switches/
