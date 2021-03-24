@@ -27,6 +27,11 @@ async function setup() {
       : undefined,
     headless: !pptr.enabled,
     devtools: pptr.enabled,
+    dumpio: true,
+    defaultViewport: {
+      width: 1920,
+      height: 1080,
+    },
     // https://peter.sh/experiments/chromium-command-line-switches/
     args: [
       '--disable-background-timer-throttling',
