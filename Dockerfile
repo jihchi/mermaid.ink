@@ -1,8 +1,13 @@
-FROM node:13
+FROM node:13-slim
 LABEL maintainer="Jihchi Lee <achi@987.tw>"
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
+
+# based on: https://github.com/ebidel/try-puppeteer/blob/master/backend/Dockerfile
+# See https://crbug.com/795759
+RUN apt-get update && apt-get -yq upgrade && apt-get install \
+    && apt-get autoremove -y && apt-get autoclean
 
 # based on: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
 # Install latest chrome dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
@@ -15,7 +20,8 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 \
       --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /src/*.deb
 
 # If running Docker >= 1.13.0 use docker run's --init arg to reap zombie processes, otherwise
 # uncomment the following lines to have `dumb-init` as PID 1
