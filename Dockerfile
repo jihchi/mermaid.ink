@@ -1,4 +1,5 @@
 FROM node:13
+LABEL maintainer="Jihchi Lee <achi@987.tw>"
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
