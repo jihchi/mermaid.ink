@@ -79,8 +79,7 @@ describe('app', () => {
         provider_name: 'Mermaid Ink',
         provider_url: 'https://mermaid.ink',
         type: 'photo',
-        url:
-          'https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtBXSAtLT4gQihCKVxuXHRcdCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19',
+        url: 'https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtBXSAtLT4gQihCKVxuXHRcdCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19',
         version: '1.0',
         width: expect.any(Number),
       });
