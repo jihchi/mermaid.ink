@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/jihchi/mermaid.ink#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "debug": "^4.3.2",
-    "font-awesome": "^4.7.0",
     "koa": "^2.13.1",
     "koa-route": "^3.2.0",
     "mermaid": "^8.12.1",
