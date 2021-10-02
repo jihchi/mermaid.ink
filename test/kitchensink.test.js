@@ -159,6 +159,13 @@ describe('app', () => {
       const resp = await request.get('/img/eyJjb2RlIjoiZ3JhcGgg');
       expect(resp.status).toEqual(400);
     });
+
+    test('returns 200 when bgColor is used', async () => {
+      const resp = await request.get(
+        '/svg/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCw8YnIgLz5jb25zZWN0ZXR1ciBhZGlwaXNjaW5nIGVsaXQuXSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19?bgColor=!slategray'
+      );
+      expect(resp.status).toEqual(200);
+    });
   });
 
   describe('/svg', () => {
@@ -241,6 +248,31 @@ describe('app', () => {
       );
       const body = resp.body.toString();
       expect(body).not.toContain('<br>');
+    });
+
+    test('should add background color', async () => {
+      const resp = await request.get(
+        '/svg/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCw8YnIgLz5jb25zZWN0ZXR1ciBhZGlwaXNjaW5nIGVsaXQuXSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19?bgColor=123123'
+      );
+      const body = resp.body.toString();
+      expect(body).toMatch(/<svg [^>]* background-color: rgb\(18, 49, 35\);/);
+    });
+
+    test('should add named background color', async () => {
+      const resp = await request.get(
+        '/svg/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCw8YnIgLz5jb25zZWN0ZXR1ciBhZGlwaXNjaW5nIGVsaXQuXSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19?bgColor=!slategray'
+      );
+      const body = resp.body.toString();
+      expect(body).toMatch(/<svg [^>]* background-color: slategray;/);
+    });
+
+    test('should silently ignore invalid background colors', async () => {
+      const resp = await request.get(
+        '/svg/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCw8YnIgLz5jb25zZWN0ZXR1ciBhZGlwaXNjaW5nIGVsaXQuXSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19?bgColor=!non-existant-color'
+      );
+      expect(resp.status).toEqual(200);
+      const body = resp.body.toString();
+      expect(body).not.toMatch(/<svg [^>]* background-color:/);
     });
   });
 
