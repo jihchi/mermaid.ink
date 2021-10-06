@@ -139,3 +139,5 @@ public/
 .dynamodb/
 
 # End of https://www.gitignore.io/api/node,linux,macos
+
+yarn.lock
