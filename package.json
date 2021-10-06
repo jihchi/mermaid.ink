@@ -31,7 +31,7 @@
     "debug": "^4.3.2",
     "koa": "^2.13.1",
     "koa-route": "^3.2.0",
-    "mermaid": "^8.12.1",
+    "mermaid": "^8.13.2",
     "puppeteer": "^10.2.0"
   },
   "devDependencies": {
