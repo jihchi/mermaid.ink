@@ -22,6 +22,7 @@ RUN sed -i -e's/ main/ main contrib non-free/g' /etc/apt/sources.list \
     && apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 \
         fonts-noto \
         fonts-noto-color-emoji \
+        fonts-font-awesome \
         ttf-mscorefonts-installer \
         fontconfig \
       --no-install-recommends
