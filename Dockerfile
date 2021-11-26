@@ -19,9 +19,15 @@ RUN apt-get update \
     && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
     && apt-get update \
     && apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 \
-      --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /src/*.deb
+      --no-install-recommends
+# Install missing fonts (e.g. trebuchet)
+RUN apt-get install fontconfig \
+    && wget https://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb \
+    && apt --fix-broken install -y ./ttf-mscorefonts-installer_3.6_all.deb \
+    && rm ttf-mscorefonts-installer_3.6_all.deb \
+    && fc-cache -f -v
+# Secure everything
+RUN rm -rf /var/lib/apt/lists/* && rm -rf /src/*.deb
 
 # If running Docker >= 1.13.0 use docker run's --init arg to reap zombie processes, otherwise
 # uncomment the following lines to have `dumb-init` as PID 1
