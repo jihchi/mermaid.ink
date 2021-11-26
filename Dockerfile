@@ -22,7 +22,7 @@ RUN apt-get update \
       --no-install-recommends
 # Install missing fonts (e.g. trebuchet)
 RUN apt-get install fontconfig \
-    && wget http://ftp.br.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb \
+    && wget https://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb \
     && apt --fix-broken install -y ./ttf-mscorefonts-installer_3.6_all.deb \
     && rm ttf-mscorefonts-installer_3.6_all.deb \
     && fc-cache -f -v
