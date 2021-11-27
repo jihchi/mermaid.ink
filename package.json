@@ -29,14 +29,14 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "debug": "^4.3.2",
-    "koa": "^2.13.3",
+    "koa": "^2.13.4",
     "koa-route": "^3.2.0",
-    "mermaid": "^8.13.2",
-    "puppeteer": "^10.4.0"
+    "mermaid": "^8.13.4",
+    "puppeteer": "^11.0.0"
   },
   "devDependencies": {
-    "jest": "^27.2.4",
-    "prettier": "^2.4.1",
+    "jest": "^27.3.1",
+    "prettier": "^2.5.0",
     "supertest": "^6.1.6"
   },
   "prettier": {
