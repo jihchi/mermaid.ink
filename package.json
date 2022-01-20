@@ -34,7 +34,7 @@
     "koa-route": "^3.2.0",
     "mermaid": "^8.13.4",
     "pako": "^2.0.4",
-    "puppeteer": "^11.0.0"
+    "puppeteer": "^13.1.1"
   },
   "devDependencies": {
     "jest": "^27.3.1",
