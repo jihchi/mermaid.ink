@@ -1,4 +1,4 @@
-FROM node:15
+FROM node:17
 LABEL maintainer="Jihchi Lee <achi@987.tw>"
 
 RUN mkdir -p /usr/src/app
