@@ -2761,9 +2761,9 @@ merge-stream@^2.0.0:
   integrity sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==
 
 mermaid@^8.13.4:
-  version "8.13.9"
-  resolved "https://registry.yarnpkg.com/mermaid/-/mermaid-8.13.9.tgz#72f9a63b1b15239e260ca4728ad9196d1862889d"
-  integrity sha512-kMH676xEomSe/gzxMpDx91L+z9L+9iB3lvtPFA8aeOPRNNrfd3ZDvDCGFnuqQaJvPRCxs3Me2JDaVVNOZjojrg==
+  version "8.13.10"
+  resolved "https://registry.yarnpkg.com/mermaid/-/mermaid-8.13.10.tgz#b9d733b178bbf7416b9b46e39d566c7c28b75688"
+  integrity sha512-2ANep359uML87+wiYaWSu83eg9Qc0xCLnNJdCh100m4v0orS3fp8SScsZLcDSElRGHi+1zuVJsEEVEWH05+COQ==
   dependencies:
     "@braintree/sanitize-url" "^3.1.0"
     d3 "^7.0.0"
