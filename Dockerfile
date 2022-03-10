@@ -25,11 +25,9 @@ RUN sed -i -e's/ main/ main contrib non-free/g' /etc/apt/sources.list \
         fonts-font-awesome \
         ttf-mscorefonts-installer \
         fontconfig \
-      --no-install-recommends
-# rebuild font cache
-RUN fc-cache -f -v
-# Secure everything
-RUN rm -rf /var/lib/apt/lists/* && rm -rf /src/*.deb
+      --no-install-recommends \
+    && fc-cache -f -v \
+    && rm -rf /var/lib/apt/lists/* && rm -rf /src/*.deb
 
 # If running Docker >= 1.13.0 use docker run's --init arg to reap zombie processes, otherwise
 # uncomment the following lines to have `dumb-init` as PID 1

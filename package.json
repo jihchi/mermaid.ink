@@ -1,6 +1,6 @@
 {
   "name": "mermaid.ink",
-  "version": "3.7.1",
+  "version": "3.8.1",
   "description": "https://mermain.ink",
   "engines": {
     "node": ">= 13"
@@ -27,16 +27,18 @@
   },
   "homepage": "https://github.com/jihchi/mermaid.ink#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@fortawesome/fontawesome-free": "^6.0.0",
     "debug": "^4.3.2",
-    "koa": "^2.13.3",
+    "js-base64": "^3.7.2",
+    "koa": "^2.13.4",
     "koa-route": "^3.2.0",
-    "mermaid": "^8.13.2",
-    "puppeteer": "^10.4.0"
+    "mermaid": "^8.14.0",
+    "pako": "^2.0.4",
+    "puppeteer": "^13.3.1"
   },
   "devDependencies": {
-    "jest": "^27.2.4",
-    "prettier": "^2.4.1",
+    "jest": "^27.5.1",
+    "prettier": "^2.5.0",
     "supertest": "^6.1.6"
   },
   "prettier": {

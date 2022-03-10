@@ -101,6 +101,24 @@ describe('app', () => {
       expect(resp.body.length).toBeGreaterThan(16 * KB);
     });
 
+    test('flowchart base64', async () => {
+      const resp = await request.get(
+        '/img/base64:eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/jpeg');
+      expect(resp.body.length).toBeGreaterThan(16 * KB);
+    });
+
+    test('flowchart pako', async () => {
+      const resp = await request.get(
+        '/img/pako:eNpVkM1qw0AMhF9F6NRC_AI-BBo7zSWQQHLz5iC8SnZJ9gd5TQm2373r_ECrk9B8MwwasA2ascSLUDRwrJWHPF9NZcR2yVF3gqJYjhtO4ILn-wirj02AzoQYrb98PvnVDEE1bGeMIRnrr9NTqh7-necR6mZLMYV4-qscf8II68buTY7_rxjh7PpuzlSeqWhJoCJ5IbhAx-LI6lx-mG8Kk2HHCsu8apKrQuWnzPVRU-K1tikI5qRbxwukPoXD3bdYJun5DdWW8iPci5p-AUT3W9o'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/jpeg');
+      expect(resp.body.length).toBeGreaterThan(16 * KB);
+    });
+
     test('sequence diagram', async () => {
       const resp = await request.get(
         '/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgQWxpY2UgLT4-IEJvYjogSGVsbG8gQm9iLCBob3cgYXJlIHlvdT9cbiAgICBCb2ItLT4-Sm9objogSG93IGFib3V0IHlvdSBKb2huP1xuICAgIEJvYi0teCBBbGljZTogSSBhbSBnb29kIHRoYW5rcyFcbiAgICBCb2IteCBKb2huOiBJIGFtIGdvb2QgdGhhbmtzIVxuICAgIE5vdGUgcmlnaHQgb2YgSm9objogQm9iIHRoaW5rcyBhIGxvbmc8YnIvPmxvbmcgdGltZSwgc28gbG9uZzxici8-dGhhdCB0aGUgdGV4dCBkb2VzPGJyLz5ub3QgZml0IG9uIGEgcm93LlxuXG4gICAgQm9iLS0-QWxpY2U6IENoZWNraW5nIHdpdGggSm9obi4uLlxuICAgIEFsaWNlLT5Kb2huOiBZZXMuLi4gSm9obiwgaG93IGFyZSB5b3U_IiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifX0'
@@ -177,6 +195,24 @@ describe('app', () => {
     test('flowchart', async () => {
       const resp = await request.get(
         '/svg/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/svg+xml');
+      expect(resp.body.length).toBeGreaterThan(9 * KB);
+    });
+
+    test('flowchart base64', async () => {
+      const resp = await request.get(
+        '/svg/base64:eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/svg+xml');
+      expect(resp.body.length).toBeGreaterThan(9 * KB);
+    });
+
+    test('flowchart pako', async () => {
+      const resp = await request.get(
+        '/svg/pako:eNpFj8GKwkAMhl8l5OSCfYEehLVVL4IL663jIXSiM8hkhnTKIm3ffccV2Vvy_V9CMmEfLWONN6Xk4Nwa-ewap37IgYYLVNVmPnCGEIUfM2xXhwiDiyl5uX0Y2T4FaKbjU2HIzst9MdL8zZ2EZ2i7I6Uc0-VNzz9xhl3nv1xZ-U-dcrH33ZXqK1U9KTSkJcY1BtZA3pYjJyMABrPjwAbrUlrSu0EjS_HGZCnzzvocFeusI6-Rxhy_H9K_-5fTeir_hhdcfgF5pVhE'
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
