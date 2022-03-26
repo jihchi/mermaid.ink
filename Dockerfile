@@ -1,5 +1,5 @@
 # based on: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
-FROM docker.io/library/node:15
+FROM docker.io/library/node:16-buster-slim
 LABEL maintainer="Jihchi Lee <achi@987.tw>"
 
 RUN mkdir -p /usr/src/app
@@ -7,8 +7,10 @@ WORKDIR /usr/src/app
 
 RUN apt-get update \
   && apt-get -yq upgrade \
+  && apt-get install -y curl gnupg \
   && curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
   && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+  && sed -i -e's/ main/ main contrib non-free/g' /etc/apt/sources.list \
   && apt-get update \
   && apt-get install -y \
     google-chrome-stable \
@@ -17,12 +19,13 @@ RUN apt-get update \
     fonts-thai-tlwg \
     fonts-kacst \
     fonts-freefont-ttf \
+    ttf-mscorefonts-installer \
+    fonts-noto-cjk \
+    fonts-noto-color-emoji \
+    fonts-font-awesome \
     libxss1 \
     fontconfig \
     --no-install-recommends \
-  && wget https://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb \
-  && apt --fix-broken install -y ./ttf-mscorefonts-installer_3.6_all.deb \
-  && rm ttf-mscorefonts-installer_3.6_all.deb \
   && fc-cache -f -v \
   && apt-get autoremove -y \
   && apt-get autoclean \
