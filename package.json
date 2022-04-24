@@ -32,9 +32,9 @@
     "js-base64": "^3.7.2",
     "koa": "^2.13.4",
     "koa-route": "^3.2.0",
-    "mermaid": "^9.0.0",
+    "mermaid": "^9.0.1",
     "pako": "^2.0.4",
-    "puppeteer": "^13.5.2"
+    "puppeteer": "^13.6.0"
   },
   "devDependencies": {
     "jest": "^27.5.1",
