@@ -2756,10 +2756,10 @@ merge-stream@^2.0.0:
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
   integrity sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==
 
-mermaid@^9.1.0:
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/mermaid/-/mermaid-9.1.0.tgz#9cc66aba808a52c1059c655489a6463fea4cecd9"
-  integrity sha512-yltuGFfVJcWTT93DdGUdUhNQyS0PFmCRsXFtgV+Fsz8MiJmkrAQRDQMGpBR4z6riXBHnWyAMjFR8aMxx5HHQqg==
+mermaid@^9.1.1:
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/mermaid/-/mermaid-9.1.1.tgz#5d3d330ca4adf7f3c8ca51095f8bb2f0fb1a93bb"
+  integrity sha512-2RVD+WkzZ4VDyO9gQvQAuQ/ux2gLigJtKDTlbwjYqOR/NwsVzTSfGm/kx648/qWJsg6Sv04tE9BWCO8s6a+pFA==
   dependencies:
     "@braintree/sanitize-url" "^6.0.0"
     d3 "^7.0.0"
