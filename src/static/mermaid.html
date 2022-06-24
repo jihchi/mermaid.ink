@@ -23,7 +23,7 @@
           mermaid.render('mermaid-svg', definition, (svgCode) => {
             container.innerHTML = svgCode;
             const style = document.createElement('style');
-            style.innerText = '@import url("../../node_modules/@fortawesome/fontawesome-free/css/all.min.css");@import url("../../node_modules/@fortawesome/fontawesome-free/css/v4-shims.min.css");';
+            style.innerText = '@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css");';
             container.querySelector('svg').appendChild(style);
             resolve(svgCode);
           });
