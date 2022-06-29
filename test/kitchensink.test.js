@@ -310,6 +310,12 @@ describe('app', () => {
       const body = resp.body.toString();
       expect(body).not.toMatch(/<svg [^>]* background-color:/);
     });
+
+    test('imports fontawesome in svg', async () => {
+      const resp = await request.get('/svg/Z3JhcGggVEQKICAgIEFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKQogICAgQiAtLT4gQ3tMZXQgbWUgdGhpbmt9CiAgICBDIC0tPnxPbmV8IERbTGFwdG9wXQogICAgQyAtLT58VHdvfCBFW2lQaG9uZV0KICAgIEMgLS0+fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJd');
+      const body = resp.body.toString();
+      expect(body).toContain('fontawesome');
+    });
   });
 
   test.skip('GET 200 even though browser is crashed or disconnected', async () => {
