@@ -312,9 +312,11 @@ describe('app', () => {
     });
 
     test('imports fontawesome in svg', async () => {
-      const resp = await request.get('/svg/Z3JhcGggVEQKICAgIEFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKQogICAgQiAtLT4gQ3tMZXQgbWUgdGhpbmt9CiAgICBDIC0tPnxPbmV8IERbTGFwdG9wXQogICAgQyAtLT58VHdvfCBFW2lQaG9uZV0KICAgIEMgLS0+fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJd');
+      const resp = await request.get(
+        '/svg/Z3JhcGggVEQKICAgIEFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKQogICAgQiAtLT4gQ3tMZXQgbWUgdGhpbmt9CiAgICBDIC0tPnxPbmV8IERbTGFwdG9wXQogICAgQyAtLT58VHdvfCBFW2lQaG9uZV0KICAgIEMgLS0+fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJd'
+      );
       const body = resp.body.toString();
-      expect(body).toContain('fontawesome');
+      expect(body).toContain('font-awesome');
     });
   });
 
