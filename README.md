@@ -66,3 +66,11 @@ yarn test
   * e.g. `docker run --rm -it -e 'NODE_OPTIONS="--max-http-header-size=102400000"' -p 3000:3000 jihchi/mermaid.ink`
 
 Or, If running locally, run `NODE_OPTIONS="--max-http-header-size=102400000" npm start` to increase `--max-http-header-size`
+
+## Contributors
+
+Many thanks for your help!
+
+<a href="https://github.com/jihchi/mermaid.ink/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=jihchi/mermaid.ink" />
+</a>
