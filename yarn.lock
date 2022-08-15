@@ -2767,9 +2767,9 @@ merge-stream@^2.0.0:
   integrity sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==
 
 mermaid@^9.1.1:
-  version "9.1.4"
-  resolved "https://registry.yarnpkg.com/mermaid/-/mermaid-9.1.4.tgz#05113b14dabe6b2ce5abd7452d10d4309cc0467f"
-  integrity sha512-QgQTpIIzJfV/Ob7FZTDzxmWjFzCciij4C8RbbQbamsadf2gHrNrfqAoWLF6ALfQlW5ZqOefvlogDdWcFZRnifg==
+  version "9.1.5"
+  resolved "https://registry.yarnpkg.com/mermaid/-/mermaid-9.1.5.tgz#9be3efb6b54942ab4f08bf3dd30a2ba77cfbdad7"
+  integrity sha512-XoikwsOTTwsf/bKrTKjE5vCWXuhrOocA+/v3ynmdb0PIO1UEdfRLUNb70Cssz4TxTADX6HzeWYsUBCATBi7F1w==
   dependencies:
     "@braintree/sanitize-url" "^6.0.0"
     d3 "^7.0.0"
@@ -2778,7 +2778,7 @@ mermaid@^9.1.1:
     dompurify "2.3.10"
     graphlib "^2.1.8"
     khroma "^2.0.0"
-    moment-mini "^2.24.0"
+    moment-mini "2.24.0"
     stylis "^4.0.10"
 
 methods@^1.1.2, methods@~1.1.0:
@@ -2845,7 +2845,7 @@ mkdirp-classic@^0.5.2:
   resolved "https://registry.yarnpkg.com/mkdirp-classic/-/mkdirp-classic-0.5.3.tgz#fa10c9115cc6d8865be221ba47ee9bed78601113"
   integrity sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==
 
-moment-mini@^2.24.0:
+moment-mini@2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment-mini/-/moment-mini-2.24.0.tgz#fa68d98f7fe93ae65bf1262f6abb5fb6983d8d18"
   integrity sha512-9ARkWHBs+6YJIvrIp0Ik5tyTTtP9PoV0Ssu2Ocq5y9v8+NOOpWiRshAp8c4rZVWTOe+157on/5G+zj5pwIQFEQ==
