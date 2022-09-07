@@ -3,7 +3,7 @@
   "version": "4.2.0",
   "description": "https://mermain.ink",
   "engines": {
-    "node": ">= 17"
+    "node": ">= 18"
   },
   "main": "src/index.js",
   "scripts": {
