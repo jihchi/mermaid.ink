@@ -28,7 +28,7 @@ describe('app', () => {
     test('returns 400 when url is missing', async () => {
       const resp = await request.get('/services/oembed');
       expect(resp.status).toEqual(400);
-      expect(resp.text).toMatchInlineSnapshot(`"query \\"url\\" is required"`);
+      expect(resp.text).toMatchInlineSnapshot(`"query \"url\" is required"`);
     });
 
     test('returns 404 when url is invalid', async () => {
