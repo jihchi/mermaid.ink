@@ -338,21 +338,28 @@ describe('app', () => {
     const crossOrigin = 'http://cross.origin.com';
 
     test('/img/:code', async () => {
-      const resp = await request.options(
-        '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
-      ).set('Origin', crossOrigin);
-      expect(resp.status).toEqual(200);
-      expect(resp.headers["Access-Control-Allow-Origin"]).toEqual(crossOrigin);
-      expect(resp.headers["Access-Control-Allow-Methods"]).toEqual("GET");
+      const resp = await request
+        .options(
+          '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
+        )
+        .set('Origin', crossOrigin)
+        .set('Access-Control-Request-Method', 'GET');
+      console.log(resp);
+      expect(resp.status).toEqual(204);
+      expect(resp.headers['access-control-allow-origin']).toEqual(crossOrigin);
+      expect(resp.headers['access-control-allow-methods']).toEqual('GET');
     });
 
     test('/svg/:code', async () => {
-      const resp = await request.options(
-        '/svg/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
-      ).set('Origin', crossOrigin);
-      expect(resp.status).toEqual(200);
-      expect(resp.headers["Access-Control-Allow-Origin"]).toEqual(crossOrigin);
-      expect(resp.headers["Access-Control-Allow-Methods"]).toEqual("GET");
+      const resp = await request
+        .options(
+          '/svg/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
+        )
+        .set('Origin', crossOrigin)
+        .set('Access-Control-Request-Method', 'GET');
+      expect(resp.status).toEqual(204);
+      expect(resp.headers['access-control-allow-origin']).toEqual(crossOrigin);
+      expect(resp.headers['access-control-allow-methods']).toEqual('GET');
     });
-  })
+  });
 });
