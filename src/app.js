@@ -1,4 +1,5 @@
 const Koa = require('koa');
+const cors = require('@koa/cors');
 const createDebug = require('debug');
 const route = require('koa-route');
 const puppeteer = require('puppeteer');
@@ -8,6 +9,7 @@ const debug = createDebug('app:main');
 const pptr = createDebug('app:pptr');
 const app = new Koa();
 
+app.use(cors());
 app.use(route.get('/', views.home));
 app.use(route.get('/services/oembed', views.servicesOembed));
 app.use(route.get('/img/:encodedCode', views.img));
