@@ -41,7 +41,8 @@ You could treat it as normal image and embed everywhere you want.
 
 The images are generated with transparent background by default. To force a background color, append the query parameter `?bgColor=<color>` to the URL. 
 `<color>` is interpreted as hexadecimal by default. It is possible to use [named colors](https://htmlcolorcodes.com/color-names/) by prefixing the color name with `!`:
-* `https://mermaid.ink/img/<encoded_string>?bgColor=FF0000` will generate a PNG with a red background;
+* `https://mermaid.ink/img/<encoded_string>?bgColor=FF0000` will generate a JPEG with a red background.
+  * By default, JPEG images are created. To create PNG or WEBP, append another query parameter `type=<type>`. `https://mermaid.ink/img/<encoded_string>?bgColor=FF0000&type=png` will generate a PNG with a red background.
 * `https://mermaid.ink/svg/<encoded_string>?bgColor=!lightgray` will generate an SVG with a light gray background.
 
 
