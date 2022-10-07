@@ -7,14 +7,23 @@ const img = async (ctx, page) => {
   const svg = await page.$('#container > svg');
   debug('got the svg element');
 
-  const image = await svg.screenshot({
-    type: 'jpeg',
-    quality: 90,
+  // read type from query parameter, allow all types supported by puppeteer https://pptr.dev/api/puppeteer.screenshotoptions.type
+  // defaults to jpeg, because that was originally the hardcoded type
+  const type = ['jpeg', 'png', 'webp'].includes(ctx.query.type) ? ctx.query.type : 'jpeg';
+  debug('screenshot type: %s', type);
+
+  const screenshotOptions = {
+    type,
+    // omit quality option if type is png https://pptr.dev/api/puppeteer.screenshotoptions.quality
+    quality: type !== 'png' ? 90 : undefined,
     omitBackground: true,
-  });
+  };
+
+  const image = await svg.screenshot(screenshotOptions);
   debug('took a screenshot from the element, file size: %o', image.length);
 
-  ctx.type = 'image/jpeg';
+  // dynamically set media type
+  ctx.type = `image/${type}`;
   ctx.body = image;
 };
 
