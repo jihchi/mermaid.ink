@@ -13,8 +13,8 @@
     "format": "prettier --with-node-modules --write \"{src,test}/**/*.{js,html}\"",
     "start": "node src/index.js",
     "test": "jest",
-    "test:ci": "yarn test --bail --ci",
-    "test:watch": "yarn test --watch"
+    "test:ci": "$npm_execpath test --bail --ci",
+    "test:watch": "$npm_execpath test --watch"
   },
   "repository": {
     "type": "git",
