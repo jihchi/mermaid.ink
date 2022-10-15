@@ -125,7 +125,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/png');
-      expect(resp.body.length).toBeGreaterThan(20 * KB);
+      expect(resp.body.length).toBeGreaterThan(19 * KB);
     });
 
     test('flowchart webp', async () => {
@@ -143,7 +143,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/png');
-      expect(resp.body.length).toBeGreaterThan(20 * KB);
+      expect(resp.body.length).toBeGreaterThan(19 * KB);
     });
 
     test('flowchart unknown type', async () => {
@@ -380,7 +380,6 @@ describe('app', () => {
         )
         .set('Origin', crossOrigin)
         .set('Access-Control-Request-Method', 'GET');
-      console.log(resp);
       expect(resp.status).toEqual(204);
       expect(resp.headers['access-control-allow-origin']).toEqual(crossOrigin);
       expect(resp.headers['access-control-allow-methods']).toEqual('GET');
