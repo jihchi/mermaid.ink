@@ -9,7 +9,9 @@ const img = async (ctx, page) => {
 
   // read type from query parameter, allow all types supported by puppeteer https://pptr.dev/api/puppeteer.screenshotoptions.type
   // defaults to jpeg, because that was originally the hardcoded type
-  const type = ['jpeg', 'png', 'webp'].includes(ctx.query.type?.toLowerCase()) ? ctx.query.type?.toLowerCase() : 'jpeg';
+  const type = ['jpeg', 'png', 'webp'].includes(ctx.query.type?.toLowerCase())
+    ? ctx.query.type?.toLowerCase()
+    : 'jpeg';
   debug('screenshot type: %s', type);
 
   const screenshotOptions = {
