@@ -773,6 +773,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.10.tgz#616f16e9d3a2a3d618136b1be244315d95bd7cab"
   integrity sha512-S/3xB4KzyFxYGCppyDt68yzBU9ysL88lSdIah4D6cptdcltc4NCPCAMc0+PCpg/lLIyC7IPvj2Z52OJWeIUkog==
 
+"@types/parse-json@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
+  integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
+
 "@types/prettier@^2.1.5":
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.4.3.tgz#a3c65525b91fca7da00ab1a3ac2b5a2a4afbffbf"
@@ -1193,6 +1198,17 @@ cookies@~0.8.0:
   dependencies:
     depd "~2.0.0"
     keygrip "~1.1.0"
+
+cosmiconfig@7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-7.0.1.tgz#714d756522cace867867ccb4474c5d01bbae5d6d"
+  integrity sha512-a1YWNUV2HwGimB7dU2s1wUMurNKjpx60HxBB6xUM8Re+2s1g1IIfJvFR0/iCF+XHdE0GMTKTuLR32UQff4TEyQ==
+  dependencies:
+    "@types/parse-json" "^4.0.0"
+    import-fresh "^3.2.1"
+    parse-json "^5.0.0"
+    path-type "^4.0.0"
+    yaml "^1.10.0"
 
 cross-fetch@3.1.5:
   version "3.1.5"
@@ -2151,6 +2167,14 @@ ieee754@^1.1.13:
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
   integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
 
+import-fresh@^3.2.1:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-3.3.0.tgz#37162c25fcb9ebaa2e6e53d5b4d88ce17d9e0c2b"
+  integrity sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==
+  dependencies:
+    parent-module "^1.0.0"
+    resolve-from "^4.0.0"
+
 import-local@^3.0.2:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/import-local/-/import-local-3.1.0.tgz#b4479df8a5fd44f6cdce24070675676063c95cb4"
@@ -2990,7 +3014,14 @@ pako@^2.0.4:
   resolved "https://registry.yarnpkg.com/pako/-/pako-2.0.4.tgz#6cebc4bbb0b6c73b0d5b8d7e8476e2b2fbea576d"
   integrity sha512-v8tweI900AUkZN6heMU/4Uy4cXRc2AYNRggVmTR+dEncawDJgCdLMximOVA2p4qO57WMynangsfGRb5WD6L1Bg==
 
-parse-json@^5.2.0:
+parent-module@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/parent-module/-/parent-module-1.0.1.tgz#691d2709e78c79fae3a156622452d00762caaaa2"
+  integrity sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==
+  dependencies:
+    callsites "^3.0.0"
+
+parse-json@^5.0.0, parse-json@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/parse-json/-/parse-json-5.2.0.tgz#c76fc66dee54231c962b22bcc8a72cf2f99753cd"
   integrity sha512-ayCKvm/phCGxOkYRSCM82iDwct8/EonSEgCSxWxD7ve6jHggsFl4fZVQBPRNgQoKiuV/odhFrGzQXZwbifC8Rg==
@@ -3031,6 +3062,11 @@ path-to-regexp@^1.2.0:
   integrity sha512-n43JRhlUKUAlibEJhPeir1ncUID16QnEjNpwzNdO3Lm4ywrBpBZ5oLD0I6br9evr1Y9JTqwRtAh7JLoOzAQdVA==
   dependencies:
     isarray "0.0.1"
+
+path-type@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
+  integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
 pend@~1.2.0:
   version "1.2.0"
@@ -3099,10 +3135,10 @@ pump@^3.0.0:
     end-of-stream "^1.1.0"
     once "^1.3.1"
 
-puppeteer-core@19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-19.0.0.tgz#8d0198550e04c7d5e0847200ba257b2a777dbd3b"
-  integrity sha512-OljQ9W5M4cBX68vnOAGbcRkVENDHn6lfj6QYoGsnLQsxPAh6ExTQAhHauwdFdQkhYdDExZFWlKArnBONzeHY+g==
+puppeteer-core@19.1.0:
+  version "19.1.0"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-19.1.0.tgz#783153a553e2ad7d9fb9e4ff480fb37c64abf5aa"
+  integrity sha512-xIIJJuvqWbUwNzaB7l0TyChJYHdLvLhcHQiBLLKsMfvaQXnVa0Fzooq3Zb5bc01Q/b7XiP9pqDvUcYWSmzZQHA==
   dependencies:
     cross-fetch "3.1.5"
     debug "4.3.4"
@@ -3116,14 +3152,15 @@ puppeteer-core@19.0.0:
     ws "8.9.0"
 
 puppeteer@^19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.0.0.tgz#848986e6ecec37b19cd5a7327ad2fcf1f1cb83fd"
-  integrity sha512-3Ga5IVerQQ2hKU9q7T28RmcUsd8F2kL6cYuPcPCzeclSjmHhGydPBZL/KJKC02sG6J6Wfry85uiWpbkjQ5qBiw==
+  version "19.1.0"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.1.0.tgz#96999e2adb3f6435fa01fd563665bd9dff375d49"
+  integrity sha512-UyJ5gz5JNjuFo6VJzIf+qDNjbSWGSoAMLuW990eErcrH6sZP85EbpLi6yG50euTMudxO/lsj4w1VNDNogHv6dA==
   dependencies:
+    cosmiconfig "7.0.1"
     https-proxy-agent "5.0.1"
     progress "2.0.3"
     proxy-from-env "1.1.0"
-    puppeteer-core "19.0.0"
+    puppeteer-core "19.1.0"
 
 qs@6.9.3:
   version "6.9.3"
@@ -3162,6 +3199,11 @@ resolve-cwd@^3.0.0:
   integrity sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg==
   dependencies:
     resolve-from "^5.0.0"
+
+resolve-from@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-4.0.0.tgz#4abcd852ad32dd7baabfe9b40e00a36db5f392e6"
+  integrity sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==
 
 resolve-from@^5.0.0:
   version "5.0.0"
@@ -3584,6 +3626,11 @@ yallist@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
+
+yaml@^1.10.0:
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
+  integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 
 yargs-parser@^21.0.0:
   version "21.0.1"
