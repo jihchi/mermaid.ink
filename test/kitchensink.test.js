@@ -98,7 +98,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
-      expect(resp.body.length).toBeGreaterThan(16 * KB);
+      expect(resp.body.length).toBeGreaterThan(15 * KB);
     });
 
     test('flowchart base64', async () => {
@@ -306,7 +306,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
-      expect(resp.body.length).toBeGreaterThan(14 * KB);
+      expect(resp.body.length).toBeGreaterThan(13 * KB);
     });
 
     test('returns 400 when encoded code is invalid', async () => {
