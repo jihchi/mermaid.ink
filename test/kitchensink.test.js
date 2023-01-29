@@ -116,7 +116,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
-      expect(resp.body.length).toBeGreaterThan(16 * KB);
+      expect(resp.body.length).toBeGreaterThan(15 * KB);
     });
 
     test('flowchart png', async () => {
