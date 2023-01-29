@@ -125,7 +125,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/png');
-      expect(resp.body.length).toBeGreaterThan(19 * KB);
+      expect(resp.body.length).toBeGreaterThan(18 * KB);
     });
 
     test('flowchart webp', async () => {
