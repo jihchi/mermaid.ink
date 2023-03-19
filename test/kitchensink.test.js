@@ -370,6 +370,25 @@ describe('app', () => {
     expect(ok.status).toEqual(200);
   });
 
+  describe('Fixed #170, ER diagram, works at mermaid@10', () => {
+    const encodedPath =
+      'pako:eNp1UsFuwjAM_RUru2wSfEB7q6BIE6OgArusO3itaSPaBDnpJgb8-1JaaSsdvsRynu33bJ9EqjMSviCeSswZq0SBs0kQw_k8HusTRMEinI6n8fNrGIMPWJb6y_yiTq3bmLEsVQ5MuXQuWqlVVFcfxLCaD1AV7mkYdGTK2-jbOxyQbdfz0j6rMF4vozscpemBhhQzlp_E5kWmpAw5epCITUFQdoGHRNzmPHreE-wkGxthRQ6_VOURPA_SAhlT68oBMrXzoWxYAEpscwcfh0Irgu2fGUllAXPqKe5pHEpKkeP_Bj-C2fyO_qv8lHqgrtkiiLazYLLZxq6ZbpQ2FK2Gb2INmt2mnNZm__51k0aMREVcoczcMV3ZJcIW5NQK37kZ8r4ZycXhsLZ6fVSp8C3XNBL1IUNL3fkJf4elocsPBXTMmA';
+
+    test('img', async () => {
+      const resp = await request.get(`/img/${encodedPath}`);
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/jpeg');
+      expect(resp.body.length).toBeGreaterThan(15 * KB);
+    });
+
+    test('svg', async () => {
+      const resp = await request.get(`/svg/${encodedPath}`);
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/svg+xml');
+      expect(resp.body.length).toBeGreaterThan(13 * KB);
+    });
+  });
+
   describe('CORS', () => {
     const crossOrigin = 'http://cross.origin.com';
 
