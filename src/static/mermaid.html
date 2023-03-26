@@ -14,50 +14,6 @@
   </head>
   <body>
     <div id="container"></div>
-    <script type="module">
-      import mermaid from '../../node_modules/mermaid/dist/mermaid.esm.min.mjs';
-
-      function isSyntaxErrorFromMermaid(code) {
-        return (
-          code.includes('Syntax error in graph') && code.includes('error-icon')
-        );
-      }
-
-      function injectFontAwesomeCss(element) {
-        const style = document.createElement('style');
-        style.innerText =
-          '@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css");';
-        element.querySelector('svg').appendChild(style);
-      }
-
-      async function render(definition, config) {
-        try {
-          mermaid.initialize({
-            ...config,
-            startOnLoad: false,
-            securityLevel: 'loose',
-          });
-
-          const { container } = window;
-          const { svg, bindFunctions } = await mermaid.render(
-            'mermaid-svg',
-            definition
-          );
-
-          container.innerHTML = svg;
-          bindFunctions?.(container);
-          injectFontAwesomeCss(container);
-        } catch (error) {
-          if (isSyntaxErrorFromMermaid(svgCode)) {
-            throw new Error('Syntax error in graph');
-          }
-          throw error;
-        }
-      }
-
-      window.App = {
-        render,
-      };
-    </script>
+    <script src="./mermaid.mjs" type="module"></script>
   </body>
 </html>
