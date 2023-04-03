@@ -440,15 +440,15 @@
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-6.3.0.tgz#b5877182692a6f7a39d1108837bec24247ba4bd7"
   integrity sha512-qVtd5i1Cc7cdrqnTWqTObKQHjPWAiRwjUPaXObaeNPcy7+WKxJumGBx66rfSFgK6LNpIasVKkEgW8oyf0tmPLA==
 
-"@happy-dom/jest-environment@^8.9.0":
-  version "8.9.0"
-  resolved "https://registry.yarnpkg.com/@happy-dom/jest-environment/-/jest-environment-8.9.0.tgz#465ef9b1883a7f9a18eb3244d4350b17e5c0f191"
-  integrity sha512-tcNmoVv1ffeeOjCuUGoJKgH52YOmrdyPUSjiAB5YJPih4e3WoZT1lh95+dbEg4KLDO4yJVmHAWcQ1Oa1CJWNQQ==
+"@happy-dom/jest-environment@^9.1.0":
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/@happy-dom/jest-environment/-/jest-environment-9.1.0.tgz#ddb3ceb6a5746b7b02f33122f24f2caabbbad43d"
+  integrity sha512-xuo/LEpjmkt+IaZmMxTRI/ygPlPTh3d8TYd5Mgmx/jt2HbE1Ro08yRRqrx/EZ7tP168LbD9q7YbD08LlxphX0A==
   dependencies:
     "@jest/environment" "^29.4.0"
     "@jest/fake-timers" "^29.4.0"
     "@jest/types" "^29.4.0"
-    happy-dom "^8.9.0"
+    happy-dom "^9.1.0"
     jest-mock "^29.4.0"
     jest-util "^29.4.0"
 
@@ -2029,15 +2029,14 @@ graceful-fs@^4.2.9:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.9.tgz#041b05df45755e587a24942279b9d113146e1c96"
   integrity sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==
 
-happy-dom@^8.9.0:
-  version "8.9.0"
-  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-8.9.0.tgz#b7c9986538b83c3ca3197ce22a1d27a1777c49d9"
-  integrity sha512-JZwJuGdR7ko8L61136YzmrLv7LgTh5b8XaEM3P709mLjyQuXJ3zHTDXvUtBBahRjGlcYW0zGjIiEWizoTUGKfA==
+happy-dom@^9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-9.1.0.tgz#95749c6aad0c6da0311f92d7318e8e7407104a41"
+  integrity sha512-Z/oOcAJsZjHFOQ/VK8n0CnZBjWucZNeZwFdlDK234vIBW9IVYGWjSUR9ujK6nwsSzJ6vNdYuSZoiag72AzlD0A==
   dependencies:
     css.escape "^1.5.1"
     he "^1.2.0"
     iconv-lite "^0.6.3"
-    node-fetch "^2.x.x"
     webidl-conversions "^7.0.0"
     whatwg-encoding "^2.0.0"
     whatwg-mimetype "^3.0.0"
@@ -3062,13 +3061,6 @@ node-fetch@2.6.7:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
-  dependencies:
-    whatwg-url "^5.0.0"
-
-node-fetch@^2.x.x:
-  version "2.6.9"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.9.tgz#7c7f744b5cc6eb5fd404e0c7a9fec630a55657e6"
-  integrity sha512-DJm/CJkZkRjKKj4Zi4BsKVZh3ValV5IR5s7LVZnW+6YMh0W1BfNA8XSs6DLMGYlId5F3KnA70uu2qepcR08Qqg==
   dependencies:
     whatwg-url "^5.0.0"
 
