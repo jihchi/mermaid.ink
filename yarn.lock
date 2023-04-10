@@ -441,14 +441,14 @@
   integrity sha512-0NyytTlPJwB/BF5LtRV8rrABDbe3TdTXqNB3PdZ+UUUZAEIrdOJdmABqKjt4AXwIoJNaRVVZEXxpNrqvE1GAYQ==
 
 "@happy-dom/jest-environment@^9.1.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@happy-dom/jest-environment/-/jest-environment-9.1.0.tgz#ddb3ceb6a5746b7b02f33122f24f2caabbbad43d"
-  integrity sha512-xuo/LEpjmkt+IaZmMxTRI/ygPlPTh3d8TYd5Mgmx/jt2HbE1Ro08yRRqrx/EZ7tP168LbD9q7YbD08LlxphX0A==
+  version "9.1.9"
+  resolved "https://registry.yarnpkg.com/@happy-dom/jest-environment/-/jest-environment-9.1.9.tgz#c5d842b8e501742274b5bf5e7daef2bd4682662b"
+  integrity sha512-K+FYQzHzOqNRl6p6DlOp+kfRieF8gUDL+vW7Xp23+ijkhgHkY4r5265K9kZtmayUFPwfxv3UuIHMlU7FH7bx3g==
   dependencies:
     "@jest/environment" "^29.4.0"
     "@jest/fake-timers" "^29.4.0"
     "@jest/types" "^29.4.0"
-    happy-dom "^9.1.0"
+    happy-dom "^9.1.9"
     jest-mock "^29.4.0"
     jest-util "^29.4.0"
 
@@ -2052,10 +2052,10 @@ graceful-fs@^4.2.9:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.9.tgz#041b05df45755e587a24942279b9d113146e1c96"
   integrity sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==
 
-happy-dom@^9.1.0:
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-9.1.0.tgz#95749c6aad0c6da0311f92d7318e8e7407104a41"
-  integrity sha512-Z/oOcAJsZjHFOQ/VK8n0CnZBjWucZNeZwFdlDK234vIBW9IVYGWjSUR9ujK6nwsSzJ6vNdYuSZoiag72AzlD0A==
+happy-dom@^9.1.9:
+  version "9.1.9"
+  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-9.1.9.tgz#d369f0086c67a8acdac8756cd3d4edf6054ac98d"
+  integrity sha512-OMbnoknA7iNNG/5fwt1JckCKc53QLLFo2ljzit1pCV9SC1TYwcQj0obq0QUTeqIf2p2skbFG69bo19YoSj/1DA==
   dependencies:
     css.escape "^1.5.1"
     he "^1.2.0"
