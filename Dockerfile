@@ -1,5 +1,5 @@
 # based on: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
-FROM docker.io/library/node:18-buster-slim
+FROM docker.io/library/node:20-buster-slim
 LABEL maintainer="Jihchi Lee <achi@987.tw>"
 
 RUN mkdir -p /usr/src/app
