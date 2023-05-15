@@ -441,14 +441,14 @@
   integrity sha512-0NyytTlPJwB/BF5LtRV8rrABDbe3TdTXqNB3PdZ+UUUZAEIrdOJdmABqKjt4AXwIoJNaRVVZEXxpNrqvE1GAYQ==
 
 "@happy-dom/jest-environment@^9.1.0":
-  version "9.10.1"
-  resolved "https://registry.yarnpkg.com/@happy-dom/jest-environment/-/jest-environment-9.10.1.tgz#8c39b47661123bb963e2da8267e1ec6a30b25c3b"
-  integrity sha512-RnGUh26WyjtllJHE/AWzb35nQOf18KHYbuos7cuYDKKuh6VeozMQkSukrm9SASvseDB3hjWQ2JfbHmDds4WyNg==
+  version "9.18.3"
+  resolved "https://registry.yarnpkg.com/@happy-dom/jest-environment/-/jest-environment-9.18.3.tgz#035aad559fcbcdd1ba3638706924909a0573cf81"
+  integrity sha512-74OZ20KLHTkpmMEriqx+z4oBHdfpTm4aeSYn58TlISzTfcGHANipCcQWdBUkVya1DOG7HO5bOh4eEP1jv1IY5A==
   dependencies:
     "@jest/environment" "^29.4.0"
     "@jest/fake-timers" "^29.4.0"
     "@jest/types" "^29.4.0"
-    happy-dom "^9.10.1"
+    happy-dom "^9.18.3"
     jest-mock "^29.4.0"
     jest-util "^29.4.0"
 
@@ -1831,6 +1831,11 @@ end-of-stream@^1.1.0, end-of-stream@^1.4.1:
   dependencies:
     once "^1.4.0"
 
+entities@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/entities/-/entities-4.5.0.tgz#5d268ea5e7113ec74c4d033b79ea5a35a488fb48"
+  integrity sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==
+
 error-ex@^1.3.1:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/error-ex/-/error-ex-1.3.2.tgz#b4ac40648107fdcdcfae242f428bea8a14d4f1bf"
@@ -2089,13 +2094,13 @@ graceful-fs@^4.2.9:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.9.tgz#041b05df45755e587a24942279b9d113146e1c96"
   integrity sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==
 
-happy-dom@^9.10.1:
-  version "9.10.1"
-  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-9.10.1.tgz#fd76d9cec8b04791e01ddd2ba37b343150e682c1"
-  integrity sha512-4wEWL9jYxtjcvGJDACtcelTBD86Sv//Kwn3G/+zb0mrNF3sC/JC0lTznqLu4Vw4cNUfR4WLMjiC+jeAr8CxM2g==
+happy-dom@^9.18.3:
+  version "9.18.3"
+  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-9.18.3.tgz#ad3fdf812ae5c08e4af1baae98719d4d8cf2edc4"
+  integrity sha512-b7iMGYeIXvUryNultA0AHEVU0FPpb2djJ/xSVlMDfP7HG4z7FomdqkCEpWtSv1zDL+t1gRUoBbpqFCoUBvjYtg==
   dependencies:
     css.escape "^1.5.1"
-    he "^1.2.0"
+    entities "^4.5.0"
     iconv-lite "^0.6.3"
     webidl-conversions "^7.0.0"
     whatwg-encoding "^2.0.0"
@@ -2146,11 +2151,6 @@ has@^1.0.3:
   integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
   dependencies:
     function-bind "^1.1.1"
-
-he@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
-  integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
 heap@^0.2.6:
   version "0.2.7"
