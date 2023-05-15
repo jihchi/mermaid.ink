@@ -35,7 +35,7 @@
     "koa-route": "^3.2.0",
     "mermaid": "^10.0.2",
     "pako": "^2.0.4",
-    "puppeteer": "^19.7.5"
+    "puppeteer": "^20.2.0"
   },
   "devDependencies": {
     "@happy-dom/jest-environment": "^9.1.0",
