@@ -1225,10 +1225,10 @@ chownr@^1.1.1:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.4.tgz#6fc9d7b42d32a583596337666e7d08084da2cc6b"
   integrity sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==
 
-chromium-bidi@0.4.11:
-  version "0.4.11"
-  resolved "https://registry.yarnpkg.com/chromium-bidi/-/chromium-bidi-0.4.11.tgz#d3eafb0a99f417406a734b889dacd777be5e227c"
-  integrity sha512-p03ajLhlQ5gebw3cmbDBFmBc2wnJM5dnXS8Phu6mblGn/KQd76yOVL5VwE0VAisa7oazNfKGTaXlIZ8Q5Bb9OA==
+chromium-bidi@0.4.12:
+  version "0.4.12"
+  resolved "https://registry.yarnpkg.com/chromium-bidi/-/chromium-bidi-0.4.12.tgz#54910b6b2c97d1d39c1162237b09e42fe6cdf803"
+  integrity sha512-yl0ngMHtYUGJa2G0lkcbPvbnUZ9WMQyMNSfYmlrGD1nHRNyI9KOGw3dOaofFugXHHToneUaSmF9iUdgCBamCjA==
   dependencies:
     mitt "3.0.0"
 
@@ -1367,10 +1367,10 @@ cose-base@^2.2.0:
   dependencies:
     layout-base "^2.0.0"
 
-cosmiconfig@8.1.3:
-  version "8.1.3"
-  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-8.1.3.tgz#0e614a118fcc2d9e5afc2f87d53cd09931015689"
-  integrity sha512-/UkO2JKI18b5jVMJUp0lvKFMpa/Gye+ZgZjKD+DGEN9y7NRcf/nK1A0sp67ONmKtnDCNMS44E6jrk0Yc3bDuUw==
+cosmiconfig@8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-8.2.0.tgz#f7d17c56a590856cd1e7cee98734dca272b0d8fd"
+  integrity sha512-3rTMnFJA1tCOPwRxtgF4wd7Ab2qvDbL8jX+3smjIbS4HlZBagTlpERbdN7iAbWlrfxE3M8c27kTwTawQ7st+OQ==
   dependencies:
     import-fresh "^3.2.1"
     js-yaml "^4.1.0"
@@ -1806,10 +1806,10 @@ detect-newline@^3.0.0:
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-3.1.0.tgz#576f5dfc63ae1a192ff192d8ad3af6308991b651"
   integrity sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==
 
-devtools-protocol@0.0.1120988:
-  version "0.0.1120988"
-  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1120988.tgz#8fe49088919ae3b8df7235774633763f1f925066"
-  integrity sha512-39fCpE3Z78IaIPChJsP6Lhmkbf4dWXOmzLk/KFTdRkNk/0JymRIfUynDVRndV9HoDz8PyalK1UH21ST/ivwW5Q==
+devtools-protocol@0.0.1135028:
+  version "0.0.1135028"
+  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1135028.tgz#b2c667c301cb6da9ba3ed0989fe1fb88b660ee0a"
+  integrity sha512-jEcNGrh6lOXNRJvZb9RjeevtZGrgugPKSMJZxfyxWQnhlKawMPhMtk/dfC+Z/6xNXExlzTKlY5LzIAK/fRpQIw==
 
 dezalgo@^1.0.4:
   version "1.0.4"
@@ -3790,26 +3790,26 @@ pump@^3.0.0:
     end-of-stream "^1.1.0"
     once "^1.3.1"
 
-puppeteer-core@20.5.0:
-  version "20.5.0"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-20.5.0.tgz#4b9ccd6c4ca35fe02373bf2147dc75b42ebd22c4"
-  integrity sha512-9ddHXUQ7jpliGei87zYTuEZYQvFj6Lzk5R8w4vT4gMmNArkEqC5CX72TnVIJiTUbiTpOXJkvMQaXIHYopjdUtQ==
+puppeteer-core@20.7.2:
+  version "20.7.2"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-20.7.2.tgz#e9d527701108693c37d3f9d5980c10b883e00378"
+  integrity sha512-4Sd+v2YLlYMYFP/9SI/spT1joGTePwhmKP89pchUqz7VcWwv/Yh0Atmsybz+7wWT0VPDnw0UhBM6iNEfXEoUvg==
   dependencies:
     "@puppeteer/browsers" "1.4.1"
-    chromium-bidi "0.4.11"
+    chromium-bidi "0.4.12"
     cross-fetch "3.1.6"
     debug "4.3.4"
-    devtools-protocol "0.0.1120988"
+    devtools-protocol "0.0.1135028"
     ws "8.13.0"
 
 puppeteer@^20.2.0:
-  version "20.5.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-20.5.0.tgz#453f42edb2cb085bb237914c2bcda7938b7ab1c2"
-  integrity sha512-3j0JShJGDT5z8rfDKf+wZQq3IHxw7JaDAdP7py5H5zOIgmqNG0e8R19y4tFzJ8i2WC4H/0bC51rIrTXyDop1FA==
+  version "20.7.2"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-20.7.2.tgz#f3c8db0eb34dc2ddb877bf34b9352e82d160bc38"
+  integrity sha512-SKg9TgUY3TJvnOy0VrkhduSvDQIjBsi+s/Ne6S+qD53MM6emau+oh+kNqySNrT7c4qkg27UrJ9aEnltKDAQTzQ==
   dependencies:
     "@puppeteer/browsers" "1.4.1"
-    cosmiconfig "8.1.3"
-    puppeteer-core "20.5.0"
+    cosmiconfig "8.2.0"
+    puppeteer-core "20.7.2"
 
 pure-rand@^6.0.0:
   version "6.0.1"
