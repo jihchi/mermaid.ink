@@ -14,11 +14,11 @@
   "author": "jihchi",
   "main": "src/index.js",
   "scripts": {
+    "docker:bash": "docker run --rm --init --cap-add=SYS_ADMIN -p 3000:3000 -e DEBUG='app:*,-app:pptr' --interactive --entrypoint='' jihchi/mermaid.ink:$npm_package_version bash",
     "docker:build": "docker build . -t jihchi/mermaid.ink:$npm_package_version",
     "docker:publish": "docker push jihchi/mermaid.ink:$npm_package_version",
     "docker:run": "docker run --rm --init --cap-add=SYS_ADMIN -p 3000:3000 -e DEBUG='app:*,-app:pptr' jihchi/mermaid.ink:$npm_package_version",
-    "docker:bash": "docker run --rm --init --cap-add=SYS_ADMIN -p 3000:3000 -e DEBUG='app:*,-app:pptr' --interactive --entrypoint='' jihchi/mermaid.ink:$npm_package_version bash",
-    "format": "prettier --with-node-modules --write \"{src,test}/**/*.{mjs,js,html}\" \"jest.*.js\" ",
+    "format": "prettier --with-node-modules --write \"{src,test}/**/*.{mjs,js,html}\" \"*.{js,cjs,mjs}\"",
     "start": "node src/index.js",
     "test": "jest",
     "test:watch": "pnpm test --watch"
@@ -46,6 +46,7 @@
     "prettier": "^2.8.8",
     "supertest": "^6.3.3"
   },
+  "packageManager": "pnpm@8.6.3",
   "engines": {
     "node": ">= 18",
     "pnpm": ">= 8"
