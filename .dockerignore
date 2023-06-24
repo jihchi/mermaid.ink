@@ -1,5 +1,7 @@
 */*
-!src/*
-!package.json
+!.npmrc
 !README.md
-!yarn.lock
+!package.json
+!pnpm-lock.yaml
+!src/*
+|LICENCE

@@ -6,7 +6,7 @@ function isSyntaxErrorFromMermaid(code) {
 
 function injectFontAwesomeCss(svgElement) {
   const fontAeasomeCssUrl =
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css';
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
   const style = document.createElement('style');
 
   style.innerText = `@import url("${fontAeasomeCssUrl}");`;

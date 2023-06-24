@@ -13,19 +13,19 @@ RUN apt-get update \
   && sed -i -e's/ main/ main contrib non-free/g' /etc/apt/sources.list \
   && apt-get update \
   && apt-get install -y \
-    google-chrome-stable \
-    fonts-ipafont-gothic \
-    fonts-wqy-zenhei \
-    fonts-thai-tlwg \
-    fonts-kacst \
-    fonts-freefont-ttf \
-    ttf-mscorefonts-installer \
-    fonts-noto-cjk \
-    fonts-noto-color-emoji \
-    fonts-font-awesome \
-    libxss1 \
-    fontconfig \
-    --no-install-recommends \
+  google-chrome-stable \
+  fonts-ipafont-gothic \
+  fonts-wqy-zenhei \
+  fonts-thai-tlwg \
+  fonts-kacst \
+  fonts-freefont-ttf \
+  ttf-mscorefonts-installer \
+  fonts-noto-cjk \
+  fonts-noto-color-emoji \
+  fonts-font-awesome \
+  libxss1 \
+  fontconfig \
+  --no-install-recommends \
   && fc-cache -f -v \
   && apt-get autoremove -y \
   && apt-get autoclean \
@@ -35,17 +35,21 @@ RUN apt-get update \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 # node application onbuild
-COPY package.json yarn.lock /usr/src/app/
-RUN yarn --production=true && yarn cache clean --force
-COPY . /usr/src/app
+RUN corepack enable
+# pnpm fetch does require only lockfile
+COPY pnpm-lock.yaml ./
+RUN pnpm fetch --prod
+
+COPY . ./
+RUN pnpm install -r --offline --prod
 
 # Add user so we don't need --no-sandbox.
 # same layer as npm install to keep re-chowned files from using up several hundred MBs more space
 RUN usermod -a -G audio,video node \
-	&& mkdir -p /home/node/Downloads \
-	&& chown -R node:node /home/node /usr/src/app/
+  && mkdir -p /home/node/Downloads \
+  && chown -R node:node /home/node /usr/src/app/
 
 USER node
-CMD ["yarn", "start"]
+CMD ["pnpm", "start"]
 
 EXPOSE 3000

@@ -27,7 +27,7 @@ async function setup() {
     executablePath: process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
       ? 'google-chrome-stable'
       : undefined,
-    headless: !pptr.enabled,
+    headless: pptr.enabled ? false : 'new',
     devtools: pptr.enabled,
     dumpio: true,
     defaultViewport: {
