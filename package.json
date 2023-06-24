@@ -2,50 +2,52 @@
   "name": "mermaid.ink",
   "version": "6.1.0",
   "description": "https://mermain.ink",
-  "engines": {
-    "node": ">= 18"
-  },
-  "main": "src/index.js",
-  "scripts": {
-    "docker:build": "docker build . -t jihchi/mermaid.ink:$npm_package_version",
-    "docker:publish": "docker push jihchi/mermaid.ink:$npm_package_version",
-    "docker:run": "docker run --rm --init --cap-add=SYS_ADMIN -p 3000:3000 -e DEBUG=app:*,-app:pptr jihchi/mermaid.ink:$npm_package_version",
-    "format": "prettier --with-node-modules --write \"{src,test}/**/*.{mjs,js,html}\" \"jest.*.js\" ",
-    "start": "node src/index.js",
-    "test": "jest",
-    "test:ci": "$npm_execpath test --bail --ci",
-    "test:watch": "$npm_execpath test --watch"
+  "homepage": "https://github.com/jihchi/mermaid.ink#readme",
+  "bugs": {
+    "url": "https://github.com/jihchi/mermaid.ink/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jihchi/mermaid.ink.git"
   },
-  "author": "jihchi",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jihchi/mermaid.ink/issues"
-  },
-  "homepage": "https://github.com/jihchi/mermaid.ink#readme",
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.1.1",
-    "@koa/cors": "^4.0.0",
-    "debug": "^4.3.2",
-    "js-base64": "^3.7.2",
-    "koa": "^2.13.4",
-    "koa-route": "^3.2.0",
-    "mermaid": "^10.0.2",
-    "pako": "^2.0.4",
-    "puppeteer": "^20.2.0"
-  },
-  "devDependencies": {
-    "@happy-dom/jest-environment": "^9.1.0",
-    "@testing-library/jest-dom": "^5.16.5",
-    "jest": "^29.5.0",
-    "prettier": "^2.6.2",
-    "supertest": "^6.1.6"
+  "author": "jihchi",
+  "main": "src/index.js",
+  "scripts": {
+    "docker:build": "docker build . -t jihchi/mermaid.ink:$npm_package_version",
+    "docker:publish": "docker push jihchi/mermaid.ink:$npm_package_version",
+    "docker:run": "docker run --rm --init --cap-add=SYS_ADMIN -p 3000:3000 -e DEBUG='app:*,-app:pptr' jihchi/mermaid.ink:$npm_package_version",
+    "docker:bash": "docker run --rm --init --cap-add=SYS_ADMIN -p 3000:3000 -e DEBUG='app:*,-app:pptr' --interactive --entrypoint='' jihchi/mermaid.ink:$npm_package_version bash",
+    "format": "prettier --with-node-modules --write \"{src,test}/**/*.{mjs,js,html}\" \"jest.*.js\" ",
+    "start": "node src/index.js",
+    "test": "jest",
+    "test:watch": "pnpm test --watch"
   },
   "prettier": {
-    "trailingComma": "es5",
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.0",
+    "@koa/cors": "^4.0.0",
+    "debug": "^4.3.4",
+    "js-base64": "^3.7.5",
+    "koa": "^2.14.2",
+    "koa-route": "^3.2.0",
+    "mermaid": "^10.2.3",
+    "pako": "^2.1.0",
+    "path-to-regexp": "^6.2.1",
+    "puppeteer": "^20.7.3"
+  },
+  "devDependencies": {
+    "@happy-dom/jest-environment": "^9.20.3",
+    "@testing-library/jest-dom": "^5.16.5",
+    "jest": "^29.5.0",
+    "prettier": "^2.8.8",
+    "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": ">= 18",
+    "pnpm": ">= 8"
   }
 }

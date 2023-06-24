@@ -1,5 +1,5 @@
 const createDebug = require('debug');
-const pathToRegexp = require('path-to-regexp');
+const { pathToRegexp } = require('path-to-regexp');
 const openMermaidPage = require('openMermaidPage');
 const renderSVG = require('renderSVG');
 
