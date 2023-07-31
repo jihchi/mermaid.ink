@@ -38,8 +38,8 @@ dependencies:
 
 devDependencies:
   '@happy-dom/jest-environment':
-    specifier: ^9.20.3
-    version: 9.20.3
+    specifier: ^10.5.2
+    version: 10.5.2
   '@testing-library/jest-dom':
     specifier: ^5.16.5
     version: 5.17.0
@@ -414,15 +414,15 @@ packages:
     requiresBuild: true
     dev: false
 
-  /@happy-dom/jest-environment@9.20.3:
-    resolution: {integrity: sha512-XfLrCMrW/Kw01uV0jGTz1WVJ/CkNMxMXH1b8jiQWr4cYVbZGukqlExVkVvYS2vBL8d1s9RqcAzcLsTMAAZLZBw==}
+  /@happy-dom/jest-environment@10.5.2:
+    resolution: {integrity: sha512-d+t994SklgrXmFKoHtpIfkixrzfDgJuSc4aHDSD6JCz+GKMq4P4c4SVSG4wkXcpPMsTQDPCRANtN6Nc+bNHGrg==}
     dependencies:
-      '@jest/environment': 29.5.0
-      '@jest/fake-timers': 29.5.0
-      '@jest/types': 29.5.0
-      happy-dom: 9.20.3
-      jest-mock: 29.5.0
-      jest-util: 29.5.0
+      '@jest/environment': 29.6.2
+      '@jest/fake-timers': 29.6.2
+      '@jest/types': 29.6.1
+      happy-dom: 10.5.2
+      jest-mock: 29.6.2
+      jest-util: 29.6.2
     dev: true
 
   /@istanbuljs/load-nyc-config@1.1.0:
@@ -496,16 +496,6 @@ packages:
       - ts-node
     dev: true
 
-  /@jest/environment@29.5.0:
-    resolution: {integrity: sha512-5FXw2+wD29YU1d4I2htpRX7jYnAyTRjP2CsXQdo9SAM8g3ifxWPSV0HnClSn71xwctr0U3oZIIH+dtbfmnbXVQ==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      '@jest/fake-timers': 29.6.2
-      '@jest/types': 29.6.1
-      '@types/node': 20.3.1
-      jest-mock: 29.6.2
-    dev: true
-
   /@jest/environment@29.6.2:
     resolution: {integrity: sha512-AEcW43C7huGd/vogTddNNTDRpO6vQ2zaQNrttvWV18ArBx9Z56h7BIsXkNFJVOO4/kblWEQz30ckw0+L3izc+Q==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -531,18 +521,6 @@ packages:
       jest-snapshot: 29.6.2
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /@jest/fake-timers@29.5.0:
-    resolution: {integrity: sha512-9ARvuAAQcBwDAqOnglWq2zwNIRUDtk/SCkp/ToGEhFv5r86K21l+VEs0qNTaXtyiY0lEePl3kylijSYJQqdbDg==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      '@jest/types': 29.6.1
-      '@sinonjs/fake-timers': 10.3.0
-      '@types/node': 20.3.1
-      jest-message-util: 29.6.2
-      jest-mock: 29.6.2
-      jest-util: 29.6.2
     dev: true
 
   /@jest/fake-timers@29.6.2:
@@ -663,18 +641,6 @@ packages:
       write-file-atomic: 4.0.2
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /@jest/types@29.5.0:
-    resolution: {integrity: sha512-qbu7kN6czmVRc3xWFQcAN03RAUamgppVUdXrvl1Wr3jlNF93o9mJbGcDWrwGB6ht44u7efB1qCFgVQmca24Uog==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      '@jest/schemas': 29.6.0
-      '@types/istanbul-lib-coverage': 2.0.4
-      '@types/istanbul-reports': 3.0.1
-      '@types/node': 20.3.1
-      '@types/yargs': 17.0.24
-      chalk: 4.1.2
     dev: true
 
   /@jest/types@29.6.1:
@@ -2049,8 +2015,8 @@ packages:
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  /happy-dom@9.20.3:
-    resolution: {integrity: sha512-eBsgauT435fXFvQDNcmm5QbGtYzxEzOaX35Ia+h6yP/wwa4xSWZh1CfP+mGby8Hk6Xu59mTkpyf72rUXHNxY7A==}
+  /happy-dom@10.5.2:
+    resolution: {integrity: sha512-dTA1cDcLOPIkAdykLd9Wo1k8Ly36Hh2OdKGkWEHWuAHb89KcVVRLSj1OFev7ir90xhRLSGCGrEdDvS6u9l13kg==}
     dependencies:
       css.escape: 1.5.1
       entities: 4.5.0
@@ -2505,15 +2471,6 @@ packages:
       stack-utils: 2.0.6
     dev: true
 
-  /jest-mock@29.5.0:
-    resolution: {integrity: sha512-GqOzvdWDE4fAV2bWQLQCkujxYWL7RxjCnj71b5VhDAGOevB3qj3Ovg26A5NI84ZpODxyzaozXLOh2NCgkbvyaw==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      '@jest/types': 29.6.1
-      '@types/node': 20.3.1
-      jest-util: 29.6.2
-    dev: true
-
   /jest-mock@29.6.2:
     resolution: {integrity: sha512-hoSv3lb3byzdKfwqCuT6uTscan471GUECqgNYykg6ob0yiAw3zYc7OrPnI9Qv8Wwoa4lC7AZ9hyS4AiIx5U2zg==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -2650,18 +2607,6 @@ packages:
       semver: 7.5.3
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /jest-util@29.5.0:
-    resolution: {integrity: sha512-RYMgG/MTadOr5t8KdhejfvUU82MxsCu5MF6KuDUHl+NuwzUt+Sm6jJWxTJVrDR1j5M/gJVCPKQEpWXY+yIQ6lQ==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      '@jest/types': 29.6.1
-      '@types/node': 20.3.1
-      chalk: 4.1.2
-      ci-info: 3.8.0
-      graceful-fs: 4.2.11
-      picomatch: 2.3.1
     dev: true
 
   /jest-util@29.6.2:
