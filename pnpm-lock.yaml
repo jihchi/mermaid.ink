@@ -48,7 +48,7 @@ devDependencies:
     version: 29.6.2
   prettier:
     specifier: ^3.0.1
-    version: 3.0.1
+    version: 3.0.2
   supertest:
     specifier: ^6.3.3
     version: 6.3.3
@@ -3352,8 +3352,8 @@ packages:
       find-up: 4.1.0
     dev: true
 
-  /prettier@3.0.1:
-    resolution: {integrity: sha512-fcOWSnnpCrovBsmFZIGIy9UqK2FaI7Hqax+DIO0A9UxeVoY4iweyaFjS5TavZN97Hfehph0nhsZnjlVKzEQSrQ==}
+  /prettier@3.0.2:
+    resolution: {integrity: sha512-o2YR9qtniXvwEZlOKbveKfDQVyqxbEIWn48Z8m3ZJjBjcCmUy3xZGIv+7AkaeuaTr6yPXJjwv07ZWlsWbEy1rQ==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
