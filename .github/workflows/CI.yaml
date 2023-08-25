@@ -22,7 +22,14 @@ jobs:
         run: pnpm install
       - name: Run test
         run: pnpm test
-
+  check-access:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run check
+        run: |
+          curl "https://mermaid.ink/img/eyJjb2RlIjogIiUle2luaXQ6IHsndGhlbWUnOiAnZGVmYXVsdCd9fSUlXG5mbG93Y2hhcnQgVEJcbiAgd2ViXG5cbiIsICJtZXJtYWlkIjogeyJ0aGVtZSI6ICJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6dHJ1ZSwiYXV0b1N5bmMiOnRydWUsInVwZGF0ZURpYWdyYW0iOnRydWV9" \
+            --silent \
+            --output /dev/null
   build-and-push-image:
     name: Push Docker image to Github registry (ghcr.io)
     runs-on: ubuntu-latest
