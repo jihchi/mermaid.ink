@@ -25,7 +25,7 @@ dependencies:
     version: 3.2.0
   mermaid:
     specifier: ^10.3.1
-    version: 10.5.1
+    version: 10.6.0
   pako:
     specifier: ^2.1.0
     version: 2.1.0
@@ -2915,8 +2915,8 @@ packages:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
     dev: true
 
-  /mermaid@10.5.1:
-    resolution: {integrity: sha512-+4mkGW5PptHDSae4YZ/Jw1pEOf0irrB/aCL6BwZcJPhr5+84UJBrQnHTvyPqCUz67tXkrDvSzWv4B+J2hLO78g==}
+  /mermaid@10.6.0:
+    resolution: {integrity: sha512-Hcti+Q2NiWnb2ZCijSX89Bn2i7TCUwosBdIn/d+u63Sz7y40XU6EKMctT4UX4qZuZGfKGZpfOeim2/KTrdR7aQ==}
     dependencies:
       '@braintree/sanitize-url': 6.0.4
       '@types/d3-scale': 4.0.3
