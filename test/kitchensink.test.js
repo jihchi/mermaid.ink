@@ -417,6 +417,24 @@ describe('app', () => {
     });
   });
 
+  describe('Fixed #272, ER diagram', () => {
+    const encodedPath = 'pako:eNpFjrEKwzAMRH_F3FjyBd4CXTt1a9VBxEpqiO3gyEMJ_ve4SaE36R6H7jYMyQksJF89T5kDRdPUPwn9hfAy2wm-WjX7OJn-JJUiOgTJgb1rH44gQd8ShGDb6WTkMiuBYm1RLprunzjAai7SoSyOVX61sCPPa6MLx0dKfy_Oa8q3c-Uxtu7OaTo4';
+
+    test('img', async () => {
+      const resp = await request.get(`/img/${encodedPath}`);
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/jpeg');
+      expect(resp.body.length).toBeGreaterThan(2 * KB);
+    });
+
+    test('svg', async () => {
+      const resp = await request.get(`/svg/${encodedPath}`);
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/svg+xml');
+      expect(resp.body.length).toBeGreaterThan(4 * KB);
+    });
+  });
+
   describe('CORS', () => {
     const crossOrigin = 'http://cross.origin.com';
 
