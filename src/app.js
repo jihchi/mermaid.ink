@@ -24,8 +24,8 @@ async function setup() {
   debug('launch headless browser instance');
 
   app.context.browser = await puppeteer.launch({
-    executablePath: process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
-      ? 'google-chrome-stable'
+    executablePath: process.env.MERMAID_INK_USE_CHROMIUM
+      ? 'chromium'
       : undefined,
     headless: pptr.enabled ? false : 'new',
     devtools: pptr.enabled,

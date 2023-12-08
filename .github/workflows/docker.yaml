@@ -1,0 +1,49 @@
+name: Docker
+
+on:
+  # Run build and push image to registry on tag.
+  push:
+    tags:
+      - "v*.*.*"
+
+  # Run build for all PRs to main.
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - name: Login to GitHub Container Registry
+        if: github.ref_type == 'tag'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/metadata-action@v5
+        id: meta
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            # this will generate tags in the following format:
+            # latest
+            # 1
+            # 1.2
+            # 1.2.3
+            tags: |
+              type=raw,value=latest
+              type=semver,pattern={{major}}
+              type=semver,pattern={{major}}.{{minor}}
+              type=semver,pattern={{version}}
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: ${{ github.ref_type == 'tag' }}
+          pull: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
