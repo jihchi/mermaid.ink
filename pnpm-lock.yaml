@@ -16,7 +16,7 @@ dependencies:
     version: 4.3.4
   js-base64:
     specifier: ^3.7.5
-    version: 3.7.6
+    version: 3.7.7
   koa:
     specifier: ^2.14.2
     version: 2.15.0
@@ -2691,8 +2691,8 @@ packages:
       - ts-node
     dev: true
 
-  /js-base64@3.7.6:
-    resolution: {integrity: sha512-NPrWuHFxFUknr1KqJRDgUQPexQF0uIJWjeT+2KjEePhitQxQEx5EJBG1lVn5/hc8aLycTpXrDOgPQ6Zq+EDiTA==}
+  /js-base64@3.7.7:
+    resolution: {integrity: sha512-7rCnleh0z2CkXhH67J8K1Ytz0b2Y+yxTPL+/KOJoa20hfnVQ/3/T6W/KflYI4bRHRagNeXeU2bkNGI3v1oS/lw==}
     dev: false
 
   /js-tokens@4.0.0:
