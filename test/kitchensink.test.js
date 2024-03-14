@@ -1,4 +1,3 @@
-const { Window } = require('happy-dom');
 const supertest = require('supertest');
 const createApp = require('../src/app');
 
