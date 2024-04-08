@@ -14,6 +14,16 @@ DEBUG=app:* pnpm start
 
 Go to http://localhost:3000
 
+## Launch a container
+
+See [here](https://github.com/jihchi/mermaid.ink/pkgs/container/mermaid.ink) for supported tags.
+
+```
+docker run --cap-add=SYS_ADMIN ghcr.io/jihchi/mermaid.ink
+```
+
+Go to http://localhost:3000
+
 ## Troubleshooting
 
 ### I'm getting back `HTTP 431 Request Header Fields Too Large` error
