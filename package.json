@@ -14,7 +14,7 @@
   "author": "jihchi",
   "main": "src/index.js",
   "scripts": {
-    "format": "prettier --with-node-modules --write \"{src,test}/**/*.{mjs,js,html}\" \"*.{js,cjs,mjs}\"",
+    "format": "prettier --with-node-modules --write \"{src,test}/**/*.{mjs,js,html}\" \"*.{js,cjs,mjs,md}\"",
     "start": "node src/index.js",
     "test": "jest",
     "test:watch": "pnpm test --watch"
