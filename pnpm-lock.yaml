@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@fortawesome/fontawesome-free':
     specifier: ^6.4.2
-    version: 6.5.1
+    version: 6.5.2
   '@koa/cors':
     specifier: ^5.0.0
     version: 5.0.0
@@ -404,8 +404,8 @@ packages:
     resolution: {integrity: sha512-s3jaWicZd0pkP0jf5ysyHUI/RE7MHos6qlToFcGWXVp+ykHOy77OUMrfbgJ9it2C5bow7OIQwYYaHjk9XlBQ2A==}
     dev: false
 
-  /@fortawesome/fontawesome-free@6.5.1:
-    resolution: {integrity: sha512-CNy5vSwN3fsUStPRLX7fUYojyuzoEMSXPl7zSLJ8TgtRfjv24LOnOWKT2zYwaHZCJGkdyRnTmstR0P+Ah503Gw==}
+  /@fortawesome/fontawesome-free@6.5.2:
+    resolution: {integrity: sha512-hRILoInAx8GNT5IMkrtIt9blOdrqHOnPBH+k70aWUAqPZPgopb9G5EQJFpaBx/S8zp2fC+mPW349Bziuk1o28Q==}
     engines: {node: '>=6'}
     requiresBuild: true
     dev: false
