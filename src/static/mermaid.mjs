@@ -4,28 +4,27 @@ function isSyntaxErrorFromMermaid(code) {
   return code.includes('Syntax error in graph') && code.includes('error-icon');
 }
 
-function injectFontAwesomeCss(svgElement) {
-  const fontAeasomeCssUrl =
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
-  const style = document.createElement('style');
-
-  style.innerText = `@import url("${fontAeasomeCssUrl}");`;
-  svgElement.appendChild(style);
+function setBgColor(svgElement, bgColor) {
+  document.body.style.backgroundColor = bgColor;
+  svgElement.style.backgroundColor = bgColor;
 }
 
-function injectXmlnsXlink(svgElement) {
-  // Mermaid.js supports binding a click event to a node, it will compile a DOM
-  // element with a `xlink:href` attribute. The `xmlns:xlink` parameter is essential
-  // for the `xlink:href` parameter to not cause an error (for example: Namespace
-  // prefix xlink for href on a is not defined).
-  //
-  // For more details, see:
-  // 1. https://developer.mozilla.org/en-US/docs/Web/SVG/Namespaces_Crash_Course
-  // 2. https://mermaid.js.org/syntax/classDiagram.html#interaction
-  svgElement.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+function setSize(svgElement, size) {
+  // Size has been explicitely set. Override absolute max-width with 100% for responsive SVG
+  // This will be unset for raster image export
+  svgElement.style.maxWidth = '100%';
+
+  // Mermaid sets the width to 100% by default. Unset that since we're setting size explicitely
+  svgElement.removeAttribute('width');
+
+  size.width && svgElement.setAttribute('width', `${size.width}px`);
+  size.height && svgElement.setAttribute('height', `${size.height}px`);
 }
 
-async function render(definition, config) {
+async function render(definition, config, bgColor, size) {
+  // Wait for fonts to load to get accurate bounding box calculations
+  await Promise.all(Array.from(document.fonts, (font) => font.load()));
+
   try {
     mermaid.initialize({
       ...config,
@@ -44,9 +43,15 @@ async function render(definition, config) {
     container.innerHTML = svgHtml;
     bindFunctions?.(container);
 
-    const svg = container.querySelector('svg');
-    injectXmlnsXlink(svg);
-    injectFontAwesomeCss(svg);
+    const svgElement = container.querySelector('svg');
+
+    if (bgColor) {
+      setBgColor(svgElement, bgColor);
+    }
+
+    if (size && (size.width || size.height)) {
+      setSize(svgElement, size);
+    }
   } catch (error) {
     console.error('Failed to render', error);
     if (isSyntaxErrorFromMermaid(error.toString())) {

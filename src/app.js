@@ -3,11 +3,20 @@ const cors = require('@koa/cors');
 const createDebug = require('debug');
 const route = require('koa-route');
 const puppeteer = require('puppeteer');
+
 const views = require('./views');
 
 const debug = createDebug('app:main');
 const pptr = createDebug('app:pptr');
 const app = new Koa();
+
+// Set global config
+app.use(async (ctx, next) => {
+  ctx.state.customFontAwesomeCssUrl = process.env.FONT_AWESOME_CSS_URL;
+  ctx.state.maxWidth = process.env.MAX_WIDTH ? process.env.MAX_WIDTH : 10000;
+  ctx.state.maxHeight = process.env.MAX_HEIGHT ? process.env.MAX_HEIGHT : 10000;
+  await next();
+});
 
 app.use(
   cors({
@@ -21,6 +30,7 @@ app.use(route.get('/', views.home));
 app.use(route.get('/services/oembed', views.servicesOembed));
 app.use(route.get('/img/:encodedCode', views.img));
 app.use(route.get('/svg/:encodedCode', views.svg));
+app.use(route.get('/pdf/:encodedCode', views.pdf));
 
 async function setup() {
   if (app.context.shutdown) {
@@ -32,7 +42,7 @@ async function setup() {
 
   app.context.browser = await puppeteer.launch({
     executablePath: process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
-      ? 'google-chrome-stable'
+      ? '/usr/bin/google-chrome-stable'
       : undefined,
     headless: pptr.enabled ? false : 'new',
     devtools: pptr.enabled,

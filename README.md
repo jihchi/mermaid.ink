@@ -35,6 +35,12 @@ wget https://raw.githubusercontent.com/jfrazelle/dotfiles/master/etc/docker/secc
 docker run --security-opt seccomp=$(pwd)/chrome.json ghcr.io/jihchi/mermaid.ink
 ```
 
+### Environment variables
+
+- **MAX_WIDTH**, **MAX_HEIGHT**: These determine the maximum scaled diagram width and height that can be requested (defaults to 10,000)
+
+- **FONT_AWESOME_CSS_URL**: Sets a custom URL for the injected font-awesome CSS in the SVG. The string 'FA_VERSION' will be replaced with the version of font-awesome in use by the application e.g., https://cdnjs.cloudflare.com/ajax/libs/font-awesome/FA_VERSION/css/all.min.css. Leave unset for default.
+
 ## Troubleshooting
 
 ### I'm getting back `HTTP 431 Request Header Fields Too Large` error

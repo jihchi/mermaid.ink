@@ -21,6 +21,11 @@
       rel="stylesheet"
       href="https://unpkg.com/spectre.css/dist/spectre.min.css"
     />
+    <style>
+      .column {
+        padding: 0.4rem;
+      }
+    </style>
   </head>
   <body>
     <div class="container grid-lg">
@@ -89,16 +94,59 @@
             </li>
             <li>
               Done, you could use the URL as a regular image URL:
-              <p>
-                <img
-                  class="img-responsive"
-                  src="/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw"
-                  alt="A mermaid.ink chart example"
-                />
-              </p>
+              <div class="container">
+                <div class="columns">
+                  <div class="column col-5 col-md-12">
+                    <img
+                      class="img-responsive"
+                      src="/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw"
+                      alt="A mermaid.ink chart example"
+                    />
+                  </div>
+                </div>
+              </div>
             </li>
           </ol>
         </div>
+
+        <div class="column col-12">
+          <h3>Image type</h3>
+          <p>
+            You may select any of the following image types for the
+            <code>/img</code> endpoint by adding e.g. <code>?type=png</code>:
+          </p>
+          <ul>
+            <li><code>jpeg</code> (default)</li>
+            <li><code>png</code></li>
+            <li><code>webp</code></li>
+          </ul>
+          <p>Use <code>/svg</code> to get an SVG image.</p>
+        </div>
+
+        <div class="column col-12">
+          <h3>PDF output options</h3>
+          <p>
+            You can generate a PDF using <code>/pdf</code> endpoint. Add the
+            <code>fit</code> URL parameter to make the PDF size fit to the
+            diagram size. Add the <code>paper</code> URL parameter to set a
+            paper size format e.g. <code>paper=a3</code>. Default is
+            <code>a4</code>. The supported paper formats are listed
+            <a href="https://pptr.dev/api/puppeteer.paperformat">here</a>. This
+            has no effect if using <code>fit</code>. Add the
+            <code>landscape</code> URL parameter to make the PDF landscape. This
+            has no effect if using <code>fit</code>.
+          </p>
+          <p>Example:</p>
+          <pre
+            class="code"
+            data-lang="URL"
+          ><code><a href="/pdf/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw?fit">https://mermaid.ink/pdf/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw<mark>?fit</mark></a></code></pre>
+          <pre
+            class="code"
+            data-lang="URL"
+          ><code><a href="/pdf/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw?paper=a3&landscape&width=700">https://mermaid.ink/pdf/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw<mark>?paper=a3&landscape&width=700</mark></a></code></pre>
+        </div>
+
         <div class="column col-12">
           <h3>Background colors</h3>
           <p>Images are generated with a transparent background by default.</p>
@@ -136,6 +184,118 @@
                   class="img-responsive"
                   src="/svg/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw?bgColor=555555"
                   alt="mermaid chart example with background color"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column col-12">
+          <h3>Themes</h3>
+          <p>
+            You can change the theme of the diagram without modifying the
+            diagram code. See the
+            <a href="https://mermaid.js.org/config/theming.html"
+              >mermaid theme docs</a
+            >
+            for details. Note that these are the built-in mermaid.js themes and
+            not the custom mermaid live editor themes.
+          </p>
+          <p>Current available theme options are:</p>
+          <ol>
+            <li>
+              <strong>default</strong> - This is the default theme for all
+              diagrams.
+            </li>
+            <li>
+              <strong>neutral</strong> - This theme is great for black and white
+              documents that will be printed.
+            </li>
+            <li>
+              <strong>dark</strong> - This theme goes well with dark-colored
+              elements or dark-mode.
+            </li>
+            <li>
+              <strong>forest</strong> - This theme contains shades of green.
+            </li>
+          </ol>
+          <p>Demo:</p>
+
+          <pre
+            class="code"
+            data-lang="URL"
+          ><code><a href="/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw?theme=dark">https://mermaid.ink/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw<mark>?theme=dark</mark></a></code></pre>
+          <div class="container">
+            <div class="columns">
+              <div class="column col-5 col-md-12">
+                <img
+                  class="img-responsive"
+                  src="/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw?theme=dark"
+                  alt="A mermaid.ink chart example"
+                />
+              </div>
+            </div>
+          </div>
+
+          <pre
+            class="code"
+            data-lang="URL"
+          ><code><a href="/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw?theme=dark&bgColor=1b1b1f">https://mermaid.ink/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw<mark>?theme=dark&bgColor=1b1b1f</mark></a></code></pre>
+          <div class="container">
+            <div class="columns">
+              <div class="column col-5 col-md-12">
+                <img
+                  class="img-responsive"
+                  src="/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw?theme=dark&bgColor=1b1b1f"
+                  alt="A mermaid.ink chart example"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column col-12">
+          <h3>Image size</h3>
+          <p>
+            You can control the image size by using <code>width</code> and
+            <code>height</code> URL parameters. By default, without specifying
+            width or height, the size of the image will be the normal mermaid
+            image size.
+          </p>
+          <p>
+            You can scale the image by using the <code>scale</code> parameter.
+            The scale must be a number between 1 and 3. You can only set a scale
+            if one or both of width and height are set.
+          </p>
+          <p>Demo:</p>
+
+          <pre
+            class="code"
+            data-lang="URL"
+          ><code><a href="/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw?width=200">https://mermaid.ink/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw<mark>?width=200</mark></a></code></pre>
+          <div class="container">
+            <div class="columns">
+              <div class="column col-5 col-md-12">
+                <img
+                  class="img-responsive"
+                  src="/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw?width=200"
+                  alt="A mermaid.ink chart example"
+                />
+              </div>
+            </div>
+          </div>
+
+          <pre
+            class="code"
+            data-lang="URL"
+          ><code><a href="/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw?width=200&scale=2">https://mermaid.ink/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw<mark>?width=200&scale=2</mark></a></code></pre>
+          <div class="container">
+            <div class="columns">
+              <div class="column col-5 col-md-12">
+                <img
+                  class="img-responsive"
+                  src="/img/pako:eNpNkM9qwzAMh19F6NRB8wI5DNak7aWwwXqLexCxUpvNf3AURkny7rNbynaTPn0_ITRjHzRjjddE0cC5VR7grWtMsqM4Gi9QVa_LkQVc8HxbYLc5BhhNiNH660uxd0WBZj4ViUGM9V9rGTT37LvnBdruRFFCvPzx809YYN_ZD5MX_-cmcU4cuoHqgaqeEjSUsqBECW7RcXJkdT55LiGFYtixwjqXmgeavkWh8mtWp6hJeK-thIS1pIm3SJOEz5vvn_3DaS3lB7gHXH8BFrFcZw?width=200&scale=2"
+                  alt="A mermaid.ink chart example"
                 />
               </div>
             </div>

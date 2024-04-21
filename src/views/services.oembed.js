@@ -61,7 +61,13 @@ module.exports = async (ctx, _next) => {
     debug('loaded local mermaid page');
 
     try {
-      await renderSVG({ page, encodedCode });
+      await renderSVG({
+        page,
+        encodedCode,
+        bgColor: null,
+        size: null,
+        theme: null,
+      });
       debug('rendered SVG in DOM');
     } catch (e) {
       debug('mermaid failed to render SVG: %o', e);

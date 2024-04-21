@@ -1,4 +1,8 @@
 const supertest = require('supertest');
+const sharp = require('sharp');
+const { PDFDocument, PageSizes } = require('pdf-lib');
+const FA_VERSION =
+  require('@fortawesome/fontawesome-free/package.json').version;
 const createApp = require('../src/app');
 
 const KB = 1024;
@@ -103,7 +107,7 @@ describe('app', () => {
   });
 
   describe('/img', () => {
-    test('returns 400 when there is no code provided', async () => {
+    test('returns 404 when there is no code provided', async () => {
       const resp = await request.get('/img');
       expect(resp.status).toEqual(404);
     });
@@ -114,6 +118,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
       expect(resp.body.length).toBeGreaterThan(15 * KB);
     });
 
@@ -123,6 +129,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
       expect(resp.body.length).toBeGreaterThan(15 * KB);
     });
 
@@ -132,6 +140,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
       expect(resp.body.length).toBeGreaterThan(15 * KB);
     });
 
@@ -141,6 +151,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/png');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('png');
       expect(resp.body.length).toBeGreaterThan(18 * KB);
     });
 
@@ -150,6 +162,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/webp');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('webp');
       expect(resp.body.length).toBeGreaterThan(10 * KB);
     });
 
@@ -159,6 +173,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/png');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('png');
       expect(resp.body.length).toBeGreaterThan(19 * KB);
     });
 
@@ -168,6 +184,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
       expect(resp.body.length).toBeGreaterThan(15 * KB);
     });
 
@@ -177,6 +195,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
       expect(resp.body.length).toBeGreaterThan(31 * KB);
     });
 
@@ -186,6 +206,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
       expect(resp.body.length).toBeGreaterThan(11 * KB);
     });
 
@@ -195,6 +217,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
       expect(resp.body.length).toBeGreaterThan(5 * KB);
     });
 
@@ -204,6 +228,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
       expect(resp.body.length).toBeGreaterThan(15 * KB);
     });
 
@@ -213,6 +239,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
       expect(resp.body.length).toBeGreaterThan(21 * KB);
     });
 
@@ -222,7 +250,9 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
-      expect(resp.body.length).toBeGreaterThan(34 * KB);
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
+      expect(resp.body.length).toBeGreaterThan(33 * KB);
     });
 
     test('returns 400 when encoded code is invalid', async () => {
@@ -236,10 +266,273 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
     });
+
+    test('returns 200 when theme is used', async () => {
+      const resp = await request.get(
+        '/svg/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCw8YnIgLz5jb25zZWN0ZXR1ciBhZGlwaXNjaW5nIGVsaXQuXSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19?theme=dark'
+      );
+      expect(resp.status).toEqual(200);
+    });
+
+    test('flowchart default size', async () => {
+      const resp = await request.get(
+        '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
+      expect(resp.body.length).toBeGreaterThan(15 * KB);
+
+      // Changes to the mermaid.js library, fonts and browser renderer could affect these values
+      expect(metadata.width).toEqual(303);
+      expect(metadata.height).toEqual(446);
+    });
+
+    test('flowchart set width', async () => {
+      const resp = await request.get(
+        '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?width=1000'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
+      expect(resp.body.length).toBeGreaterThan(15 * KB);
+
+      // Changes to the mermaid.js library, fonts and browser renderer could affect these values
+      expect(metadata.width).toEqual(1000);
+      expect(metadata.height).toEqual(1474);
+    });
+
+    test('flowchart set height', async () => {
+      const resp = await request.get(
+        '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?height=1000'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
+      expect(resp.body.length).toBeGreaterThan(15 * KB);
+
+      // Changes to the mermaid.js library, fonts and browser renderer could affect these values
+      expect(metadata.width).toEqual(679);
+      expect(metadata.height).toEqual(1000);
+    });
+
+    // This doesn't change the aspect ratio of the actual diagram, it just adds more margins - not very useful
+    test('flowchart set width and height', async () => {
+      const resp = await request.get(
+        '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?width=1000&height=1000'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
+      expect(resp.body.length).toBeGreaterThan(15 * KB);
+
+      expect(metadata.width).toEqual(1000);
+      expect(metadata.height).toEqual(1000);
+    });
+
+    test('flowchart set width with 2x scale', async () => {
+      const resp = await request.get(
+        '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?width=1000&scale=2'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
+      expect(resp.body.length).toBeGreaterThan(15 * KB);
+
+      // Changes to the mermaid.js library, fonts and browser renderer could affect these values
+      expect(metadata.width).toEqual(2000);
+      expect(metadata.height).toEqual(2948);
+    });
+
+    test('setting scale with no explicit width or height', async () => {
+      const resp = await request.get(
+        '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?scale=2'
+      );
+      expect(resp.status).toEqual(400);
+    });
+
+    test('scale < 0', async () => {
+      const resp = await request.get(
+        '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?width=1000&scale=-1'
+      );
+      expect(resp.status).toEqual(400);
+    });
+
+    test('scale > 3', async () => {
+      const resp = await request.get(
+        '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?width=1000&scale=4'
+      );
+      expect(resp.status).toEqual(400);
+    });
+
+    test('width < 0', async () => {
+      const resp = await request.get(
+        '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?width=-1'
+      );
+      expect(resp.status).toEqual(400);
+    });
+
+    test('width > max width ENV var', async () => {
+      const width = process.env.MAX_WIDTH + 1;
+      const resp = await request.get(
+        `/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?width=${width}`
+      );
+      expect(resp.status).toEqual(400);
+    });
+
+    test('height > max height ENV var', async () => {
+      const height = process.env.MAX_HEIGHT + 1;
+      const resp = await request.get(
+        `/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?height=${height}`
+      );
+      expect(resp.status).toEqual(400);
+    });
+  });
+
+  describe('/pdf', () => {
+    test('returns 404 when there is no code provided', async () => {
+      const resp = await request.get('/pdf');
+      expect(resp.status).toEqual(404);
+    });
+
+    test('flowchart', async () => {
+      const resp = await request.get(
+        '/pdf/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('application/pdf');
+      expect(resp.body.length).toBeGreaterThan(19 * KB);
+
+      await PDFDocument.load(resp.body.toString('base64'));
+    });
+
+    test('should default to a4', async () => {
+      const resp = await request.get(
+        '/pdf/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('application/pdf');
+      expect(resp.body.length).toBeGreaterThan(19 * KB);
+
+      const pdfDoc = await PDFDocument.load(resp.body.toString('base64'));
+      const pages = pdfDoc.getPages();
+      const firstPage = pages[0];
+      const { width, height } = firstPage.getSize();
+      const expectedSize = PageSizes.A4;
+
+      // There can be a slight difference in size
+      expect(width).toBeGreaterThan(expectedSize[0] - 1);
+      expect(width).toBeLessThan(expectedSize[0] + 1);
+      expect(height).toBeGreaterThan(expectedSize[1] - 1);
+      expect(height).toBeLessThan(expectedSize[1] + 1);
+    });
+
+    test('should set page size standard (a3)', async () => {
+      const resp = await request.get(
+        '/pdf/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?paper=a3'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('application/pdf');
+
+      const pdfDoc = await PDFDocument.load(resp.body.toString('base64'));
+      const pages = pdfDoc.getPages();
+      const firstPage = pages[0];
+      const { width, height } = firstPage.getSize();
+      const expectedSize = PageSizes.A3;
+
+      // There can be a slight difference in size
+      expect(width).toBeGreaterThan(expectedSize[0] - 1);
+      expect(width).toBeLessThan(expectedSize[0] + 1);
+      expect(height).toBeGreaterThan(expectedSize[1] - 1);
+      expect(height).toBeLessThan(expectedSize[1] + 1);
+    });
+
+    test('should set page size standard with uppercase input (A3)', async () => {
+      const resp = await request.get(
+        '/pdf/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?paper=A3'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('application/pdf');
+
+      const pdfDoc = await PDFDocument.load(resp.body.toString('base64'));
+      const pages = pdfDoc.getPages();
+      const firstPage = pages[0];
+      const { width, height } = firstPage.getSize();
+      const expectedSize = PageSizes.A3;
+
+      // There can be a slight difference in size
+      expect(width).toBeGreaterThan(expectedSize[0] - 1);
+      expect(width).toBeLessThan(expectedSize[0] + 1);
+      expect(height).toBeGreaterThan(expectedSize[1] - 1);
+      expect(height).toBeLessThan(expectedSize[1] + 1);
+    });
+
+    test('should silently default to a3 paper size given unexpected input', async () => {
+      const resp = await request.get(
+        '/pdf/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?paper=not-a-size'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('application/pdf');
+
+      const pdfDoc = await PDFDocument.load(resp.body.toString('base64'));
+      const pages = pdfDoc.getPages();
+      const firstPage = pages[0];
+      const { width, height } = firstPage.getSize();
+      const expectedSize = PageSizes.A4;
+
+      // There can be a slight difference in size
+      expect(width).toBeGreaterThan(expectedSize[0] - 1);
+      expect(width).toBeLessThan(expectedSize[0] + 1);
+      expect(height).toBeGreaterThan(expectedSize[1] - 1);
+      expect(height).toBeLessThan(expectedSize[1] + 1);
+    });
+
+    test('should set landscape', async () => {
+      const resp = await request.get(
+        '/pdf/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?landscape'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('application/pdf');
+
+      const pdfDoc = await PDFDocument.load(resp.body.toString('base64'));
+      const pages = pdfDoc.getPages();
+      const firstPage = pages[0];
+      const { width, height } = firstPage.getSize();
+      const expectedSize = PageSizes.A4;
+
+      // There can be a slight difference in size
+      expect(width).toBeGreaterThan(expectedSize[1] - 1);
+      expect(width).toBeLessThan(expectedSize[1] + 1);
+      expect(height).toBeGreaterThan(expectedSize[0] - 1);
+      expect(height).toBeLessThan(expectedSize[0] + 1);
+    });
+
+    test('should fit page size to diagram', async () => {
+      const diagramSize = [1000, 800];
+      const resp = await request.get(
+        `/pdf/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ?width=${diagramSize[0]}&height=${diagramSize[1]}&fit`
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('application/pdf');
+
+      const pdfDoc = await PDFDocument.load(resp.body.toString('base64'));
+      const pages = pdfDoc.getPages();
+      expect(pages.length).toBe(1);
+      const firstPage = pages[0];
+      const { width, height } = firstPage.getSize();
+
+      // Note that the resulting PDF page size according to pdf-lib may not equal the requested diagram size but the aspect ratios will be the same
+      expect(width / height).toBeCloseTo(diagramSize[0] / diagramSize[1]);
+    });
   });
 
   describe('/svg', () => {
-    test('returns 400 when there is no code provided', async () => {
+    test('returns 404 when there is no code provided', async () => {
       const resp = await request.get('/svg');
       expect(resp.status).toEqual(404);
     });
@@ -250,6 +543,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('svg');
       expect(resp.body.length).toBeGreaterThan(9 * KB);
     });
 
@@ -259,6 +554,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('svg');
       expect(resp.body.length).toBeGreaterThan(9 * KB);
     });
 
@@ -268,6 +565,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('svg');
       expect(resp.body.length).toBeGreaterThan(9 * KB);
     });
 
@@ -277,6 +576,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('svg');
       expect(resp.body.length).toBeGreaterThan(8 * KB);
     });
 
@@ -286,6 +587,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('svg');
       expect(resp.body.length).toBeGreaterThan(6 * KB);
     });
 
@@ -295,6 +598,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('svg');
       expect(resp.body.length).toBeGreaterThan(6 * KB);
     });
 
@@ -304,6 +609,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('svg');
       expect(resp.body.length).toBeGreaterThan(6 * KB);
     });
 
@@ -313,6 +620,8 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('svg');
       expect(resp.body.length).toBeGreaterThan(2 * KB);
     });
 
@@ -322,7 +631,9 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
-      expect(resp.body.length).toBeGreaterThan(13 * KB);
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('svg');
+      expect(resp.body.length).toBeGreaterThan(12 * KB);
     });
 
     test('returns 400 when encoded code is invalid', async () => {
@@ -363,12 +674,78 @@ describe('app', () => {
       expect(body).not.toMatch(/<svg [^>]* background-color:/);
     });
 
+    // Theme style contains
+    // default: #mermaid-svg .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}
+    // neutral: #mermaid-svg .node path{fill:#eee;stroke:#999;stroke-width:1px;}
+    // dark: #mermaid-svg .node path{fill:#1f2020;stroke:#81B1DB;stroke-width:1px;}
+    // forest: #mermaid-svg .node path{fill:#cde498;stroke:#13540c;stroke-width:1px;}
+
+    test('site-wide diagram theme should be "default" if unset', async () => {
+      const resp = await request.get(
+        '/svg/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCw8YnIgLz5jb25zZWN0ZXR1ciBhZGlwaXNjaW5nIGVsaXQuXSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19'
+      );
+      expect(resp.status).toEqual(200);
+      const body = resp.body.toString();
+      expect(body).toContain(
+        '#mermaid-svg .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}'
+      );
+    });
+
+    test('should set site-wide theme (dark)', async () => {
+      const resp = await request.get(
+        '/svg/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCw8YnIgLz5jb25zZWN0ZXR1ciBhZGlwaXNjaW5nIGVsaXQuXSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19?theme=dark'
+      );
+      expect(resp.status).toEqual(200);
+      const body = resp.body.toString();
+      expect(body).toContain(
+        '#mermaid-svg .node path{fill:#1f2020;stroke:#81B1DB;stroke-width:1px;}'
+      );
+    });
+
+    test('should silently ignore invalid site-wide themes', async () => {
+      const resp = await request.get(
+        '/svg/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCw8YnIgLz5jb25zZWN0ZXR1ciBhZGlwaXNjaW5nIGVsaXQuXSIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In19?theme=non-existant-theme'
+      );
+      expect(resp.status).toEqual(200);
+      const body = resp.body.toString();
+      expect(body).toContain(
+        '#mermaid-svg .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}'
+      );
+    });
+
+    test('should add diagram-specific theme from serialized state (dark)', async () => {
+      const resp = await request.get(
+        '/svg/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCw8YnIgLz5jb25zZWN0ZXR1ciBhZGlwaXNjaW5nIGVsaXQuXSIsIm1lcm1haWQiOnsidGhlbWUiOiJkYXJrIn19'
+      );
+      expect(resp.status).toEqual(200);
+      const body = resp.body.toString();
+      expect(body).toContain(
+        '#mermaid-svg .node path{fill:#1f2020;stroke:#81B1DB;stroke-width:1px;}'
+      );
+    });
+
     test('imports fontawesome in svg', async () => {
       const resp = await request.get(
         '/svg/Z3JhcGggVEQKICAgIEFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKQogICAgQiAtLT4gQ3tMZXQgbWUgdGhpbmt9CiAgICBDIC0tPnxPbmV8IERbTGFwdG9wXQogICAgQyAtLT58VHdvfCBFW2lQaG9uZV0KICAgIEMgLS0+fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJd'
       );
       const body = resp.body.toString();
-      expect(body).toContain('font-awesome');
+      expect(body).toContain(
+        `https://cdnjs.cloudflare.com/ajax/libs/font-awesome/${FA_VERSION}/css/all.min.css`
+      );
+    });
+
+    test('imports custom fontawesome URL in svg', async () => {
+      const originalEnvValue = process.env.FONT_AWESOME_CSS_URL;
+      process.env.FONT_AWESOME_CSS_URL =
+        'https://example.com/ajax/libs/font-awesome/FA_VERSION/css/all.min.css';
+      const resp = await request.get(
+        '/svg/Z3JhcGggVEQKICAgIEFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKQogICAgQiAtLT4gQ3tMZXQgbWUgdGhpbmt9CiAgICBDIC0tPnxPbmV8IERbTGFwdG9wXQogICAgQyAtLT58VHdvfCBFW2lQaG9uZV0KICAgIEMgLS0+fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJd'
+      );
+      const body = resp.body.toString();
+      process.env.FONT_AWESOME_CSS_URL = originalEnvValue;
+      expect(body).toContain(
+        `https://example.com/ajax/libs/font-awesome/${FA_VERSION}/css/all.min.css`
+      );
     });
 
     test('should render svg correctly when there is clickable node in the diagram', async () => {
@@ -405,6 +782,8 @@ describe('app', () => {
       const resp = await request.get(`/img/${encodedPath}`);
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
       expect(resp.body.length).toBeGreaterThan(15 * KB);
     });
 
@@ -412,6 +791,8 @@ describe('app', () => {
       const resp = await request.get(`/svg/${encodedPath}`);
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('svg');
       expect(resp.body.length).toBeGreaterThan(13 * KB);
     });
   });
@@ -424,6 +805,8 @@ describe('app', () => {
       const resp = await request.get(`/img/${encodedPath}`);
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/jpeg');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('jpeg');
       expect(resp.body.length).toBeGreaterThan(2 * KB);
     });
 
@@ -431,6 +814,8 @@ describe('app', () => {
       const resp = await request.get(`/svg/${encodedPath}`);
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('image/svg+xml');
+      const metadata = await sharp(resp.body).metadata();
+      expect(metadata.format).toEqual('svg');
       expect(resp.body.length).toBeGreaterThan(4 * KB);
     });
   });
