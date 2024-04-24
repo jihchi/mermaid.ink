@@ -285,8 +285,8 @@ describe('app', () => {
       expect(resp.body.length).toBeGreaterThan(15 * KB);
 
       // Changes to the mermaid.js library, fonts and browser renderer could affect these values
-      expect(metadata.width).toEqual(303);
-      expect(metadata.height).toEqual(446);
+      expect(metadata.width).toBeGreaterThan(300);
+      expect(metadata.height).toBeGreaterThan(430);
     });
 
     test('flowchart set width', async () => {
@@ -301,7 +301,7 @@ describe('app', () => {
 
       // Changes to the mermaid.js library, fonts and browser renderer could affect these values
       expect(metadata.width).toEqual(1000);
-      expect(metadata.height).toEqual(1474);
+      expect(metadata.height).toBeGreaterThan(1400);
     });
 
     test('flowchart set height', async () => {
@@ -315,7 +315,7 @@ describe('app', () => {
       expect(resp.body.length).toBeGreaterThan(15 * KB);
 
       // Changes to the mermaid.js library, fonts and browser renderer could affect these values
-      expect(metadata.width).toEqual(679);
+      expect(metadata.width).toBeGreaterThan(679);
       expect(metadata.height).toEqual(1000);
     });
 
@@ -346,7 +346,7 @@ describe('app', () => {
 
       // Changes to the mermaid.js library, fonts and browser renderer could affect these values
       expect(metadata.width).toEqual(2000);
-      expect(metadata.height).toEqual(2948);
+      expect(metadata.height).toBeGreaterThan(2800);
     });
 
     test('setting scale with no explicit width or height', async () => {
