@@ -50,6 +50,7 @@ RUN usermod -a -G audio,video node \
   && chown -R node:node /home/node /usr/src/app/
 
 USER node
+RUN corepack pack
 CMD ["pnpm", "start"]
 
 EXPOSE 3000

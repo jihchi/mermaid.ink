@@ -3,4 +3,5 @@ module.exports = {
   servicesOembed: require('./services.oembed'),
   img: require('./img'),
   svg: require('./svg'),
+  pdf: require('./pdf'),
 };
