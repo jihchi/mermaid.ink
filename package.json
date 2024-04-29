@@ -42,7 +42,7 @@
     "pdf-lib": "^1.17.1",
     "prettier": "^3.0.1",
     "sharp": "^0.33.3",
-    "supertest": "^6.3.3"
+    "supertest": "^7.0.0"
   },
   "packageManager": "pnpm@8.15.4",
   "engines": {
