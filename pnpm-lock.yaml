@@ -34,7 +34,7 @@ dependencies:
     version: 6.2.2
   puppeteer:
     specifier: ^22.4.1
-    version: 22.9.0
+    version: 22.10.0
 
 devDependencies:
   '@happy-dom/jest-environment':
@@ -3688,8 +3688,8 @@ packages:
       once: 1.4.0
     dev: false
 
-  /puppeteer-core@22.9.0:
-    resolution: {integrity: sha512-Q2SYVZ1SIE7jCd/Pp+1/mNLFtdJfGvAF+CqOTDG8HcCNCiBvoXfopXfOfMHQ/FueXhGfJW/I6DartWv6QzpNGg==}
+  /puppeteer-core@22.10.0:
+    resolution: {integrity: sha512-I54J4Vy4I07UHsgB1QSmuFoF7KNQjJWcvFBPhtY+ezMdBfwgGDr8dzYrJa11aPgP9kxIUHjhktcMmmfJkOAtTw==}
     engines: {node: '>=18'}
     dependencies:
       '@puppeteer/browsers': 2.2.3
@@ -3703,8 +3703,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /puppeteer@22.9.0:
-    resolution: {integrity: sha512-yNux2cm6Sfik4lNLNjJ25Cdn9spJRbMXxl1YZtVZCEhEeej1sFlCvZ/Cr64LhgyJOuvz3iq2uk+RLFpQpGwrjw==}
+  /puppeteer@22.10.0:
+    resolution: {integrity: sha512-ZOkZd6a6t0BdKcWb0wAYHWQqCfdlN1PPnXOmg/XNrbo6gJhYWFX4qCNb6ahSn8TpAqBqLCoD4Q010F7GwOM7mA==}
     engines: {node: '>=18'}
     hasBin: true
     requiresBuild: true
@@ -3712,7 +3712,7 @@ packages:
       '@puppeteer/browsers': 2.2.3
       cosmiconfig: 9.0.0
       devtools-protocol: 0.0.1286932
-      puppeteer-core: 22.9.0
+      puppeteer-core: 22.10.0
     transitivePeerDependencies:
       - bufferutil
       - supports-color
