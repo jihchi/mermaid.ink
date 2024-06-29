@@ -13,7 +13,7 @@ dependencies:
     version: 5.0.0
   debug:
     specifier: ^4.3.4
-    version: 4.3.4
+    version: 4.3.5
   js-base64:
     specifier: ^3.7.5
     version: 3.7.7
@@ -3057,7 +3057,7 @@ packages:
   /koa-route@4.0.1:
     resolution: {integrity: sha512-ytLrdDPF/qTMh20BxZCNpIUY329SoGu84xjGYeNsp/jkGT3OpZfkuK646sDScVJQ9XdsLXJVMml1dXMA5EIuxQ==}
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.5
       methods: 1.1.2
       path-to-regexp: 6.2.2
     transitivePeerDependencies:
@@ -3073,7 +3073,7 @@ packages:
       content-disposition: 0.5.4
       content-type: 1.0.5
       cookies: 0.9.0
-      debug: 4.3.4
+      debug: 4.3.5
       delegates: 1.0.0
       depd: 2.0.0
       destroy: 1.2.0
