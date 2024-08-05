@@ -34,7 +34,7 @@ dependencies:
     version: 7.1.0
   puppeteer:
     specifier: ^22.4.1
-    version: 22.14.0
+    version: 22.15.0
 
 devDependencies:
   '@happy-dom/jest-environment':
@@ -1379,8 +1379,8 @@ packages:
     resolution: {integrity: sha512-shx7oQ0Awen/BRIdkjkvz54PnEEI/EjwXDSIZp86/KKdbafHh1Df/RYGBhn4hbe2+uKC9FnT5UCEdyPz3ai9hQ==}
     dev: false
 
-  /chromium-bidi@0.6.2(devtools-protocol@0.0.1312386):
-    resolution: {integrity: sha512-4WVBa6ijmUTVr9cZD4eicQD8Mdy/HCX3bzEIYYpmk0glqYLoWH+LqQEvV9RpDRzoQSbY1KJHloYXbDMXMbDPhg==}
+  /chromium-bidi@0.6.3(devtools-protocol@0.0.1312386):
+    resolution: {integrity: sha512-qXlsCmpCZJAnoTYI83Iu6EdYQpMYdVkCfq08KDh2pmlVqK5t5IA9mGs4/LwCwp4fqisSOMXZxP3HIh8w8aRn0A==}
     peerDependencies:
       devtools-protocol: '*'
     dependencies:
@@ -3675,12 +3675,12 @@ packages:
       once: 1.4.0
     dev: false
 
-  /puppeteer-core@22.14.0:
-    resolution: {integrity: sha512-rl4tOY5LcA3e374GAlsGGHc05HL3eGNf5rZ+uxkl6id9zVZKcwcp1Z+Nd6byb6WPiPeecT/dwz8f/iUm+AZQSw==}
+  /puppeteer-core@22.15.0:
+    resolution: {integrity: sha512-cHArnywCiAAVXa3t4GGL2vttNxh7GqXtIYGym99egkNJ3oG//wL9LkvO4WE8W1TJe95t1F1ocu9X4xWaGsOKOA==}
     engines: {node: '>=18'}
     dependencies:
       '@puppeteer/browsers': 2.3.0
-      chromium-bidi: 0.6.2(devtools-protocol@0.0.1312386)
+      chromium-bidi: 0.6.3(devtools-protocol@0.0.1312386)
       debug: 4.3.6
       devtools-protocol: 0.0.1312386
       ws: 8.18.0
@@ -3690,8 +3690,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /puppeteer@22.14.0:
-    resolution: {integrity: sha512-MGTR6/pM8zmWbTdazb6FKnwIihzsSEXBPH49mFFU96DNZpQOevCAZMnjBZGlZRGRzRK6aADCavR6SQtrbv5dQw==}
+  /puppeteer@22.15.0:
+    resolution: {integrity: sha512-XjCY1SiSEi1T7iSYuxS82ft85kwDJUS7wj1Z0eGVXKdtr5g4xnVcbjwxhq5xBnpK/E7x1VZZoJDxpjAOasHT4Q==}
     engines: {node: '>=18'}
     hasBin: true
     requiresBuild: true
@@ -3699,7 +3699,7 @@ packages:
       '@puppeteer/browsers': 2.3.0
       cosmiconfig: 9.0.0
       devtools-protocol: 0.0.1312386
-      puppeteer-core: 22.14.0
+      puppeteer-core: 22.15.0
     transitivePeerDependencies:
       - bufferutil
       - supports-color
