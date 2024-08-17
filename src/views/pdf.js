@@ -63,7 +63,7 @@ const pdf = async (ctx, page, size) => {
   debug('printed to pdf, file size: %o', pdf.length);
 
   ctx.type = 'application/pdf';
-  ctx.body = pdf;
+  ctx.body = Buffer.from(pdf);
 };
 
 module.exports = renderImgOrSvg(pdf);
