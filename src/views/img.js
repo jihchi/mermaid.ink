@@ -34,7 +34,7 @@ const img = async (ctx, page, size) => {
 
   // dynamically set media type
   ctx.type = `image/${type}`;
-  ctx.body = image;
+  ctx.body = Buffer.from(image);
 };
 
 module.exports = renderImgOrSvg(img);

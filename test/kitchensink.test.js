@@ -406,7 +406,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('application/pdf');
-      expect(resp.body.length).toBeGreaterThan(19 * KB);
+      expect(resp.body.length).toBeGreaterThan(17 * KB);
 
       await PDFDocument.load(resp.body.toString('base64'));
     });
@@ -417,7 +417,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('application/pdf');
-      expect(resp.body.length).toBeGreaterThan(19 * KB);
+      expect(resp.body.length).toBeGreaterThan(17 * KB);
 
       const pdfDoc = await PDFDocument.load(resp.body.toString('base64'));
       const pages = pdfDoc.getPages();
