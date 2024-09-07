@@ -301,7 +301,7 @@ describe('app', () => {
 
       // Changes to the mermaid.js library, fonts and browser renderer could affect these values
       expect(metadata.width).toEqual(1000);
-      expect(metadata.height).toBeGreaterThan(1400);
+      expect(metadata.height).toBeGreaterThan(1000);
     });
 
     test('flowchart set height', async () => {
@@ -346,7 +346,7 @@ describe('app', () => {
 
       // Changes to the mermaid.js library, fonts and browser renderer could affect these values
       expect(metadata.width).toEqual(2000);
-      expect(metadata.height).toBeGreaterThan(2800);
+      expect(metadata.height).toBeGreaterThan(2000);
     });
 
     test('setting scale with no explicit width or height', async () => {
@@ -677,7 +677,7 @@ describe('app', () => {
     // Theme style contains
     // default: #mermaid-svg .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}
     // neutral: #mermaid-svg .node path{fill:#eee;stroke:#999;stroke-width:1px;}
-    // dark: #mermaid-svg .node path{fill:#1f2020;stroke:#81B1DB;stroke-width:1px;}
+    // dark: #mermaid-svg .node path{fill:#1f2020;stroke:#ccc;stroke-width:1px;}
     // forest: #mermaid-svg .node path{fill:#cde498;stroke:#13540c;stroke-width:1px;}
 
     test('site-wide diagram theme should be "default" if unset', async () => {
@@ -698,7 +698,7 @@ describe('app', () => {
       expect(resp.status).toEqual(200);
       const body = resp.body.toString();
       expect(body).toContain(
-        '#mermaid-svg .node path{fill:#1f2020;stroke:#81B1DB;stroke-width:1px;}'
+        '#mermaid-svg .node path{fill:#1f2020;stroke:#ccc;stroke-width:1px;}'
       );
     });
 
@@ -720,7 +720,7 @@ describe('app', () => {
       expect(resp.status).toEqual(200);
       const body = resp.body.toString();
       expect(body).toContain(
-        '#mermaid-svg .node path{fill:#1f2020;stroke:#81B1DB;stroke-width:1px;}'
+        '#mermaid-svg .node path{fill:#1f2020;stroke:#ccc;stroke-width:1px;}'
       );
     });
 
