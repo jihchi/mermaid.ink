@@ -1,9 +1,11 @@
 const createDebug = require('debug');
-const { pathToRegexp } = require('path-to-regexp');
+const { match } = require('path-to-regexp');
 const openMermaidPage = require('openMermaidPage');
 const renderSVG = require('renderSVG');
 
 const debug = createDebug('app:services:oembed');
+
+const matchImgEncodedCode = match('/img/:encodedCode');
 
 const parseAndValidateURL = (inputURL) => {
   let url;
@@ -27,14 +29,13 @@ const parseAndValidateURL = (inputURL) => {
 };
 
 const getEncodedCodeFromURL = ({ pathname }) => {
-  const regexp = pathToRegexp('/img/:encodedCode');
-  const matches = regexp.exec(pathname);
+  const matches = matchImgEncodedCode(pathname);
 
   if (!matches) {
     throw new Error('URL pathname supported: /img/:code, /svg/:code');
   }
 
-  const [, encodedCode] = matches;
+  const { params: { encodedCode } } = matches;
   return encodedCode;
 };
 
