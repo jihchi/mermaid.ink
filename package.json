@@ -32,7 +32,7 @@
     "koa-route": "^4.0.1",
     "mermaid": "^11.0.2",
     "pako": "^2.1.0",
-    "path-to-regexp": "^7.0.0",
+    "path-to-regexp": "^8.0.0",
     "puppeteer": "^23.0.2"
   },
   "devDependencies": {
