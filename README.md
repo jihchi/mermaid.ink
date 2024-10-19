@@ -28,7 +28,7 @@ If you don't / can't add `--cap-add=SYS_ADMIN` to the command, please refer to [
 
 ### With `seccomp`
 
-For example, you can use [Jessie Frazelle seccomp profile for Chrome](https://github.com/Zenika/alpine-chrome/blob/master/chrome.json):
+For example, you can use [Jessie Frazelle's seccomp profile for Chrome](https://github.com/Zenika/alpine-chrome/blob/master/chrome.json):
 
 ```
 wget https://raw.githubusercontent.com/jfrazelle/dotfiles/master/etc/docker/seccomp/chrome.json
