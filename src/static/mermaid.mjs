@@ -1,7 +1,7 @@
 import mermaid from '../../node_modules/mermaid/dist/mermaid.esm.min.mjs';
 
-function isSyntaxErrorFromMermaid(code) {
-  return code.includes('Syntax error in graph') && code.includes('error-icon');
+function isUnknownDiagramError(code) {
+  return code.includes('UnknownDiagramError');
 }
 
 function setBgColor(svgElement, bgColor) {
@@ -54,8 +54,8 @@ async function render(definition, config, bgColor, size) {
     }
   } catch (error) {
     console.error('Failed to render', error);
-    if (isSyntaxErrorFromMermaid(error.toString())) {
-      throw new Error('Syntax error in graph');
+    if (isUnknownDiagramError(error.toString())) {
+      throw new Error('Unknown diagram error');
     }
     throw error;
   }
