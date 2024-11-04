@@ -57,7 +57,7 @@ async function render(definition, config, bgColor, size) {
     if (isUnknownDiagramError(error.toString())) {
       throw new Error('Unknown diagram error');
     }
-    throw error;
+    throw error.message;
   }
 }
 
