@@ -34,7 +34,7 @@ dependencies:
     version: 8.2.0
   puppeteer:
     specifier: ^23.0.2
-    version: 23.6.0
+    version: 23.6.1
 
 devDependencies:
   '@happy-dom/jest-environment':
@@ -3758,8 +3758,8 @@ packages:
       once: 1.4.0
     dev: false
 
-  /puppeteer-core@23.6.0:
-    resolution: {integrity: sha512-se1bhgUpR9C529SgHGr/eyT92mYyQPAhA2S9pGtGrVG2xob9qE6Pbp7TlqiSPlnnY1lINqhn6/67EwkdzOmKqQ==}
+  /puppeteer-core@23.6.1:
+    resolution: {integrity: sha512-DoNLAzQfGklPauEn33N4h9cM9GubJSINEn+AUMwAXwW159Y9JLk5y34Jsbv4c7kG8P0puOYWV9leu2siMZ/QpQ==}
     engines: {node: '>=18'}
     dependencies:
       '@puppeteer/browsers': 2.4.0
@@ -3774,8 +3774,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /puppeteer@23.6.0:
-    resolution: {integrity: sha512-l+Fgo8SVFSd51STtq2crz8t1Y3VXowsuR4zfR64qDOn6oggz7YIZauWiNR4IJjczQ6nvFs3S4cgng55/nesxTQ==}
+  /puppeteer@23.6.1:
+    resolution: {integrity: sha512-8+ALGQgwXd3P/tGcuSsxTPGDaOQIjcDIm04I5hpWZv/PiN5q8bQNHRUyfYrifT+flnM9aTWCP7tLEzuB6SlIgA==}
     engines: {node: '>=18'}
     hasBin: true
     requiresBuild: true
@@ -3784,7 +3784,7 @@ packages:
       chromium-bidi: 0.8.0(devtools-protocol@0.0.1354347)
       cosmiconfig: 9.0.0
       devtools-protocol: 0.0.1354347
-      puppeteer-core: 23.6.0
+      puppeteer-core: 23.6.1
       typed-query-selector: 2.12.0
     transitivePeerDependencies:
       - bufferutil
