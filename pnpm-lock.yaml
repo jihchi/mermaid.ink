@@ -42,7 +42,7 @@ devDependencies:
     version: 15.7.4
   '@testing-library/jest-dom':
     specifier: ^6.0.0
-    version: 6.6.2
+    version: 6.6.3
   jest:
     specifier: ^29.6.2
     version: 29.7.0
@@ -982,8 +982,8 @@ packages:
       '@sinonjs/commons': 3.0.0
     dev: true
 
-  /@testing-library/jest-dom@6.6.2:
-    resolution: {integrity: sha512-P6GJD4yqc9jZLbe98j/EkyQDTPgqftohZF5FBkHY5BUERZmcf4HeO2k0XaefEg329ux2p21i1A1DmyQ1kKw2Jw==}
+  /@testing-library/jest-dom@6.6.3:
+    resolution: {integrity: sha512-IteBhl4XqYNkM54f4ejhLRJiZNqcSCoXUOG2CPK7qbD322KjQozM4kHQOfkG2oln9b9HTYqs+Sae8vBATubxxA==}
     engines: {node: '>=14', npm: '>=6', yarn: '>=1'}
     dependencies:
       '@adobe/css-tools': 4.4.0
