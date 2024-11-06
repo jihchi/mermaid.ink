@@ -461,7 +461,7 @@ packages:
       '@jest/environment': 29.7.0
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      happy-dom: 15.8.3
+      happy-dom: 15.10.1
       jest-mock: 29.7.0
       jest-util: 29.7.0
     dev: true
@@ -2498,8 +2498,8 @@ packages:
     resolution: {integrity: sha512-3GKBOn+m2LX9iq+JC1064cSFprJY4jL1jCXTcpnfER5HYE2l/4EfWSGzkPa/ZDBmYI0ZOEj5VHV/eKnPGkHuOg==}
     dev: false
 
-  /happy-dom@15.8.3:
-    resolution: {integrity: sha512-YR9nUWN/T2bH7pPLEYMhTp4DQExPH+mC4KulJDgimCb+FY3Er0Vp6SOOcBXrNfMTri3lAk9uSZqUTG2hgZOYwg==}
+  /happy-dom@15.10.1:
+    resolution: {integrity: sha512-FuGnj/qIB4QnBL6fWmD7Wnh6STxevLgOVWB6+nopDGgWG1+t9CXkNB2ldZ+iqwD2UKxD2D0SU8el8A6AX6Q1+g==}
     engines: {node: '>=18.0.0'}
     dependencies:
       entities: 4.5.0
