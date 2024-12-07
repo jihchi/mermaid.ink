@@ -65,7 +65,7 @@ Or, If running locally, run `NODE_OPTIONS="--max-http-header-size=102400000" npm
 Many thanks for your help!
 
 <a href="https://github.com/jihchi/mermaid.ink/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=jihchi/mermaid.ink&max=10" />
+  <img src="https://contrib.rocks/image?repo=jihchi/mermaid.ink&max=11" />
 </a>
 
 The image of contributors is made with [contrib.rocks](https://contrib.rocks).
