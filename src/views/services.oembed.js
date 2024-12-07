@@ -35,7 +35,9 @@ const getEncodedCodeFromURL = ({ pathname }) => {
     throw new Error('URL pathname supported: /img/:code, /svg/:code');
   }
 
-  const { params: { encodedCode } } = matches;
+  const {
+    params: { encodedCode },
+  } = matches;
   return encodedCode;
 };
 
