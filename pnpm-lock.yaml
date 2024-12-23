@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@fortawesome/fontawesome-free':
         specifier: ^6.4.2
-        version: 6.7.1
+        version: 6.7.2
       '@koa/cors':
         specifier: ^5.0.0
         version: 5.0.0
@@ -264,8 +264,8 @@ packages:
   '@emnapi/runtime@1.2.0':
     resolution: {integrity: sha512-bV21/9LQmcQeCPEg3BDFtvwL6cwiTMksYNWQQ4KOxCZikEGalWtenoZ0wCiukJINlGCIi2KXx01g4FoH/LxpzQ==}
 
-  '@fortawesome/fontawesome-free@6.7.1':
-    resolution: {integrity: sha512-ALIk/MOh5gYe1TG/ieS5mVUsk7VUIJTJKPMK9rFFqOgfp0Q3d5QiBXbcOMwUvs37fyZVCz46YjOE6IFeOAXCHA==}
+  '@fortawesome/fontawesome-free@6.7.2':
+    resolution: {integrity: sha512-JUOtgFW6k9u4Y+xeIaEiLr3+cjoUPiAuLXoyKOJSia6Duzb7pq+A76P9ZdPDoAoxHdHzq6gE9/jKBGXlZT8FbA==}
     engines: {node: '>=6'}
 
   '@happy-dom/jest-environment@15.11.7':
@@ -2578,7 +2578,7 @@ snapshots:
       tslib: 2.6.1
     optional: true
 
-  '@fortawesome/fontawesome-free@6.7.1': {}
+  '@fortawesome/fontawesome-free@6.7.2': {}
 
   '@happy-dom/jest-environment@15.11.7':
     dependencies:
