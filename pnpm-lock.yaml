@@ -41,7 +41,7 @@ importers:
     devDependencies:
       '@happy-dom/jest-environment':
         specifier: ^16.0.1
-        version: 16.0.1
+        version: 16.3.0
       '@testing-library/jest-dom':
         specifier: ^6.0.0
         version: 6.6.3
@@ -268,8 +268,8 @@ packages:
     resolution: {integrity: sha512-JUOtgFW6k9u4Y+xeIaEiLr3+cjoUPiAuLXoyKOJSia6Duzb7pq+A76P9ZdPDoAoxHdHzq6gE9/jKBGXlZT8FbA==}
     engines: {node: '>=6'}
 
-  '@happy-dom/jest-environment@16.0.1':
-    resolution: {integrity: sha512-JObaonXd9C6eM28sNg8x1hE4l/DhXdHfS3YXpvUQCLarw04eE6W0W5GtxBapu0Siay7DsWQhiUcbT8EnRm92vw==}
+  '@happy-dom/jest-environment@16.3.0':
+    resolution: {integrity: sha512-4tZjkbxJMOY+EkdvDfBg1KK+ee7Xzw1v9r0xlu2a7zGHWbc5GG5epd+55jk4fZETcYjpTPaiIMO/x4v31KLp9g==}
     engines: {node: '>=18.0.0'}
 
   '@iconify/types@2.0.0':
@@ -1343,8 +1343,8 @@ packages:
   hachure-fill@0.5.2:
     resolution: {integrity: sha512-3GKBOn+m2LX9iq+JC1064cSFprJY4jL1jCXTcpnfER5HYE2l/4EfWSGzkPa/ZDBmYI0ZOEj5VHV/eKnPGkHuOg==}
 
-  happy-dom@16.0.1:
-    resolution: {integrity: sha512-cqbqvutE6XAIMe4nM93TkbW5SDFtLkU/6nsQfJBJ2KSlaT+My2kmnYsCFXrvEzvmP7s1xGJ6Xt4D9LNJIJHMbA==}
+  happy-dom@16.3.0:
+    resolution: {integrity: sha512-Q71RaIhyS21vhW17Tpa5W36yqQXIlE1TZ0A0Gguts8PShUSQE/7fBgxYGxgm3+5y0gF6afdlAVHLQqgrIcfRzg==}
     engines: {node: '>=18.0.0'}
 
   has-flag@3.0.0:
@@ -2576,12 +2576,12 @@ snapshots:
 
   '@fortawesome/fontawesome-free@6.7.2': {}
 
-  '@happy-dom/jest-environment@16.0.1':
+  '@happy-dom/jest-environment@16.3.0':
     dependencies:
       '@jest/environment': 29.7.0
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      happy-dom: 16.0.1
+      happy-dom: 16.3.0
       jest-mock: 29.7.0
       jest-util: 29.7.0
 
@@ -3809,7 +3809,7 @@ snapshots:
 
   hachure-fill@0.5.2: {}
 
-  happy-dom@16.0.1:
+  happy-dom@16.3.0:
     dependencies:
       webidl-conversions: 7.0.0
       whatwg-mimetype: 3.0.0
