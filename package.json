@@ -33,7 +33,7 @@
     "mermaid": "^11.0.2",
     "pako": "^2.1.0",
     "path-to-regexp": "^8.0.0",
-    "puppeteer": "^23.0.2"
+    "puppeteer": "^24.0.0"
   },
   "devDependencies": {
     "@happy-dom/jest-environment": "^16.0.1",
