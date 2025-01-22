@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - add_sandbox_flag
+      - dummy
 
 env:
   PUPPETEER_DOWNLOAD_PATH: ${{ github.workspace }}/.cache/Puppeteer
