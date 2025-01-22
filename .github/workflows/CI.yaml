@@ -1,6 +1,10 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+      - add_sandbox_flag
 
 env:
   PUPPETEER_DOWNLOAD_PATH: ${{ github.workspace }}/.cache/Puppeteer
