@@ -88,6 +88,8 @@ async function setup() {
       '--no-pings',
       '--noerrdialogs',
       '--prerender-from-omnibox=disabled',
+      '--no-sandbox',
+      '--headless --no-sandbox --disable-gpu ',
       // less-secure workaround to enable `import .. from '../node_modules/..'` in `src/static/mermaid.html`
       '--allow-file-access-from-files',
     ],
