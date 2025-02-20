@@ -3,6 +3,10 @@
 [![GitHub](https://img.shields.io/github/license/jihchi/mermaid.ink)](./LICENSE)
 [![CI](https://github.com/jihchi/mermaid.ink/actions/workflows/CI.yaml/badge.svg)](https://github.com/jihchi/mermaid.ink/actions/workflows/CI.yaml)
 
+## Live Demo
+
+Want to see mermaid.ink in action? Check out this [live converter](https://freeslugs.github.io/mermaid-converter/) that demonstrates how mermaid.ink transforms Mermaid diagrams into images.
+
 ## Getting Started
 
 ```
