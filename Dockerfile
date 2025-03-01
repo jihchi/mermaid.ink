@@ -1,54 +1,40 @@
-# based on: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
-FROM docker.io/library/node:18-buster-slim
+FROM ghcr.io/puppeteer/puppeteer:24.3.0
 LABEL maintainer="Jihchi Lee <achi@987.tw>"
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+# Install system dependencies
+USER root
 
 RUN apt-get update \
   && apt-get -yq upgrade \
-  && apt-get install -y curl gnupg \
-  && curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
-  && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
-  && sed -i -e's/ main/ main contrib non-free/g' /etc/apt/sources.list \
-  && apt-get update \
-  && apt-get install -y \
-  google-chrome-stable \
-  fonts-ipafont-gothic \
-  fonts-wqy-zenhei \
-  fonts-thai-tlwg \
-  fonts-kacst \
-  fonts-freefont-ttf \
-  ttf-mscorefonts-installer \
-  fonts-noto-cjk \
-  fonts-noto-color-emoji \
-  fonts-font-awesome \
-  libxss1 \
-  fontconfig \
-  --no-install-recommends \
+  && apt-get install -y --no-install-recommends \
+    fonts-kacst \
+    fonts-freefont-ttf \
+    fonts-noto-cjk \
+    fonts-noto-cjk-extra \
+    fonts-noto-color-emoji \
+    fonts-font-awesome \
   && fc-cache -f -v \
   && apt-get autoremove -y \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /src/*.deb
 
-# node application onbuild
-RUN corepack enable
-# pnpm fetch does require only lockfile
-COPY pnpm-lock.yaml ./
-RUN pnpm fetch --prod
+USER pptruser
 
+# Set global npm dependencies in the non-root (pptruser) directory
+# https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#global-npm-dependencies
+ENV NPM_CONFIG_PREFIX=/home/pptruser/.npm-global
+ENV PATH=$PATH:/home/pptruser/.npm-global/bin
+RUN mkdir -p /home/pptruser/.npm-global/bin
+
+# Install package manager
+RUN corepack enable --install-directory /home/pptruser/.npm-global/bin
+
+# pnpm fetch does require only lockfile
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm fetch --prod
 COPY . ./
 RUN pnpm install -r --offline --prod
 
-# Add user so we don't need --no-sandbox.
-# same layer as npm install to keep re-chowned files from using up several hundred MBs more space
-RUN usermod -a -G audio,video node \
-  && mkdir -p /home/node/Downloads \
-  && chown -R node:node /home/node /usr/src/app/
-
-USER node
-RUN corepack pack
 CMD ["pnpm", "start"]
-
 EXPOSE 3000
