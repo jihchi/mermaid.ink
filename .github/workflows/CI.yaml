@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 env:
-  PUPPETEER_DOWNLOAD_PATH: ${{ github.workspace }}/.cache/Puppeteer
+  PUPPETEER_SKIP_DOWNLOAD: true
 
 jobs:
   test:
@@ -20,16 +20,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: pnpm install
+      - uses: browser-actions/setup-chrome@v1
+        id: setup-chrome
       - name: Run test
         run: pnpm test
-  check-access:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run check
-        run: |
-          curl "https://mermaid.ink/img/eyJjb2RlIjogIiUle2luaXQ6IHsndGhlbWUnOiAnZGVmYXVsdCd9fSUlXG5mbG93Y2hhcnQgVEJcbiAgd2ViXG5cbiIsICJtZXJtYWlkIjogeyJ0aGVtZSI6ICJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6dHJ1ZSwiYXV0b1N5bmMiOnRydWUsInVwZGF0ZURpYWdyYW0iOnRydWV9" \
-            --silent \
-            --output /dev/null
+        env:
+          PUPPETEER_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
   build-and-push-image:
     name: Push Docker image to Github registry (ghcr.io)
     runs-on: ubuntu-latest
