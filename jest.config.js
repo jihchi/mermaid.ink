@@ -2,6 +2,5 @@
 module.exports = async () => {
   return {
     setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-    testEnvironment: '@happy-dom/jest-environment',
   };
 };
