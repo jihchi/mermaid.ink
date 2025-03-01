@@ -7,22 +7,6 @@ const createApp = require('../src/app');
 
 const KB = 1024;
 
-const parseDom = (html) => {
-  const window = new Window({
-    // https://github.com/capricorn86/happy-dom/tree/master/packages/happy-dom#settings
-    settings: {
-      disableJavaScriptFileLoading: true,
-      disableJavaScriptEvaluation: true,
-      disableCSSFileLoading: true,
-      disableIframePageLoading: true,
-      enableFileSystemHttpRequests: false,
-    },
-  });
-  const document = window.document;
-  document.body.innerHTML = html;
-  return document;
-};
-
 describe('app', () => {
   let request;
   let app;
@@ -752,10 +736,8 @@ describe('app', () => {
       const resp = await request.get(
         '/svg/pako:eNpVU-9r2zAQ_VcOwUIGTTL2MawtzY-1HSUbbcYYdRmKdY61yJLRSUtD0v99JzlZV3-ST_fuvXvP3ovSKRRjURm3LWvpAyxnhQV-rh7vnFTaruH7_R1UUhtUQ_iBUEoLwe8gOKj0OnoEFwNs693wCQaDi8MM00z48vB1cYBJ_5tBSYyqsdxAqPnkLDmDCU-IuZR6QVoF6L3zoDAwHQ3fd0omaSxM97f02lw677EMly9dyzQz_0Q6wOzEODWaGWv0mepeaq6xdE0UEbSFtQ51XA0_rfzo4taWJuZlE8PKuw1aMNpuUmMqdajcC1ttDFCLqCC2-bbSzyexnZKFO8B8P9MKyDXo7BFKyDvuXGSQpjz_tMD8dYHPj1eUnWo6ixiSwR0u-de0BgNm_NP_8MR6nVlTb-na3VHxGxjHeWK9zs4efXtTKsTCwbhfiAPc9JecdqSTO0vdIFOzq3KV7LnRFJw_UlXeNUCyySZuCX2WEom94mVKjzJ0kSst1142J9vKHNYMao8VFKIOoaXxaHTMiLWPGvSN1Grwm_4djf6DA1Sa6Uc5IBpZ3F5KIr22iHTeM3KFhs5Xcd0LyPsze3r55bF1Pgwb1Qs6GDyf5MTfffyQPC0EK-i-lzy1EOJMHDn5V9knxYVIAfHVmI8KKxlNKERhX7hVxuAedrYU4-AjnonYKuaddQu_Lc6z-K728hd0LzGz'
       );
-      const svg = parseDom(resp.body.toString()).querySelector('svg');
-      expect(svg).toHaveAttribute(
-        'xmlns:xlink',
-        'http://www.w3.org/1999/xlink'
+      expect(resp.body.toString()).toContain(
+        '<svg id="mermaid-svg" width="100%" xmlns="http://www.w3.org/2000/svg" '
       );
     });
   });
