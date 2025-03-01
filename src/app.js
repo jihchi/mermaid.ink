@@ -7,7 +7,6 @@ const puppeteer = require('puppeteer');
 const views = require('./views');
 
 const debug = createDebug('app:main');
-const pptr = createDebug('app:pptr');
 const app = new Koa();
 
 // Set global config
@@ -41,11 +40,6 @@ async function setup() {
   debug('launch headless browser instance');
 
   app.context.browser = await puppeteer.launch({
-    executablePath: process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
-      ? '/usr/bin/google-chrome-stable'
-      : undefined,
-    headless: pptr.enabled ? false : 'new',
-    devtools: pptr.enabled,
     dumpio: true,
     defaultViewport: {
       width: 1920,
@@ -90,7 +84,8 @@ async function setup() {
       '--prerender-from-omnibox=disabled',
       // less-secure workaround to enable `import .. from '../node_modules/..'` in `src/static/mermaid.html`
       '--allow-file-access-from-files',
-    ],
+      process.env.CI ? '--no-sandbox' : undefined,
+    ].filter(Boolean),
   });
 
   app.context.browser.on('disconnected', setup);

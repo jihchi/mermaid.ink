@@ -28,18 +28,21 @@ docker run --cap-add=SYS_ADMIN ghcr.io/jihchi/mermaid.ink
 
 Go to http://localhost:3000
 
-If you don't / can't add `--cap-add=SYS_ADMIN` to the command, please refer to [3 ways to securely use Chrome Headless with this image](https://github.com/Zenika/alpine-chrome?tab=readme-ov-file#3-ways-to-securely-use-chrome-headless-with-this-image) to find the most suitable solution for your case.
+> [!CAUTION]
+> Generally, launching a container with `--cap-add=SYS_ADMIN` is **not recommended**.
+> Please refer to [3 ways to securely use Chrome Headless with this image](https://github.com/Zenika/alpine-chrome?tab=readme-ov-file#3-ways-to-securely-use-chrome-headless-with-this-image)
+> to find the most suitable solution for your case.
 
-### With `seccomp`
+### Without `--cap-add=SYS_ADMIN`
 
-For example, you can use [Jessie Frazelle's seccomp profile for Chrome](https://github.com/Zenika/alpine-chrome/blob/master/chrome.json):
+You may use [Jessie Frazelle's seccomp profile for Chrome](https://github.com/Zenika/alpine-chrome/blob/master/chrome.json) instead:
 
 ```
 wget https://raw.githubusercontent.com/jfrazelle/dotfiles/master/etc/docker/seccomp/chrome.json
 docker run --security-opt seccomp=$(pwd)/chrome.json ghcr.io/jihchi/mermaid.ink
 ```
 
-### Environment variables
+## Environment variables
 
 | variable name          | default value | description                                                                                                                                                                                                                                                          |
 | ---------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
