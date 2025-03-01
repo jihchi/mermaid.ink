@@ -32,8 +32,6 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /src/*.deb
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-
 # node application onbuild
 RUN corepack enable
 # pnpm fetch does require only lockfile

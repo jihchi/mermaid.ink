@@ -41,9 +41,6 @@ async function setup() {
   debug('launch headless browser instance');
 
   app.context.browser = await puppeteer.launch({
-    executablePath: process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
-      ? '/usr/bin/google-chrome-stable'
-      : undefined,
     headless: pptr.enabled ? false : 'new',
     devtools: pptr.enabled,
     dumpio: true,
