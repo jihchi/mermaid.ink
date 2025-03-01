@@ -7,7 +7,6 @@ const puppeteer = require('puppeteer');
 const views = require('./views');
 
 const debug = createDebug('app:main');
-const pptr = createDebug('app:pptr');
 const app = new Koa();
 
 // Set global config
@@ -41,8 +40,6 @@ async function setup() {
   debug('launch headless browser instance');
 
   app.context.browser = await puppeteer.launch({
-    headless: pptr.enabled ? false : 'new',
-    devtools: pptr.enabled,
     dumpio: true,
     defaultViewport: {
       width: 1920,
