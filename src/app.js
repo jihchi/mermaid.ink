@@ -87,7 +87,8 @@ async function setup() {
       '--prerender-from-omnibox=disabled',
       // less-secure workaround to enable `import .. from '../node_modules/..'` in `src/static/mermaid.html`
       '--allow-file-access-from-files',
-    ],
+      process.env.CI ? '--no-sandbox' : undefined,
+    ].filter(Boolean),
   });
 
   app.context.browser.on('disconnected', setup);
