@@ -1,9 +1,9 @@
-const supertest = require('supertest');
-const sharp = require('sharp');
-const { PDFDocument, PageSizes } = require('pdf-lib');
-const FA_VERSION =
-  require('@fortawesome/fontawesome-free/package.json').version;
-const createApp = require('../src/app');
+import { describe, beforeAll, afterAll, test, expect } from 'vitest';
+import supertest from 'supertest';
+import sharp from 'sharp';
+import { PDFDocument, PageSizes } from 'pdf-lib';
+import { version as FA_VERSION } from '@fortawesome/fontawesome-free/package.json';
+import createApp from '../src/app';
 
 const KB = 1024;
 
