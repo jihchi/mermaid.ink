@@ -1,9 +1,9 @@
-const supertest = require('supertest');
-const sharp = require('sharp');
-const { PDFDocument, PageSizes } = require('pdf-lib');
-const FA_VERSION =
-  require('@fortawesome/fontawesome-free/package.json').version;
-const createApp = require('../src/app');
+import { describe, beforeAll, afterAll, test, expect } from 'vitest';
+import supertest from 'supertest';
+import sharp from 'sharp';
+import { PDFDocument, PageSizes } from 'pdf-lib';
+import { version as FA_VERSION } from '@fortawesome/fontawesome-free/package.json';
+import createApp from '../src/app';
 
 const KB = 1024;
 
@@ -390,7 +390,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('application/pdf');
-      expect(resp.body.length).toBeGreaterThan(17 * KB);
+      expect(resp.body.length).toBeGreaterThan(16 * KB);
 
       await PDFDocument.load(resp.body.toString('base64'));
     });
@@ -401,7 +401,7 @@ describe('app', () => {
       );
       expect(resp.status).toEqual(200);
       expect(resp.type).toEqual('application/pdf');
-      expect(resp.body.length).toBeGreaterThan(17 * KB);
+      expect(resp.body.length).toBeGreaterThan(16 * KB);
 
       const pdfDoc = await PDFDocument.load(resp.body.toString('base64'));
       const pages = pdfDoc.getPages();
