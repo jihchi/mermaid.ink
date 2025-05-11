@@ -49,6 +49,7 @@ docker run --security-opt seccomp=$(pwd)/chrome.json ghcr.io/jihchi/mermaid.ink
 | `MAX_WIDTH`            | `10000`       | Determine the maximum scaled diagram width that can be requested                                                                                                                                                                                                     |
 | `MAX_HEIGHT`           | `10000`       | Determine the maximum scaled diagram height that can be requested                                                                                                                                                                                                    |
 | `FONT_AWESOME_CSS_URL` | `<unset>`     | Sets a custom URL for the injected font-awesome CSS in the SVG. <br><br> The string `FA_VERSION` will be replaced with the version of font-awesome in use by the application e.g., `https://cdnjs.cloudflare.com/ajax/libs/font-awesome/FA_VERSION/css/all.min.css`. |
+| `PROTOCOL_TIMEOUT`     | `180_000`     | Timeout setting for individual protocol (CDP) calls. See ConnectionOptions > Properties > [protocolTimeout](https://pptr.dev/api/puppeteer.connectoptions#properties) for more details                                                                               |
 
 ## Troubleshooting
 
