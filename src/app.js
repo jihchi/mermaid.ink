@@ -40,6 +40,7 @@ async function setup() {
   debug('launch headless browser instance');
 
   app.context.browser = await puppeteer.launch({
+    protocolTimeout: process.env.PROTOCOL_TIMEOUT,
     dumpio: true,
     defaultViewport: {
       width: 1920,
