@@ -9,6 +9,26 @@ const views = require('./views');
 const debug = createDebug('app:main');
 const app = new Koa();
 
+const getHeadlessMode = () => {
+  const mode = process.env.HEADLESS_MODE?.toLowerCase();
+
+  if (mode) {
+    debug('headless mode:', mode);
+  }
+
+  if (mode === 'shell') {
+    return 'shell';
+  }
+
+  if (mode === 'true') {
+    return true;
+  }
+
+  if (mode === 'false') {
+    return false;
+  }
+};
+
 // Set global config
 app.use(async (ctx, next) => {
   ctx.state.customFontAwesomeCssUrl = process.env.FONT_AWESOME_CSS_URL;
@@ -41,7 +61,7 @@ async function setup() {
 
   app.context.browser = await puppeteer.launch({
     protocolTimeout: process.env.PROTOCOL_TIMEOUT,
-    headless: 'shell',
+    headless: getHeadlessMode(),
     dumpio: true,
     defaultViewport: {
       width: 1920,
