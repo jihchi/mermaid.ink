@@ -23,7 +23,7 @@ Go to http://localhost:3000
 See [here](https://github.com/jihchi/mermaid.ink/pkgs/container/mermaid.ink) for supported tags.
 
 ```
-docker run --cap-add=SYS_ADMIN ghcr.io/jihchi/mermaid.ink
+docker run --cap-add=SYS_ADMIN -p 3000:3000 ghcr.io/jihchi/mermaid.ink
 ```
 
 Go to http://localhost:3000
@@ -61,7 +61,6 @@ docker run --security-opt seccomp=$(pwd)/chrome.json ghcr.io/jihchi/mermaid.ink
 > Thanks [@ryepup](https://github.com/ryepup) for the analysis and work-arounds ([#12](https://github.com/jihchi/mermaid.ink/issues/12))
 
 - If running locally, add `--max-http-header-size` to the start script in package.json
-
   - e.g. `"start": "node --max-http-header-size=102400000 src/index.js"`
 
 - If running via docker, use [`NODE_OPTIONS`](https://nodejs.org/api/cli.html#cli_node_options_options) to increase `--max-http-header-size`
