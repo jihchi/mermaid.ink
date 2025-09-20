@@ -1,6 +1,5 @@
 const createDebug = require('debug');
 const { match } = require('path-to-regexp');
-const openMermaidPage = require('openMermaidPage');
 const renderSVG = require('renderSVG');
 
 const debug = createDebug('app:services:oembed');
@@ -58,9 +57,10 @@ module.exports = async (ctx, _next) => {
     return;
   }
 
-  let page;
+  let resource;
   try {
-    page = await openMermaidPage(ctx);
+    resource = await ctx.context.browsersPool.acquire().page;
+    const { page } = resource;
     debug('loaded local mermaid page');
 
     try {
@@ -98,6 +98,6 @@ module.exports = async (ctx, _next) => {
       height,
     };
   } finally {
-    if (page) await page.close();
+    if (resource) await ctx.browsersPool.release(resource);
   }
 };

@@ -742,20 +742,6 @@ describe('app', () => {
     });
   });
 
-  test.skip('GET 200 even though browser is crashed or disconnected', async () => {
-    // this will trigger 'disconnected' event and app will try to re-launch browser
-    await app.context.browser.close();
-    const resp = await request.get(
-      '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
-    );
-    expect(resp.status).toEqual(500);
-    // TODO: figure out how to "observe" browser has been re-created
-    const ok = await request.get(
-      '/img/eyJjb2RlIjoiZ3JhcGggVERcbkFbQ2hyaXN0bWFzXSAtLT58R2V0IG1vbmV5fCBCKEdvIHNob3BwaW5nKVxuQiAtLT4gQ3tMZXQgbWUgdGhpbmt9XG5DIC0tPnxPbmV8IERbTGFwdG9wXVxuQyAtLT58VHdvfCBFW2lQaG9uZV1cbkMgLS0-fFRocmVlfCBGW2ZhOmZhLWNhciBDYXJdXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ'
-    );
-    expect(ok.status).toEqual(200);
-  });
-
   describe('Fixed #170, ER diagram, works at mermaid@10', () => {
     const encodedPath =
       'pako:eNp1UsFuwjAM_RUru2wSfEB7q6BIE6OgArusO3itaSPaBDnpJgb8-1JaaSsdvsRynu33bJ9EqjMSviCeSswZq0SBs0kQw_k8HusTRMEinI6n8fNrGIMPWJb6y_yiTq3bmLEsVQ5MuXQuWqlVVFcfxLCaD1AV7mkYdGTK2-jbOxyQbdfz0j6rMF4vozscpemBhhQzlp_E5kWmpAw5epCITUFQdoGHRNzmPHreE-wkGxthRQ6_VOURPA_SAhlT68oBMrXzoWxYAEpscwcfh0Irgu2fGUllAXPqKe5pHEpKkeP_Bj-C2fyO_qv8lHqgrtkiiLazYLLZxq6ZbpQ2FK2Gb2INmt2mnNZm__51k0aMREVcoczcMV3ZJcIW5NQK37kZ8r4ZycXhsLZ6fVSp8C3XNBL1IUNL3fkJf4elocsPBXTMmA';

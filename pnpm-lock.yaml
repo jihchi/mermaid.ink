@@ -17,6 +17,9 @@ importers:
       debug:
         specifier: ^4.3.4
         version: 4.4.3
+      generic-pool:
+        specifier: ^3.9.0
+        version: 3.9.0
       js-base64:
         specifier: ^3.7.5
         version: 3.7.8
@@ -1182,6 +1185,10 @@ packages:
 
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
+
+  generic-pool@3.9.0:
+    resolution: {integrity: sha512-hymDOu5B53XvN4QT9dBmZxPX4CWhBPPLguTZ9MMFeFa/Kg0xWVfylOVNlJji/E7yTZWFd/q9GO5TxDLq156D7g==}
+    engines: {node: '>= 4'}
 
   get-caller-file@2.0.5:
     resolution: {integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==}
@@ -2909,6 +2916,8 @@ snapshots:
     optional: true
 
   function-bind@1.1.2: {}
+
+  generic-pool@3.9.0: {}
 
   get-caller-file@2.0.5: {}
 
