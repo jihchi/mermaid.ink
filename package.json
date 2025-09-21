@@ -33,7 +33,8 @@
     "mermaid": "^11.0.2",
     "pako": "^2.1.0",
     "path-to-regexp": "^8.0.0",
-    "puppeteer": "^24.0.0"
+    "puppeteer": "^24.0.0",
+    "redis": "^5.8.2"
   },
   "devDependencies": {
     "pdf-lib": "^1.17.1",

@@ -19,8 +19,6 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /src/*.deb
 
-USER pptruser
-
 # Set global npm dependencies in the non-root (pptruser) directory
 # https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#global-npm-dependencies
 ENV NPM_CONFIG_PREFIX=/home/pptruser/.npm-global
@@ -31,10 +29,10 @@ RUN mkdir -p /home/pptruser/.npm-global/bin
 RUN corepack enable --install-directory /home/pptruser/.npm-global/bin
 
 # pnpm fetch does require only lockfile
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm fetch --prod
 COPY . ./
-RUN pnpm install -r --offline --prod
+RUN chown -R pptruser:pptruser .
+USER pptruser
+RUN pnpm install
 
 CMD ["pnpm", "start"]
 EXPOSE 3000
