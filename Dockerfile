@@ -1,4 +1,4 @@
-FROM ghcr.io/puppeteer/puppeteer:24.25.0
+FROM ghcr.io/puppeteer/puppeteer:24.26.1
 LABEL maintainer="Jihchi Lee <achi@987.tw>"
 
 # Install system dependencies
