@@ -1,7 +1,7 @@
-const createDebug = require('debug');
-const { match } = require('path-to-regexp');
-const openMermaidPage = require('openMermaidPage');
-const renderSVG = require('renderSVG');
+import createDebug from 'debug';
+import { match } from 'path-to-regexp';
+import openMermaidPage from '../node_modules/openMermaidPage.js';
+import renderSVG from '../node_modules/renderSVG.js';
 
 const debug = createDebug('app:services:oembed');
 
@@ -41,7 +41,7 @@ const getEncodedCodeFromURL = ({ pathname }) => {
   return encodedCode;
 };
 
-module.exports = async (ctx, _next) => {
+export default async (ctx, _next) => {
   const {
     query: { url = '' },
   } = ctx;

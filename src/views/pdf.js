@@ -1,5 +1,5 @@
-const createDebug = require('debug');
-const renderImgOrSvg = require('renderImgOrSvg');
+import createDebug from 'debug';
+import renderImgOrSvg from '../node_modules/renderImgOrSvg.js';
 
 const debug = createDebug('app:views:pdf');
 
@@ -66,4 +66,4 @@ const pdf = async (ctx, page, size) => {
   ctx.body = Buffer.from(pdf);
 };
 
-module.exports = renderImgOrSvg(pdf);
+export default renderImgOrSvg(pdf);

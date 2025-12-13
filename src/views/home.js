@@ -1,11 +1,14 @@
-const { promises: fs } = require('fs');
-const path = require('path');
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
-const indexHTML = fs.readFile(path.resolve(__dirname, '../static/index.html'), {
-  encoding: 'utf-8',
-});
+const indexHTML = fs.readFile(
+  path.resolve(import.meta.dirname, '../static/index.html'),
+  {
+    encoding: 'utf-8',
+  }
+);
 
-module.exports = async (ctx, _next) => {
+export default async (ctx, _next) => {
   ctx.type = 'text/html';
   ctx.body = await indexHTML;
 };

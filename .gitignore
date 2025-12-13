@@ -141,3 +141,4 @@ public/
 # End of https://www.gitignore.io/api/node,linux,macos
 
 package-lock.json
+.pnpm-store/

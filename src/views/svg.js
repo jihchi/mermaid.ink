@@ -1,9 +1,9 @@
-const FA_VERSION =
-  require('@fortawesome/fontawesome-free/package.json').version;
-const createDebug = require('debug');
-const renderImgOrSvg = require('renderImgOrSvg');
+import fontawesome from '@fortawesome/fontawesome-free/package.json' with { type: 'json' };
+import createDebug from 'debug';
+import renderImgOrSvg from '../node_modules/renderImgOrSvg.js';
 
 const debug = createDebug('app:views:svg');
+const { version: FA_VERSION } = fontawesome;
 
 const svg = async (ctx, page, size) => {
   let fontAwesomeCssUrl;
@@ -60,4 +60,4 @@ const svg = async (ctx, page, size) => {
   ctx.body = svgString;
 };
 
-module.exports = renderImgOrSvg(svg);
+export default renderImgOrSvg(svg);
