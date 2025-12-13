@@ -33,7 +33,7 @@ RUN corepack enable --install-directory /home/pptruser/.npm-global/bin
 # pnpm fetch does require only lockfile
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm fetch --prod
-COPY . ./
+COPY --chown=pptruser:pptruser . ./
 RUN pnpm install -r --offline --prod
 
 CMD ["pnpm", "start"]
