@@ -1,6 +1,6 @@
-const createDebug = require('debug');
-const openMermaidPage = require('openMermaidPage');
-const renderSVG = require('renderSVG');
+import createDebug from 'debug';
+import openMermaidPage from '#@/helpers/openMermaidPage.js';
+import renderSVG from '#@/helpers/renderSVG.js';
 
 const debug = createDebug('app:renderImgOrSvg');
 
@@ -78,7 +78,7 @@ function themeFromContext(ctx) {
     : null;
 }
 
-module.exports = (render) => async (ctx, encodedCode, _next) => {
+export default (render) => async (ctx, encodedCode, _next) => {
   debug(`start to render, code: ${encodedCode}`);
 
   let page;

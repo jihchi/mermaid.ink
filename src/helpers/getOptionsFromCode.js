@@ -1,6 +1,6 @@
 // copied from https://github.com/mermaid-js/mermaid-live-editor/blob/develop/src/lib/util/serde.ts
-const { inflate } = require('pako');
-const { toUint8Array, fromBase64 } = require('js-base64');
+import { inflate } from 'pako';
+import { toUint8Array, fromBase64 } from 'js-base64';
 
 class UnknownSerdeError extends Error {
   constructor(message) {
@@ -36,7 +36,7 @@ const deserializers = {
   },
 };
 
-module.exports = (serializedState) => {
+export default (serializedState) => {
   try {
     return deserializeState(serializedState);
   } catch (error) {

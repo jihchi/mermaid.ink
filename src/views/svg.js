@@ -1,6 +1,6 @@
 import fontawesome from '@fortawesome/fontawesome-free/package.json' with { type: 'json' };
 import createDebug from 'debug';
-import renderImgOrSvg from '../node_modules/renderImgOrSvg.js';
+import renderImgOrSvg from '#@/helpers/renderImgOrSvg.js';
 
 const debug = createDebug('app:views:svg');
 const { version: FA_VERSION } = fontawesome;

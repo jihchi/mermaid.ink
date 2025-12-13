@@ -1,7 +1,7 @@
 import createDebug from 'debug';
 import { match } from 'path-to-regexp';
-import openMermaidPage from '../node_modules/openMermaidPage.js';
-import renderSVG from '../node_modules/renderSVG.js';
+import openMermaidPage from '#@/helpers/openMermaidPage.js';
+import renderSVG from '#@/helpers/renderSVG.js';
 
 const debug = createDebug('app:services:oembed');
 

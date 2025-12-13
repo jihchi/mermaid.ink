@@ -1,6 +1,6 @@
-const getOptionsFromCode = require('./getOptionsFromCode');
+import getOptionsFromCode from '#@/helpers/getOptionsFromCode.js';
 
-module.exports = async ({ page, encodedCode, bgColor, size, theme }) => {
+export default async ({ page, encodedCode, bgColor, size, theme }) => {
   const { code, mermaid: config } = getOptionsFromCode(encodedCode);
   const configObj = typeof config === 'string' ? JSON.parse(config) : config;
   if (theme) {

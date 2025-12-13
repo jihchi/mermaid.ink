@@ -1,5 +1,5 @@
 import createDebug from 'debug';
-import renderImgOrSvg from '../node_modules/renderImgOrSvg.js';
+import renderImgOrSvg from '#@/helpers/renderImgOrSvg.js';
 
 const debug = createDebug('app:views:pdf');
 

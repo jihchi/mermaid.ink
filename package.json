@@ -3,7 +3,6 @@
   "version": "13.0.1",
   "description": "https://mermain.ink",
   "homepage": "https://github.com/jihchi/mermaid.ink#readme",
-  "type": "module",
   "bugs": {
     "url": "https://github.com/jihchi/mermaid.ink/issues"
   },
@@ -13,9 +12,13 @@
   },
   "license": "MIT",
   "author": "jihchi",
+  "type": "module",
+  "imports": {
+    "#@/*": "./src/*"
+  },
   "main": "src/index.js",
   "scripts": {
-    "format": "prettier --with-node-modules --write \"{src,test}/**/*.{mjs,js,html}\" \"*.{js,cjs,mjs,md}\"",
+    "format": "sort-package-json && prettier --write \"{src,test}/**/*.{mjs,js,html}\" \"*.{js,cjs,mjs,md}\"",
     "start": "node src/index.js",
     "test": "vitest",
     "test:watch": "pnpm test --watch"
@@ -40,6 +43,7 @@
     "pdf-lib": "^1.17.1",
     "prettier": "3.7.4",
     "sharp": "^0.34.5",
+    "sort-package-json": "3.5.1",
     "supertest": "^7.1.4",
     "vitest": "^4.0.15"
   },
