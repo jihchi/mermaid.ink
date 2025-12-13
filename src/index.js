@@ -1,11 +1,11 @@
 import createDebug from 'debug';
-import createApp from './app.js';
+import createApp from '#@/app.js';
 
 const debug = createDebug('app:index');
 const PORT = process.env.PORT || 3000;
 
 (async () => {
   const { app } = await createApp();
-  await app.listen(PORT);
+  app.listen(PORT);
   debug('server listening on %o', PORT);
 })();
