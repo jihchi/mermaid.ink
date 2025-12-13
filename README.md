@@ -42,6 +42,16 @@ wget https://raw.githubusercontent.com/jfrazelle/dotfiles/master/etc/docker/secc
 docker run --security-opt seccomp=$(pwd)/chrome.json ghcr.io/jihchi/mermaid.ink
 ```
 
+If you run into a core dump error during startup (see #496 for more details), you might want to run it without default seccomp profile.
+
+### Without the default seccomp profile
+
+You may launch container without seccomp profile:
+
+```
+docker run --security-opt seccomp=unconfined ghcr.io/jihchi/mermaid.ink
+```
+
 ## Environment variables
 
 | variable name          | default value | description                                                                                                                                                                                                                                                                                                                                                                                                                                       |
