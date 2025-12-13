@@ -9,35 +9,35 @@ importers:
   .:
     dependencies:
       '@fortawesome/fontawesome-free':
-        specifier: ^6.4.2
+        specifier: ^6.7.2
         version: 6.7.2
       '@koa/cors':
         specifier: ^5.0.0
         version: 5.0.0
       debug:
-        specifier: ^4.3.4
+        specifier: ^4.4.3
         version: 4.4.3
       js-base64:
-        specifier: ^3.7.5
+        specifier: ^3.7.8
         version: 3.7.8
       koa:
-        specifier: ^3.0.0
+        specifier: ^3.1.1
         version: 3.1.1
       koa-route:
         specifier: ^4.0.1
         version: 4.0.1
       mermaid:
-        specifier: ^11.0.2
+        specifier: ^11.12.2
         version: 11.12.2
       pako:
         specifier: ^2.1.0
         version: 2.1.0
       path-to-regexp:
-        specifier: ^8.0.0
+        specifier: ^8.3.0
         version: 8.3.0
       puppeteer:
-        specifier: ^24.0.0
-        version: 24.32.0
+        specifier: ^24.33.0
+        version: 24.33.0
     devDependencies:
       pdf-lib:
         specifier: ^1.17.1
@@ -46,13 +46,13 @@ importers:
         specifier: 3.7.4
         version: 3.7.4
       sharp:
-        specifier: ^0.34.0
+        specifier: ^0.34.5
         version: 0.34.5
       supertest:
-        specifier: ^7.0.0
+        specifier: ^7.1.4
         version: 7.1.4
       vitest:
-        specifier: ^4.0.3
+        specifier: ^4.0.15
         version: 4.0.15(@types/node@24.10.1)
 
 packages:
@@ -1507,12 +1507,12 @@ packages:
   pump@3.0.3:
     resolution: {integrity: sha512-todwxLMY7/heScKmntwQG8CXVkWUOdYxIvY2s0VWAAMh/nd8SoYiRaKjlr7+iCs984f2P8zvrfWcDDYVb73NfA==}
 
-  puppeteer-core@24.32.0:
-    resolution: {integrity: sha512-MqzLLeJjqjtHK9J44+KE3kjtXXhFpPvg+AvXl/oy/jB8MeeNH66/4MNotOTqGZ6MPaxWi51YJ1ASga6OIff6xw==}
+  puppeteer-core@24.33.0:
+    resolution: {integrity: sha512-tPTxVg+Qdj/8av4cy6szv3GlhxeOoNhiiMZ955fjxQyvPQE/6DjCa6ZyF/x0WJrlgBZtaLSP8TQgJb7FdLDXXA==}
     engines: {node: '>=18'}
 
-  puppeteer@24.32.0:
-    resolution: {integrity: sha512-exyxHPV5DSsigIhM/pzLcyzl5XU4Dp5lNP+APwIeStDxAdYqpMnJ1qN0QHXghjJx+cQJczby+ySH5rgv/5GQLw==}
+  puppeteer@24.33.0:
+    resolution: {integrity: sha512-nl3wsAztq5F8zybn4Tk41OCnYIzFIzGC6AN0WcF2KCUnWenajvRRPgBmS6LvNUV2HEeIzT2zRZHH0TgVxLDKew==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -3227,7 +3227,7 @@ snapshots:
       end-of-stream: 1.4.5
       once: 1.4.0
 
-  puppeteer-core@24.32.0:
+  puppeteer-core@24.33.0:
     dependencies:
       '@puppeteer/browsers': 2.11.0
       chromium-bidi: 11.0.0(devtools-protocol@0.0.1534754)
@@ -3244,13 +3244,13 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  puppeteer@24.32.0:
+  puppeteer@24.33.0:
     dependencies:
       '@puppeteer/browsers': 2.11.0
       chromium-bidi: 11.0.0(devtools-protocol@0.0.1534754)
       cosmiconfig: 9.0.0
       devtools-protocol: 0.0.1534754
-      puppeteer-core: 24.32.0
+      puppeteer-core: 24.33.0
       typed-query-selector: 2.12.0
     transitivePeerDependencies:
       - bare-abort-controller
