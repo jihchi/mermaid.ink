@@ -2,9 +2,9 @@ import { describe, beforeAll, afterAll, test, expect } from 'vitest';
 import supertest from 'supertest';
 import sharp from 'sharp';
 import { PDFDocument, PageSizes } from 'pdf-lib';
-import { version as FA_VERSION } from '@fortawesome/fontawesome-free/package.json';
-import createApp from '../src/app';
+import createApp from '../src/app.js';
 
+const FA_VERSION = '6.7.2';
 const KB = 1024;
 
 describe('app', () => {

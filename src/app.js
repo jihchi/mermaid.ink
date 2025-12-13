@@ -1,10 +1,14 @@
-const Koa = require('koa');
-const cors = require('@koa/cors');
-const createDebug = require('debug');
-const route = require('koa-route');
-const puppeteer = require('puppeteer');
+import Koa from 'koa';
+import cors from '@koa/cors';
+import createDebug from 'debug';
+import route from 'koa-route';
+import puppeteer from 'puppeteer';
 
-const views = require('./views');
+import home from './views/home.js';
+import servicesOembed from './views/services.oembed.js';
+import img from './views/img.js';
+import svg from './views/svg.js';
+import pdf from './views/pdf.js';
 
 const debug = createDebug('app:main');
 const app = new Koa();
@@ -45,11 +49,11 @@ app.use(
     },
   })
 );
-app.use(route.get('/', views.home));
-app.use(route.get('/services/oembed', views.servicesOembed));
-app.use(route.get('/img/:encodedCode', views.img));
-app.use(route.get('/svg/:encodedCode', views.svg));
-app.use(route.get('/pdf/:encodedCode', views.pdf));
+app.use(route.get('/', home));
+app.use(route.get('/services/oembed', servicesOembed));
+app.use(route.get('/img/:encodedCode', img));
+app.use(route.get('/svg/:encodedCode', svg));
+app.use(route.get('/pdf/:encodedCode', pdf));
 
 async function setup() {
   if (app.context.shutdown) {
@@ -123,7 +127,7 @@ async function shutdown() {
   }
 }
 
-module.exports = async () => {
+export default async () => {
   try {
     await setup();
     return {

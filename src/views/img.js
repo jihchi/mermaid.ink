@@ -1,5 +1,5 @@
-const createDebug = require('debug');
-const renderImgOrSvg = require('renderImgOrSvg');
+import createDebug from 'debug';
+import renderImgOrSvg from '../node_modules/renderImgOrSvg.js';
 
 const debug = createDebug('app:views:img');
 
@@ -37,4 +37,4 @@ const img = async (ctx, page, size) => {
   ctx.body = Buffer.from(image);
 };
 
-module.exports = renderImgOrSvg(img);
+export default renderImgOrSvg(img);

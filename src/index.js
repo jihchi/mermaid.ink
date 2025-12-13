@@ -1,5 +1,5 @@
-const createDebug = require('debug');
-const createApp = require('./app');
+import createDebug from 'debug';
+import createApp from './app.js';
 
 const debug = createDebug('app:index');
 const PORT = process.env.PORT || 3000;
