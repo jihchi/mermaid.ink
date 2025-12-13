@@ -25,25 +25,25 @@
     "trailingComma": "es5"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.4.2",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@koa/cors": "^5.0.0",
-    "debug": "^4.3.4",
-    "js-base64": "^3.7.5",
-    "koa": "^3.0.0",
+    "debug": "^4.4.3",
+    "js-base64": "^3.7.8",
+    "koa": "^3.1.1",
     "koa-route": "^4.0.1",
-    "mermaid": "^11.0.2",
+    "mermaid": "^11.12.2",
     "pako": "^2.1.0",
-    "path-to-regexp": "^8.0.0",
-    "puppeteer": "^24.0.0"
+    "path-to-regexp": "^8.3.0",
+    "puppeteer": "^24.33.0"
   },
   "devDependencies": {
     "pdf-lib": "^1.17.1",
     "prettier": "3.7.4",
-    "sharp": "^0.34.0",
-    "supertest": "^7.0.0",
-    "vitest": "^4.0.3"
+    "sharp": "^0.34.5",
+    "supertest": "^7.1.4",
+    "vitest": "^4.0.15"
   },
-  "packageManager": "pnpm@10.5.2+sha512.da9dc28cd3ff40d0592188235ab25d3202add8a207afbedc682220e4a0029ffbff4562102b9e6e46b4e3f9e8bd53e6d05de48544b0c57d4b0179e22c76d1199b",
+  "packageManager": "pnpm@10.25.0",
   "engines": {
     "node": ">= 22",
     "pnpm": ">= 10"
