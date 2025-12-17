@@ -1,4 +1,8 @@
+import createDebug from 'debug';
+
 const SECOND_MS = 1000;
+
+const debug = createDebug('app:helpers:utils');
 
 export const getHeadlessMode = () => {
   const mode = process.env.HEADLESS_MODE?.toLowerCase();
