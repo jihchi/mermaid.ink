@@ -1,6 +1,10 @@
 import createDebug from 'debug';
 import openMermaidPage from '#@/helpers/openMermaidPage.js';
 import renderSVG from '#@/helpers/renderSVG.js';
+import { TimeoutError } from 'p-queue';
+import { getQueueAddTimeout } from '#@/helpers/utils.js';
+
+const QUEUE_ADD_TIMEOUT = getQueueAddTimeout();
 
 const debug = createDebug('app:renderImgOrSvg');
 
@@ -18,7 +22,7 @@ function sizeFromContext(ctx) {
   let height = null;
 
   if (ctx.query.width) {
-    const parsedWidth = parseInt(ctx.query.width);
+    const parsedWidth = Number.parseInt(ctx.query.width, 10);
     if (!parsedWidth) {
       ctx.throw(400, 'invalid width value');
     }
@@ -26,7 +30,7 @@ function sizeFromContext(ctx) {
   }
 
   if (ctx.query.height) {
-    const parsedHeight = parseInt(ctx.query.height);
+    const parsedHeight = Number.parseInt(ctx.query.height, 10);
     if (!parsedHeight) {
       ctx.throw(400, 'invalid height value');
     }
@@ -78,41 +82,67 @@ function themeFromContext(ctx) {
     : null;
 }
 
-export default (render) => async (ctx, encodedCode, _next) => {
-  debug(`start to render, code: ${encodedCode}`);
-
-  let page;
-  try {
-    page = await openMermaidPage(ctx);
-    debug('loaded local mermaid page');
-    const bgColor = bgColorFromContext(ctx);
-    debug('set background color to %s', bgColor);
-    const size = sizeFromContext(ctx);
-    debug('set size to %s', size);
-    const theme = themeFromContext(ctx);
-    debug('set theme to %s', theme);
+function renderCode(ctx, render, encodedCode) {
+  return async ({ signal }) => {
+    let page;
 
     try {
-      await renderSVG({ page, encodedCode, bgColor, size, theme });
-      debug('rendered SVG in DOM');
-    } catch (e) {
-      debug('mermaid failed to render SVG: %o', e);
-      ctx.throw(400, e);
-    }
+      page = await openMermaidPage(ctx);
+      debug('loaded local mermaid page');
+      const bgColor = bgColorFromContext(ctx);
+      debug('set background color to %s', bgColor);
+      const size = sizeFromContext(ctx);
+      debug('set size to %s', size);
+      const theme = themeFromContext(ctx);
+      debug('set theme to %s', theme);
 
-    await render(ctx, page, size);
-    debug('body is ready to respond');
-  } catch (e) {
-    debug('*** caught exception ***');
-    debug(e);
+      if (signal.aborted) {
+        debug('timeout triggered, abort rendering SVG');
+        return;
+      }
 
-    // here don't throw 500 if exception has already been thrown inside try-catch
-    if (!ctx.headerSent) {
-      ctx.throw(500, e);
+      try {
+        await renderSVG({ page, encodedCode, bgColor, size, theme });
+        debug('rendered SVG in DOM');
+      } catch (e) {
+        debug('mermaid failed to render SVG: %o', e);
+        ctx.throw(400, e);
+      }
+
+      if (signal.aborted) {
+        debug('timeout triggered, abort producing artifact');
+        return;
+      }
+
+      await render(ctx, page, size);
+      debug('body is ready to respond');
+    } finally {
+      if (page) {
+        await page.close();
+      }
     }
-  } finally {
-    if (page) {
-      await page.close();
+  };
+}
+
+export default (render) => async (ctx, encodedCode, _next) => {
+  const controller = new AbortController();
+
+  try {
+    debug(`start to render, code: ${encodedCode}`);
+
+    await ctx.renderingJobQueue.add(renderCode(ctx, render, encodedCode), {
+      timeout: QUEUE_ADD_TIMEOUT,
+      signal: controller.signal,
+    });
+  } catch (error) {
+    if (error instanceof TimeoutError) {
+      debug('rendering job timed out');
+      controller.abort();
+      ctx.throw(503);
+    } else {
+      debug('*** caught exception from rendering job queue ***');
+      debug(error);
+      throw error;
     }
   }
 };

@@ -1,37 +1,19 @@
 import Koa from 'koa';
+import PQueue from 'p-queue';
 import cors from '@koa/cors';
 import createDebug from 'debug';
-import route from 'koa-route';
 import puppeteer from 'puppeteer';
+import route from 'koa-route';
 
 import home from '#@/views/home.js';
-import servicesOembed from '#@/views/services.oembed.js';
 import img from '#@/views/img.js';
-import svg from '#@/views/svg.js';
 import pdf from '#@/views/pdf.js';
+import servicesOembed from '#@/views/services.oembed.js';
+import svg from '#@/views/svg.js';
+import { getHeadlessMode, getQueueConcurrency } from '#@/helpers/utils.js';
 
 const debug = createDebug('app:main');
 const app = new Koa();
-
-const getHeadlessMode = () => {
-  const mode = process.env.HEADLESS_MODE?.toLowerCase();
-
-  if (mode) {
-    debug('headless mode:', mode);
-  }
-
-  if (mode === 'shell') {
-    return 'shell';
-  }
-
-  if (mode === 'true') {
-    return true;
-  }
-
-  if (mode === 'false') {
-    return false;
-  }
-};
 
 // Set global config
 app.use(async (ctx, next) => {
@@ -62,6 +44,12 @@ async function setup() {
   }
 
   debug('launch headless browser instance');
+
+  const renderingJobQueue = new PQueue({
+    concurrency: getQueueConcurrency(),
+  });
+
+  app.context.renderingJobQueue = renderingJobQueue;
 
   app.context.browser = await puppeteer.launch({
     protocolTimeout: process.env.PROTOCOL_TIMEOUT,
