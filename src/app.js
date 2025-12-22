@@ -10,6 +10,8 @@ import img from '#@/views/img.js';
 import pdf from '#@/views/pdf.js';
 import servicesOembed from '#@/views/services.oembed.js';
 import svg from '#@/views/svg.js';
+import readCacheFromDb from '#@/helpers/readCacheFromDb.js';
+import { connect, disconnect } from '#@/helpers/db.js';
 import { getHeadlessMode, getQueueConcurrency } from '#@/helpers/utils.js';
 
 const debug = createDebug('app:main');
@@ -31,25 +33,32 @@ app.use(
     },
   })
 );
+
 app.use(route.get('/', home));
 app.use(route.get('/services/oembed', servicesOembed));
-app.use(route.get('/img/:encodedCode', img));
-app.use(route.get('/svg/:encodedCode', svg));
-app.use(route.get('/pdf/:encodedCode', pdf));
+app.use(route.get('/img/:encodedCode', readCacheFromDb(img, 'img')));
+app.use(route.get('/svg/:encodedCode', readCacheFromDb(svg, 'svg')));
+app.use(route.get('/pdf/:encodedCode', readCacheFromDb(pdf, 'pdf')));
 
 async function setup() {
+  debug('start the service');
+
   if (app.context.shutdown) {
     debug("application is shutting down, won't re-launch browser");
     return;
   }
 
-  debug('launch headless browser instance');
+  debug('initialize job queue');
 
   const renderingJobQueue = new PQueue({
     concurrency: getQueueConcurrency(),
   });
 
   app.context.renderingJobQueue = renderingJobQueue;
+
+  app.context.sql = await connect();
+
+  debug('launch headless browser instance');
 
   app.context.browser = await puppeteer.launch({
     protocolTimeout: process.env.PROTOCOL_TIMEOUT,
@@ -113,6 +122,8 @@ async function shutdown() {
     debug('shutdown browser');
     await app.context.browser.close();
   }
+
+  await disconnect(app.context.sql);
 }
 
 export default async () => {

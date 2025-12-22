@@ -1,9 +1,11 @@
 import createDebug from 'debug';
 import renderImgOrSvg from '#@/helpers/renderImgOrSvg.js';
+import { isEnabled as isDatabaseEnabled, updateAsset } from '#@/helpers/db.js';
+import { extractImageType } from '#@/helpers/utils.js';
 
 const debug = createDebug('app:views:img');
 
-const img = async (ctx, page, size) => {
+const img = async (ctx, cacheKey, page, size) => {
   const svg = await page.$('#container > svg');
   debug('got the svg element');
 
@@ -15,11 +17,7 @@ const img = async (ctx, page, size) => {
     });
   }
 
-  // read type from query parameter, allow all types supported by puppeteer https://pptr.dev/api/puppeteer.screenshotoptions.type
-  // defaults to jpeg, because that was originally the hardcoded type
-  const type = ['jpeg', 'png', 'webp'].includes(ctx.query.type?.toLowerCase())
-    ? ctx.query.type?.toLowerCase()
-    : 'jpeg';
+  const type = extractImageType(ctx.query);
   debug('screenshot type: %s', type);
 
   const screenshotOptions = {
@@ -31,6 +29,21 @@ const img = async (ctx, page, size) => {
 
   const image = await svg.screenshot(screenshotOptions);
   debug('took a screenshot from the element, file size: %o', image.length);
+
+  if (isDatabaseEnabled) {
+    debug('cache the result');
+
+    try {
+      await updateAsset(ctx.sql, {
+        id: cacheKey,
+        statusCode: 200,
+        mimeType: `image/${type}`,
+        body: image,
+      });
+    } catch (error) {
+      debug('failed to cache the result', error);
+    }
+  }
 
   // dynamically set media type
   ctx.type = `image/${type}`;
