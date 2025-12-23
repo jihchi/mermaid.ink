@@ -1,11 +1,12 @@
 import fontawesome from '@fortawesome/fontawesome-free/package.json' with { type: 'json' };
 import createDebug from 'debug';
 import renderImgOrSvg from '#@/helpers/renderImgOrSvg.js';
+import { isEnabled as isDatabaseEnabled, updateAsset } from '#@/helpers/db.js';
 
 const debug = createDebug('app:views:svg');
 const { version: FA_VERSION } = fontawesome;
 
-const svg = async (ctx, page, size) => {
+const svg = async (ctx, cacheKey, page) => {
   let fontAwesomeCssUrl;
   if (ctx.state.customFontAwesomeCssUrl) {
     fontAwesomeCssUrl = ctx.state.customFontAwesomeCssUrl.replaceAll(
@@ -55,6 +56,21 @@ const svg = async (ctx, page, size) => {
   }, fontAwesomeCssUrl);
 
   debug('got the svg element, file size: %o', svgString.length);
+
+  if (isDatabaseEnabled) {
+    debug('cache the result');
+
+    try {
+      await updateAsset(ctx.sql, {
+        id: cacheKey,
+        statusCode: 200,
+        mimeType: 'image/svg+xml',
+        body: svgString,
+      });
+    } catch (error) {
+      debug('failed to cache the result', error);
+    }
+  }
 
   ctx.type = 'image/svg+xml';
   ctx.body = svgString;

@@ -21,7 +21,7 @@ updates:
       minor-and-patch:
         applies-to: version-updates
         patterns:
-          - "*"
+          - '*'
         update-types:
-          - "patch"
-          - "minor"
+          - 'patch'
+          - 'minor'

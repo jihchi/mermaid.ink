@@ -1,9 +1,11 @@
 import createDebug from 'debug';
 import renderImgOrSvg from '#@/helpers/renderImgOrSvg.js';
+import { isEnabled as isDatabaseEnabled, updateAsset } from '#@/helpers/db.js';
+import { extractPaper, isLandscape, isFit } from '#@/helpers/utils.js';
 
 const debug = createDebug('app:views:pdf');
 
-const pdf = async (ctx, page, size) => {
+const pdf = async (ctx, cacheKey, page, size) => {
   // If a size value has been explicitely set
   if (size.width || size.height) {
     await page.$eval('#container > svg', (svgElement) => {
@@ -27,23 +29,10 @@ const pdf = async (ctx, page, size) => {
     printBackground: true,
   };
 
-  const paperFormat = [
-    'letter',
-    'legal',
-    'tabloid',
-    'ledger',
-    'a0',
-    'a1',
-    'a2',
-    'a3',
-    'a4',
-    'a5',
-    'a6',
-  ].includes(ctx.query.paper?.toLowerCase())
-    ? ctx.query.paper?.toLowerCase()
-    : 'a4';
-  const landscape = ctx.query.landscape !== undefined;
-  const pdfFit = ctx.query.fit !== undefined;
+  const paperFormat = extractPaper(ctx.query);
+  const landscape = isLandscape(ctx.query);
+  const pdfFit = isFit(ctx.query);
+
   if (pdfFit) {
     pdfOptions = {
       ...pdfOptions,
@@ -61,6 +50,21 @@ const pdf = async (ctx, page, size) => {
 
   const pdf = await page.pdf(pdfOptions);
   debug('printed to pdf, file size: %o', pdf.length);
+
+  if (isDatabaseEnabled) {
+    debug('cache the result');
+
+    try {
+      await updateAsset(ctx.sql, {
+        id: cacheKey,
+        statusCode: 200,
+        mimeType: 'application/pdf',
+        body: pdf,
+      });
+    } catch (error) {
+      debug('failed to cache the result', error);
+    }
+  }
 
   ctx.type = 'application/pdf';
   ctx.body = Buffer.from(pdf);

@@ -18,7 +18,8 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "format": "sort-package-json && prettier --write \"{src,test}/**/*.{mjs,js,html}\" \"*.{js,cjs,mjs,md}\"",
+    "format": "sort-package-json && prettier --write \"{src,test,db}/**/*.{mjs,js,html}\" \"*.{js,cjs,mjs,md}\"",
+    "migrate": "env PGIDLE_TIMEOUT=1 node ./db/migrate.js",
     "start": "node src/index.js",
     "test": "vitest",
     "test:watch": "pnpm test --watch"
@@ -38,6 +39,8 @@
     "p-queue": "^9.0.1",
     "pako": "^2.1.0",
     "path-to-regexp": "^8.3.0",
+    "postgres": "^3.4.7",
+    "postgres-shift": "^0.1.0",
     "puppeteer": "^24.33.0"
   },
   "devDependencies": {
