@@ -78,6 +78,7 @@ async function setup() {
       '--disable-dev-shm-usage',
       '--disable-device-discovery-notifications',
       '--disable-extensions',
+      '--disable-gpu',
       '--disable-hang-monitor',
       '--disable-infobars',
       '--disable-ipc-flooding-protection',
@@ -108,6 +109,8 @@ async function setup() {
       // less-secure workaround to enable `import .. from '../node_modules/..'` in `src/static/mermaid.html`
       '--allow-file-access-from-files',
       process.env.CI ? '--no-sandbox' : undefined,
+      process.env.CI ? '--no-zygote' : undefined,
+      process.env.CI ? '--disable-setuid-sandbox' : undefined,
     ].filter(Boolean),
   });
 
