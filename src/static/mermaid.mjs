@@ -1,4 +1,14 @@
 import mermaid from '../../node_modules/mermaid/dist/mermaid.esm.min.mjs';
+import elkLayouts from '../../node_modules/@mermaid-js/layout-elk/dist/mermaid-layout-elk.esm.min.mjs';
+import tidyTreeLayouts from '../../node_modules/@mermaid-js/layout-tidy-tree/dist/mermaid-layout-tidy-tree.esm.mjs';
+import zenuml from '../../node_modules/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs';
+
+let registrationPromise = null;
+
+async function registerLayoutAndExternalDiagrams() {
+  mermaid.registerLayoutLoaders([...elkLayouts, ...tidyTreeLayouts]);
+  await mermaid.registerExternalDiagrams([zenuml]);
+}
 
 function isUnknownDiagramError(code) {
   return code.includes('UnknownDiagramError');
@@ -24,6 +34,11 @@ function setSize(svgElement, size) {
 async function render(definition, config, bgColor, size) {
   // Wait for fonts to load to get accurate bounding box calculations
   await Promise.all(Array.from(document.fonts, (font) => font.load()));
+
+  if (!registrationPromise) {
+    registrationPromise = registerLayoutAndExternalDiagrams();
+  }
+  await registrationPromise;
 
   try {
     mermaid.initialize({
