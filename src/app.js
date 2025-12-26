@@ -8,7 +8,6 @@ import route from 'koa-route';
 import home from '#@/views/home.js';
 import img from '#@/views/img.js';
 import pdf from '#@/views/pdf.js';
-import servicesOembed from '#@/views/services.oembed.js';
 import svg from '#@/views/svg.js';
 import readCacheFromDb from '#@/helpers/readCacheFromDb.js';
 import { connect, disconnect } from '#@/helpers/db.js';
@@ -35,7 +34,6 @@ app.use(
 );
 
 app.use(route.get('/', home));
-app.use(route.get('/services/oembed', servicesOembed));
 app.use(route.get('/img/:encodedCode', readCacheFromDb(img, 'img')));
 app.use(route.get('/svg/:encodedCode', readCacheFromDb(svg, 'svg')));
 app.use(route.get('/pdf/:encodedCode', readCacheFromDb(pdf, 'pdf')));
