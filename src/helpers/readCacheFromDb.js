@@ -4,6 +4,7 @@ import {
   isEnabled,
   readAsset,
   insertAsset,
+  updateAsset,
   tryAcquireLock,
   releaseLock,
 } from '#@/helpers/db.js';
@@ -94,7 +95,25 @@ export default (handler, assetType) => async (ctx, encodedCode, next) => {
       statusCode: 503,
     });
 
-    await handler(ctx, cacheKey, encodedCode, next);
+    try {
+      await handler(ctx, cacheKey, encodedCode, next);
+    } catch (error) {
+      const status = error.status ?? error.statusCode;
+      if (status >= 400 && status < 500) {
+        debug('caching 4xx error', { status, message: error.message });
+        try {
+          await updateAsset(sql, {
+            id: cacheKey,
+            statusCode: status,
+            mimeType: 'text/plain',
+            body: error.message,
+          });
+        } catch (cacheError) {
+          debug('failed to cache 4xx error', cacheError);
+        }
+      }
+      throw error;
+    }
   } finally {
     debug('releasing advisory lock');
     await releaseLock(sql, cacheKey);
