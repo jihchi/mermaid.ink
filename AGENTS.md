@@ -46,6 +46,7 @@ test/
 **Route handlers** (`img.js`, `svg.js`, `pdf.js`): Export default wrapped in `renderImgOrSvg`, receive `(ctx, cacheKey, page, size)`, use Puppeteer API, update cache, set response.
 
 **Higher-order functions:**
+
 - `renderImgOrSvg(render)` - queue mgmt, page open, SVG render, timeout
 - `readCacheFromDb(handler, assetType)` - cache check middleware
 
