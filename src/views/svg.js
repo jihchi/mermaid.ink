@@ -65,7 +65,7 @@ const svg = async (ctx, cacheKey, page) => {
         id: cacheKey,
         statusCode: 200,
         mimeType: 'image/svg+xml',
-        body: svgString,
+        blob: Buffer.from(svgString, 'utf-8'),
       });
     } catch (error) {
       debug('failed to cache the result', error);

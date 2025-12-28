@@ -3,6 +3,7 @@ import createCacheKey from '#@/helpers/createCacheKey.js';
 import {
   isEnabled,
   readAsset,
+  readBlob,
   insertAsset,
   updateAsset,
   tryAcquireLock,
@@ -35,31 +36,43 @@ export default (handler, assetType) => async (ctx, encodedCode, next) => {
   const cacheData = await readAsset(sql, cacheKey);
 
   if (cacheData) {
-    const {
-      res_status_code: status,
-      res_body: body,
-      res_mime_type: mimeType,
-    } = cacheData;
+    const { res_status_code: status, res_mime_type: mimeType } = cacheData;
 
     // treat 503 as cache miss - previous render may have failed
     if (status === 503) {
       debug('found stale 503 entry, attempting re-render');
-    } else {
-      debug('got from cache', {
-        status,
-        body: body?.length,
-        mimeType,
-      });
-
-      ctx.body = body;
-      ctx.type = mimeType;
-
-      if (status === 200) {
-        ctx.status = status;
+    } else if (status === 200) {
+      const blob = await readBlob(sql, cacheKey);
+      if (blob == null) {
+        debug('metadata found but blob missing, treating as cache miss');
       } else {
-        ctx.throw(status);
-      }
+        debug('got from cache', {
+          length: blob?.length,
+          mimeType,
+        });
 
+        ctx.body = blob;
+        ctx.type = mimeType;
+        ctx.status = 200;
+        return;
+      }
+    } else if (status === 400) {
+      // Only fetch blob for 400 error (where error message is cached as body)
+      const blob = await readBlob(sql, cacheKey);
+      debug('got cached error from cache', {
+        status,
+        mimeType,
+        bodySize: blob?.length,
+      });
+      ctx.body = blob;
+      ctx.type = mimeType;
+      ctx.status = 400;
+      return;
+    } else {
+      // For other errors (for example, 5xx), no blob expected—just headers
+      debug('got cached error from cache', { status, mimeType });
+      ctx.type = mimeType;
+      ctx.throw(status);
       return;
     }
   }
@@ -80,11 +93,14 @@ export default (handler, assetType) => async (ctx, encodedCode, next) => {
     // double-check cache after acquiring lock
     const recheckData = await readAsset(sql, cacheKey);
     if (recheckData && recheckData.res_status_code === 200) {
-      debug('cache populated while waiting for lock');
-      ctx.body = recheckData.res_body;
-      ctx.type = recheckData.res_mime_type;
-      ctx.status = 200;
-      return;
+      const blob = await readBlob(sql, cacheKey);
+      if (blob) {
+        debug('cache populated while waiting for lock');
+        ctx.body = blob;
+        ctx.type = recheckData.res_mime_type;
+        ctx.status = 200;
+        return;
+      }
     }
 
     debug('inserting 503 placeholder');
@@ -93,6 +109,7 @@ export default (handler, assetType) => async (ctx, encodedCode, next) => {
       path,
       querystring,
       statusCode: 503,
+      mimeType: 'text/plain',
     });
 
     try {
@@ -106,7 +123,7 @@ export default (handler, assetType) => async (ctx, encodedCode, next) => {
             id: cacheKey,
             statusCode: status,
             mimeType: 'text/plain',
-            body: error.message,
+            blob: Buffer.from(error.message, 'utf-8'),
           });
         } catch (cacheError) {
           debug('failed to cache 4xx error', cacheError);

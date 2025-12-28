@@ -59,7 +59,7 @@ const pdf = async (ctx, cacheKey, page, size) => {
         id: cacheKey,
         statusCode: 200,
         mimeType: 'application/pdf',
-        body: pdf,
+        blob: pdf,
       });
     } catch (error) {
       debug('failed to cache the result', error);

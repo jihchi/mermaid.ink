@@ -38,7 +38,7 @@ const img = async (ctx, cacheKey, page, size) => {
         id: cacheKey,
         statusCode: 200,
         mimeType: `image/${type}`,
-        body: image,
+        blob: image,
       });
     } catch (error) {
       debug('failed to cache the result', error);
