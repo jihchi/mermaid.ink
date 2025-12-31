@@ -7,6 +7,10 @@ const debug = createDebug('app:helpers:db');
 
 export const isEnabled = ENABLE_DATABASE?.toLowerCase() === 'true';
 
+/**
+ * Establish a PostgreSQL connection.
+ * @returns {Promise<?import('postgres').Sql>} postgres connection instance, or undefined if database is disabled
+ */
 export const connect = async () => {
   if (!isEnabled) {
     debug('`ENABLE_DATABASE` is not enabled. Skip database mode');
@@ -28,6 +32,11 @@ export const connect = async () => {
   return sql;
 };
 
+/**
+ * Close the PostgreSQL connection.
+ * @param {?import('postgres').Sql} sql - postgres connection instance
+ * @returns {Promise<void>}
+ */
 export const disconnect = async (sql) => {
   if (!isEnabled) {
     debug('`ENABLE_DATABASE` is not enabled. Skip database disconnection');
@@ -43,6 +52,12 @@ export const disconnect = async (sql) => {
   await sql.end();
 };
 
+/**
+ * Read asset metadata by cache key.
+ * @param {?import('postgres').Sql} sql - postgres connection instance
+ * @param {?Buffer} id - cache key (BYTEA)
+ * @returns {Promise<?{res_status_code: number, res_mime_type: string}>} Metadata with {res_status_code, res_mime_type} if found, undefined if cache miss
+ */
 export const readAsset = async (sql, id) => {
   if (sql == null) {
     throw new Error('parameter `sql` is required');
@@ -51,61 +66,47 @@ export const readAsset = async (sql, id) => {
   }
 
   const [data] = await sql`
-    SELECT res_status_code, res_mime_type, res_body
-    FROM mermaid_ink_assets
+    SELECT res_status_code, res_mime_type
+    FROM mermaid_ink_meta
     WHERE id = ${id}
+    ORDER BY created_at DESC
+    LIMIT 1
   `;
 
   return data;
 };
 
-export const insertAsset = async (
-  sql,
-  { id, path, querystring, statusCode, mimeType, body }
-) => {
+/**
+ * Read rendered asset blob by cache key.
+ * @param {?import('postgres').Sql} sql - postgres connection instance
+ * @param {?Buffer} id - cache key (BYTEA)
+ * @returns {Promise<?Buffer>} Rendered output blob if found, undefined if cache miss
+ */
+export const readBlob = async (sql, id) => {
   if (sql == null) {
     throw new Error('parameter `sql` is required');
   } else if (id == null) {
     throw new Error('parameter `id` is required');
   }
 
-  const asset = { id };
-  const fields = ['id'];
-
-  if (path) {
-    fields.push('req_pathname');
-    asset.req_pathname = path;
-  }
-
-  if (querystring) {
-    fields.push('req_search');
-    asset.req_search = querystring;
-  }
-
-  if (statusCode) {
-    fields.push('res_status_code');
-    asset.res_status_code = statusCode;
-  }
-
-  if (mimeType) {
-    fields.push('res_mime_type');
-    asset.res_mime_type = mimeType;
-  }
-
-  if (body) {
-    fields.push('res_body');
-    asset.res_body = body;
-  }
-
-  return await sql`
-    INSERT INTO mermaid_ink_assets ${sql([asset], fields)}
-    ON CONFLICT (id) DO NOTHING
+  const [data] = await sql`
+    SELECT data
+    FROM mermaid_ink_blob
+    WHERE id = ${id}
   `;
+
+  return data?.data;
 };
 
-export const updateAsset = async (
+/**
+ * Insert asset metadata and optional blob.
+ * @param {?import('postgres').Sql} sql - postgres connection instance
+ * @param {{id?: Buffer, path?: string, querystring?: string, statusCode?: number, mimeType?: string, blob?: Buffer}} options - asset fields
+ * @returns {Promise<void>}
+ */
+export const insertAsset = async (
   sql,
-  { id, path, querystring, statusCode, mimeType, body }
+  { id, path, querystring, statusCode, mimeType, blob }
 ) => {
   if (sql == null) {
     throw new Error('parameter `sql` is required');
@@ -113,41 +114,118 @@ export const updateAsset = async (
     throw new Error('parameter `id` is required');
   }
 
-  const asset = {};
+  return await sql.begin(async (sql) => {
+    const entry = { id };
+    const fields = ['id'];
+
+    if (path) {
+      entry.req_pathname = path;
+      fields.push('req_pathname');
+    }
+
+    if (querystring) {
+      entry.req_search = querystring;
+      fields.push('req_search');
+    }
+
+    if (statusCode) {
+      entry.res_status_code = statusCode;
+      fields.push('res_status_code');
+    }
+
+    if (mimeType) {
+      entry.res_mime_type = mimeType;
+      fields.push('res_mime_type');
+    }
+
+    await sql`
+      INSERT INTO mermaid_ink_meta ${sql(entry, fields)}
+      ON CONFLICT (id, created_at) DO NOTHING
+    `;
+
+    if (blob) {
+      await sql`
+        INSERT INTO mermaid_ink_blob
+          (id, data)
+        VALUES
+          (${id}, ${blob})
+        ON CONFLICT (id) DO UPDATE SET data = EXCLUDED.data
+      `;
+    }
+  });
+};
+
+/**
+ * Update asset metadata and/or blob.
+ * @param {?import('postgres').Sql} sql - postgres connection instance
+ * @param {{id?: Buffer, path?: string, querystring?: string, statusCode?: number, mimeType?: string, blob?: Buffer}} options - update fields
+ * @returns {Promise<void>}
+ */
+export const updateAsset = async (
+  sql,
+  { id, path, querystring, statusCode, mimeType, blob }
+) => {
+  if (sql == null) {
+    throw new Error('parameter `sql` is required');
+  } else if (id == null) {
+    throw new Error('parameter `id` is required');
+  }
+
+  const entry = {};
   const fields = [];
 
   if (path) {
     fields.push('req_pathname');
-    asset.req_pathname = path;
+    entry.req_pathname = path;
   }
 
   if (querystring) {
     fields.push('req_search');
-    asset.req_search = querystring;
+    entry.req_search = querystring;
   }
 
   if (statusCode) {
     fields.push('res_status_code');
-    asset.res_status_code = statusCode;
+    entry.res_status_code = statusCode;
   }
 
   if (mimeType) {
     fields.push('res_mime_type');
-    asset.res_mime_type = mimeType;
+    entry.res_mime_type = mimeType;
   }
 
-  if (body) {
-    fields.push('res_body');
-    asset.res_body = body;
+  if (fields.length === 0 && !blob) {
+    return;
   }
 
-  return await sql`
-    UPDATE mermaid_ink_assets SET ${sql(asset, fields)}
-    WHERE id = ${id}
-  `;
+  return await sql.begin(async (sql) => {
+    if (fields.length) {
+      await sql`
+        UPDATE mermaid_ink_meta SET ${sql(entry, fields)}
+        WHERE id = ${id}
+    `;
+    }
+
+    if (blob) {
+      await sql`
+        INSERT INTO mermaid_ink_blob
+          (id, data)
+        VALUES
+          (${id}, ${blob})
+        ON CONFLICT (id) DO UPDATE SET data = EXCLUDED.data
+      `;
+    }
+  });
 };
 
-// convert first 8 bytes of cache key (Buffer) to BigInt for advisory lock
+/**
+ * Convert first 8 bytes of cache key Buffer to BigInt for PostgreSQL advisory lock.
+ * Advisory locks require a single 64-bit signed integer as the lock ID.
+ *
+ * @param {Buffer} buffer - cache key (should be SHA256 hash = 32 bytes)
+ * @returns {BigInt} First 8 bytes interpreted as signed 64-bit big-endian integer
+ * @throws {Error} If buffer is not a Buffer or less than 8 bytes
+ */
 export const bufferToLockKey = (buffer) => {
   if (!Buffer.isBuffer(buffer)) {
     throw new Error('value must be a Buffer');
@@ -158,6 +236,15 @@ export const bufferToLockKey = (buffer) => {
   return buffer.readBigInt64BE();
 };
 
+/**
+ * Try to acquire a non-blocking PostgreSQL advisory lock.
+ * Used to prevent concurrent rendering of the same diagram.
+ * Returns immediately with true/false—does not wait.
+ *
+ * @param {?import('postgres').Sql} sql - postgres connection instance
+ * @param {Buffer} cacheKey - cache key to lock on
+ * @returns {Promise<boolean>} true if lock acquired, false if already held by another session
+ */
 export const tryAcquireLock = async (sql, cacheKey) => {
   if (sql == null) {
     throw new Error('parameter `sql` is required');
@@ -178,6 +265,15 @@ export const tryAcquireLock = async (sql, cacheKey) => {
   return acquired;
 };
 
+/**
+ * Release a PostgreSQL advisory lock.
+ * Typically called in finally block to ensure cleanup even if rendering fails.
+ * Silently catches errors to prevent lock release failures from masking render errors.
+ *
+ * @param {?import('postgres').Sql} sql - postgres connection instance
+ * @param {Buffer} cacheKey - cache key that was locked
+ * @returns {Promise<void>}
+ */
 export const releaseLock = async (sql, cacheKey) => {
   if (sql == null) {
     throw new Error('parameter `sql` is required');

@@ -1,5 +1,11 @@
 import { describe, test, expect } from 'vitest';
-import { bufferToLockKey } from '#@/helpers/db.js';
+import {
+  bufferToLockKey,
+  readAsset,
+  readBlob,
+  insertAsset,
+  updateAsset,
+} from '#@/helpers/db.js';
 
 describe('bufferToLockKey', () => {
   test.each`
@@ -82,5 +88,65 @@ describe('bufferToLockKey', () => {
         Buffer.from([0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0])
       )
     ).toBe(BigInt('0x123456789ABCDEF0'));
+  });
+});
+
+describe('readAsset', () => {
+  test('throws if sql parameter is missing', async () => {
+    const id = Buffer.from('test-id');
+    await expect(readAsset(null, id)).rejects.toThrowError(
+      'parameter `sql` is required'
+    );
+  });
+
+  test('throws if id parameter is missing', async () => {
+    await expect(readAsset({}, null)).rejects.toThrowError(
+      'parameter `id` is required'
+    );
+  });
+});
+
+describe('readBlob', () => {
+  test('throws if sql parameter is missing', async () => {
+    const id = Buffer.from('test-id');
+    await expect(readBlob(null, id)).rejects.toThrowError(
+      'parameter `sql` is required'
+    );
+  });
+
+  test('throws if id parameter is missing', async () => {
+    await expect(readBlob({}, null)).rejects.toThrowError(
+      'parameter `id` is required'
+    );
+  });
+});
+
+describe('insertAsset', () => {
+  test('throws if sql parameter is missing', async () => {
+    const id = Buffer.from('test-id');
+    await expect(
+      insertAsset(null, { id, statusCode: 200 })
+    ).rejects.toThrowError('parameter `sql` is required');
+  });
+
+  test('throws if id parameter is missing', async () => {
+    await expect(insertAsset({}, { statusCode: 200 })).rejects.toThrowError(
+      'parameter `id` is required'
+    );
+  });
+});
+
+describe('updateAsset', () => {
+  test('throws if sql parameter is missing', async () => {
+    const id = Buffer.from('test-id');
+    await expect(
+      updateAsset(null, { id, statusCode: 200 })
+    ).rejects.toThrowError('parameter `sql` is required');
+  });
+
+  test('throws if id parameter is missing', async () => {
+    await expect(updateAsset({}, { statusCode: 200 })).rejects.toThrowError(
+      'parameter `id` is required'
+    );
   });
 });
