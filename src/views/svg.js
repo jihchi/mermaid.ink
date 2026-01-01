@@ -1,3 +1,8 @@
+/**
+ * @file SVG route handler that extracts Mermaid diagrams as SVG markup.
+ * Injects FontAwesome CSS for icon support and xmlns:xlink for clickable nodes.
+ */
+
 import fontawesome from '@fortawesome/fontawesome-free/package.json' with { type: 'json' };
 import createDebug from 'debug';
 import renderImgOrSvg from '#@/helpers/renderImgOrSvg.js';
@@ -6,6 +11,15 @@ import { isEnabled as isDatabaseEnabled, updateAsset } from '#@/helpers/db.js';
 const debug = createDebug('app:views:svg');
 const { version: FA_VERSION } = fontawesome;
 
+/**
+ * Extracts the rendered SVG from the page with FontAwesome CSS injection and xmlns:xlink namespace.
+ * The xmlns:xlink namespace is required for Mermaid's clickable node feature (xlink:href attributes).
+ * Uses XMLSerializer to ensure all HTML tags are valid XML in the SVG output.
+ * @param {import('koa').Context} ctx - Koa context object with optional customFontAwesomeCssUrl in state
+ * @param {Buffer | null} cacheKey - SHA256 hash used as the cache key for database storage (null when DB is disabled)
+ * @param {import('puppeteer').Page} page - Puppeteer page with the rendered diagram
+ * @returns {Promise<void>}
+ */
 const svg = async (ctx, cacheKey, page) => {
   let fontAwesomeCssUrl;
   if (ctx.state.customFontAwesomeCssUrl) {
@@ -76,4 +90,9 @@ const svg = async (ctx, cacheKey, page) => {
   ctx.body = svgString;
 };
 
+/**
+ * Koa middleware that renders Mermaid diagrams as SVG.
+ * Wrapped with renderImgOrSvg for queue management, page setup, and timeout handling.
+ * @type {import('koa').Middleware}
+ */
 export default renderImgOrSvg(svg);

@@ -1,3 +1,8 @@
+/**
+ * @file PDF route handler that renders Mermaid diagrams as PDF documents.
+ * Supports paper size selection, landscape orientation, and fit-to-content mode.
+ */
+
 import createDebug from 'debug';
 import renderImgOrSvg from '#@/helpers/renderImgOrSvg.js';
 import { isEnabled as isDatabaseEnabled, updateAsset } from '#@/helpers/db.js';
@@ -5,8 +10,18 @@ import { extractPaper, isLandscape, isFit } from '#@/helpers/utils.js';
 
 const debug = createDebug('app:views:pdf');
 
+/**
+ * Generates a PDF from the rendered Mermaid diagram with configurable paper/layout options.
+ * Supports two modes: standard paper format (A4, Letter, etc.) with optional landscape,
+ * or fit-to-content mode that sizes the PDF to match the diagram dimensions.
+ * @param {import('koa').Context} ctx - Koa context object with query params for paper/landscape/fit
+ * @param {Buffer | null} cacheKey - SHA256 hash used as the cache key for database storage (null when DB is disabled)
+ * @param {import('puppeteer').Page} page - Puppeteer page with the rendered diagram
+ * @param {{width: number | undefined, height: number | undefined}} size - Requested dimensions
+ * @returns {Promise<void>}
+ */
 const pdf = async (ctx, cacheKey, page, size) => {
-  // If a size value has been explicitely set
+  // If a size value has been explicitly set
   if (size.width || size.height) {
     await page.$eval('#container > svg', (svgElement) => {
       // Allow the element's max-width to exceed 100% for full resolution when screenshotted
@@ -70,4 +85,9 @@ const pdf = async (ctx, cacheKey, page, size) => {
   ctx.body = Buffer.from(pdf);
 };
 
+/**
+ * Koa middleware that renders Mermaid diagrams as PDF documents.
+ * Wrapped with renderImgOrSvg for queue management, page setup, and timeout handling.
+ * @type {import('koa').Middleware}
+ */
 export default renderImgOrSvg(pdf);

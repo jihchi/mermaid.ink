@@ -1,3 +1,19 @@
+/**
+ * @file Database caching middleware with advisory lock support.
+ *
+ * Implements a double-checked locking pattern for cache management:
+ * 1. Check cache for existing entry (hit → return cached response)
+ * 2. Acquire PostgreSQL advisory lock to prevent duplicate renders
+ * 3. Re-check cache after lock (another request may have populated it)
+ * 4. Insert 503 placeholder to signal in-progress render
+ * 5. Execute handler to render the diagram
+ * 6. Handler updates cache with final result; lock is released
+ *
+ * 503 placeholders are treated as cache misses on subsequent requests,
+ * allowing recovery from failed renders. 4xx errors are cached to avoid
+ * re-rendering invalid diagrams.
+ */
+
 import createDebug from 'debug';
 import createCacheKey from '#@/helpers/createCacheKey.js';
 import {
@@ -12,6 +28,17 @@ import {
 
 const debug = createDebug('app:helpers:readCacheFromDb');
 
+/**
+ * Creates a Koa middleware that wraps a render handler with database caching.
+ *
+ * @param {function(import('koa').Context, Buffer | null, string, import('koa').Next): Promise<void>} handler
+ *   The render handler function. Receives `null` for cacheKey when database is disabled.
+ *   Must update the cache via `updateAsset` when rendering succeeds.
+ * @param {import('#@/types.js').AssetType} assetType - The asset type identifier
+ *   used as part of the cache key to differentiate output formats.
+ * @returns {function(import('koa').Context, string, import('koa').Next): Promise<void>}
+ *   Koa middleware that handles cache lookup, advisory locking, and delegates to the handler on cache miss.
+ */
 export default (handler, assetType) => async (ctx, encodedCode, next) => {
   if (!isEnabled) {
     await handler(ctx, null, encodedCode, next);
