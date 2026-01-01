@@ -1,6 +1,16 @@
 import createDebug from 'debug';
 import postgres from 'postgres';
 
+/**
+ * @file PostgreSQL database abstraction layer for caching rendered diagrams.
+ *
+ * Provides connection management, asset metadata/blob CRUD operations,
+ * and PostgreSQL advisory lock support for preventing duplicate renders.
+ * Database features are only active when ENABLE_DATABASE=true.
+ *
+ * @module helpers/db
+ */
+
 const { ENABLE_DATABASE, PGHOST, PGPORT, PGDATABASE, PGUSERNAME } = process.env;
 
 const debug = createDebug('app:helpers:db');
@@ -101,7 +111,7 @@ export const readBlob = async (sql, id) => {
 /**
  * Insert asset metadata and optional blob.
  * @param {?import('postgres').Sql} sql - postgres connection instance
- * @param {{id?: Buffer, path?: string, querystring?: string, statusCode?: number, mimeType?: string, blob?: Buffer}} options - asset fields
+ * @param {{id: Buffer | undefined, path: string | undefined, querystring: string | undefined, statusCode: number | undefined, mimeType: string | undefined, blob: Buffer | undefined}} options - asset fields
  * @returns {Promise<void>}
  */
 export const insertAsset = async (
@@ -158,7 +168,7 @@ export const insertAsset = async (
 /**
  * Update asset metadata and/or blob.
  * @param {?import('postgres').Sql} sql - postgres connection instance
- * @param {{id?: Buffer, path?: string, querystring?: string, statusCode?: number, mimeType?: string, blob?: Buffer}} options - update fields
+ * @param {{id: Buffer | undefined, path: string | undefined, querystring: string | undefined, statusCode: number | undefined, mimeType: string | undefined, blob: Buffer | undefined}} options - update fields
  * @returns {Promise<void>}
  */
 export const updateAsset = async (

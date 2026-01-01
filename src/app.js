@@ -1,3 +1,14 @@
+/**
+ * @file Application factory for the mermaid.ink server.
+ *
+ * Sets up a Koa application with routes for rendering Mermaid diagrams
+ * to various output formats (img, svg, pdf). Manages the Puppeteer
+ * headless browser instance, rendering job queue, and optional
+ * PostgreSQL database connection for caching.
+ *
+ * @module app
+ */
+
 import Koa from 'koa';
 import PQueue from 'p-queue';
 import cors from '@koa/cors';
@@ -38,6 +49,19 @@ app.use(route.get('/img/:encodedCode', readCacheFromDb(img, 'img')));
 app.use(route.get('/svg/:encodedCode', readCacheFromDb(svg, 'svg')));
 app.use(route.get('/pdf/:encodedCode', readCacheFromDb(pdf, 'pdf')));
 
+/**
+ * Initializes the application resources.
+ *
+ * Sets up the rendering job queue with configured concurrency,
+ * establishes the database connection (if enabled), and launches
+ * the Puppeteer headless browser instance with optimized Chrome flags.
+ *
+ * Automatically re-invokes itself when the browser disconnects,
+ * unless the application is shutting down.
+ *
+ * @async
+ * @returns {Promise<void>}
+ */
 async function setup() {
   debug('start the service');
 
@@ -115,6 +139,15 @@ async function setup() {
   app.context.browser.on('disconnected', setup);
 }
 
+/**
+ * Gracefully shuts down the application resources.
+ *
+ * Closes the Puppeteer browser instance and disconnects from the
+ * database. Sets a shutdown flag to prevent browser re-launch.
+ *
+ * @async
+ * @returns {Promise<void>}
+ */
 async function shutdown() {
   debug('shutdown server');
   app.context.shutdown = true;
@@ -127,6 +160,14 @@ async function shutdown() {
   await disconnect(app.context.sql);
 }
 
+/**
+ * Creates and initializes the Koa application.
+ *
+ * @async
+ * @returns {Promise<{app: import('koa'), shutdown: () => Promise<void>}>} Object containing
+ *   the configured Koa app instance and a shutdown function for cleanup.
+ * @note If setup fails, the process is terminated with exit code 1 after attempting shutdown.
+ */
 export default async () => {
   try {
     await setup();

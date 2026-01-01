@@ -11,6 +11,14 @@ describe('validateQuery', () => {
       expect(() => validateQuery({ width: '1' })).not.toThrowError();
     });
 
+    test('accepts width of exactly 1 (minimum positive value)', () => {
+      expect(() => validateQuery({ width: '1' })).not.toThrowError();
+    });
+
+    test('accepts very large width values', () => {
+      expect(() => validateQuery({ width: '999999999' })).not.toThrowError();
+    });
+
     test.each`
       width
       ${'nan'}
@@ -26,6 +34,14 @@ describe('validateQuery', () => {
   describe('height', () => {
     test('works if height is valid', () => {
       expect(() => validateQuery({ height: '1' })).not.toThrowError();
+    });
+
+    test('accepts height of exactly 1 (minimum positive value)', () => {
+      expect(() => validateQuery({ height: '1' })).not.toThrowError();
+    });
+
+    test('accepts very large height values', () => {
+      expect(() => validateQuery({ height: '999999999' })).not.toThrowError();
     });
 
     test.each`
@@ -224,7 +240,7 @@ describe('validateQuery', () => {
         test('throws error when scaled width exceeds maxWidth', () => {
           expect(() =>
             validateQuery({ scale: '2', width: '100' }, { maxWidth: 150 })
-          ).toThrowError('the scaled width must be between 0 and 150');
+          ).toThrowError('the scaled width must be between 1 and 150');
         });
 
         test('throws error when width is zero (before scale validation)', () => {
@@ -250,7 +266,7 @@ describe('validateQuery', () => {
         test('throws error when scaled height exceeds maxHeight', () => {
           expect(() =>
             validateQuery({ scale: '2', height: '100' }, { maxHeight: 150 })
-          ).toThrowError('the scaled height must be between 0 and 150');
+          ).toThrowError('the scaled height must be between 1 and 150');
         });
 
         test('throws error when height is zero (before scale validation)', () => {
@@ -279,7 +295,7 @@ describe('validateQuery', () => {
               { scale: '2', width: '100', height: '50' },
               { maxWidth: 150, maxHeight: 200 }
             )
-          ).toThrowError('the scaled width must be between 0 and 150');
+          ).toThrowError('the scaled width must be between 1 and 150');
         });
 
         test('throws error when scaled height exceeds maxHeight (width ok)', () => {
@@ -288,7 +304,7 @@ describe('validateQuery', () => {
               { scale: '2', width: '50', height: '100' },
               { maxWidth: 200, maxHeight: 150 }
             )
-          ).toThrowError('the scaled height must be between 0 and 150');
+          ).toThrowError('the scaled height must be between 1 and 150');
         });
 
         test('accepts when both scaled dimensions within limits', () => {
@@ -296,6 +312,24 @@ describe('validateQuery', () => {
             validateQuery(
               { scale: '2', width: '50', height: '50' },
               { maxWidth: 200, maxHeight: 200 }
+            )
+          ).not.toThrowError();
+        });
+
+        test('accepts when only maxWidth is set and height is valid', () => {
+          expect(() =>
+            validateQuery(
+              { scale: '2', width: '50', height: '100' },
+              { maxWidth: 200 }
+            )
+          ).not.toThrowError();
+        });
+
+        test('accepts when only maxHeight is set and width is valid', () => {
+          expect(() =>
+            validateQuery(
+              { scale: '2', width: '100', height: '50' },
+              { maxHeight: 200 }
             )
           ).not.toThrowError();
         });
@@ -331,6 +365,60 @@ describe('validateQuery', () => {
         expect(() =>
           validateQuery({ scale: '2.9949', width: '100' })
         ).not.toThrowError();
+      });
+    });
+
+    describe('multiple invalid dimensions', () => {
+      test('throws width error first when both width and height are invalid', () => {
+        expect(() => validateQuery({ width: '-1', height: '-1' })).toThrowError(
+          'invalid width value'
+        );
+      });
+
+      test('throws width error when both width and scale are invalid', () => {
+        expect(() => validateQuery({ width: '-1', scale: '0.5' })).toThrowError(
+          'invalid width value'
+        );
+      });
+
+      test('throws height error when width is valid but height is invalid', () => {
+        expect(() =>
+          validateQuery({ width: '100', height: '-1' })
+        ).toThrowError('invalid height value');
+      });
+    });
+
+    describe('boundary value tests', () => {
+      test('accepts width at exactly 1', () => {
+        expect(() => validateQuery({ width: '1' })).not.toThrowError();
+      });
+
+      test('accepts height at exactly 1', () => {
+        expect(() => validateQuery({ height: '1' })).not.toThrowError();
+      });
+
+      test('accepts scale at exactly 1 with dimension', () => {
+        expect(() =>
+          validateQuery({ scale: '1', width: '100' })
+        ).not.toThrowError();
+      });
+
+      test('accepts scale at exactly 3 with dimension', () => {
+        expect(() =>
+          validateQuery({ scale: '3', width: '100' })
+        ).not.toThrowError();
+      });
+
+      test('rejects width at exactly 0', () => {
+        expect(() => validateQuery({ width: '0' })).toThrowError(
+          'invalid width value'
+        );
+      });
+
+      test('rejects height at exactly 0', () => {
+        expect(() => validateQuery({ height: '0' })).toThrowError(
+          'invalid height value'
+        );
       });
     });
   });

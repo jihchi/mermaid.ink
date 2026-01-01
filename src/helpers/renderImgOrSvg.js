@@ -14,6 +14,17 @@ const QUEUE_ADD_TIMEOUT = getQueueAddTimeout();
 
 const debug = createDebug('app:renderImgOrSvg');
 
+/**
+ * Creates a queue job function that handles the Mermaid rendering pipeline.
+ *
+ * @private
+ * @param {import('koa').Context} ctx - Koa context with browser and query params
+ * @param {import('#@/types.js').RenderFunction} render - Output format renderer (img/svg/pdf)
+ * @param {Buffer | null} cacheKey - Cache key for storing the result
+ * @param {string} encodedCode - Serialized Mermaid state string (e.g., base64 or pako-prefixed)
+ * @returns {function({signal: AbortSignal}): Promise<void>} Queue job function
+ * @throws {Error} 400 if query validation fails or Mermaid rendering fails
+ */
 function renderCode(ctx, render, cacheKey, encodedCode) {
   return async ({ signal }) => {
     let page;
@@ -62,6 +73,15 @@ function renderCode(ctx, render, cacheKey, encodedCode) {
   };
 }
 
+/**
+ * Higher-order function that wraps a render function with queue management,
+ * timeout handling, and error recovery.
+ *
+ * @param {import('#@/types.js').RenderFunction} render - Output format renderer (e.g., img, svg, pdf handler)
+ * @returns {function(import('koa').Context, Buffer | null, string, function): Promise<void>}. Middleware-like function accepting (ctx, cacheKey, encodedCode, next)
+ * @throws {Error} 503 if the rendering job times out
+ * @throws {Error} Re-throws any non-timeout errors from the rendering pipeline
+ */
 export default (render) => async (ctx, cacheKey, encodedCode, _next) => {
   const controller = new AbortController();
 
