@@ -142,3 +142,4 @@ public/
 
 package-lock.json
 .pnpm-store/
+.worktrees/
