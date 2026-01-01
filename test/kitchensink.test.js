@@ -796,7 +796,7 @@ describe('app', () => {
         .set('Origin', crossOrigin)
         .set('Access-Control-Request-Method', 'GET');
       expect(resp.status).toEqual(204);
-      expect(resp.headers['access-control-allow-origin']).toEqual(crossOrigin);
+      expect(resp.headers['access-control-allow-origin']).toEqual('*');
       expect(resp.headers['access-control-allow-methods']).toEqual('GET');
     });
 
@@ -808,7 +808,7 @@ describe('app', () => {
         .set('Origin', crossOrigin)
         .set('Access-Control-Request-Method', 'GET');
       expect(resp.status).toEqual(204);
-      expect(resp.headers['access-control-allow-origin']).toEqual(crossOrigin);
+      expect(resp.headers['access-control-allow-origin']).toEqual('*');
       expect(resp.headers['access-control-allow-methods']).toEqual('GET');
     });
   });

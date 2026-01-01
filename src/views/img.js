@@ -45,9 +45,8 @@ const img = async (ctx, cacheKey, page, size) => {
     }
   }
 
-  // dynamically set media type
   ctx.type = `image/${type}`;
-  ctx.body = Buffer.from(image);
+  ctx.body = image;
 };
 
 export default renderImgOrSvg(img);

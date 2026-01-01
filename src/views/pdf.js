@@ -48,8 +48,9 @@ const pdf = async (ctx, cacheKey, page, size) => {
     };
   }
 
-  const pdf = await page.pdf(pdfOptions);
-  debug('printed to pdf, file size: %o', pdf.length);
+  const pdfData = await page.pdf(pdfOptions);
+  const pdfBuffer = Buffer.from(pdfData);
+  debug('printed to pdf, file size: %o', pdfBuffer.length);
 
   if (isDatabaseEnabled) {
     debug('cache the result');
@@ -59,7 +60,7 @@ const pdf = async (ctx, cacheKey, page, size) => {
         id: cacheKey,
         statusCode: 200,
         mimeType: 'application/pdf',
-        blob: pdf,
+        blob: pdfBuffer,
       });
     } catch (error) {
       debug('failed to cache the result', error);
@@ -67,7 +68,7 @@ const pdf = async (ctx, cacheKey, page, size) => {
   }
 
   ctx.type = 'application/pdf';
-  ctx.body = Buffer.from(pdf);
+  ctx.body = pdfBuffer;
 };
 
 export default renderImgOrSvg(pdf);

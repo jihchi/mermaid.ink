@@ -1,8 +1,39 @@
 import createDebug from 'debug';
 
 const SECOND_MS = 1000;
+const DEFAULT_MAX_DIMENSION = 10000;
+const DEFAULT_PROTOCOL_TIMEOUT = 30000;
 
 const debug = createDebug('app:helpers:utils');
+
+export const parsePositiveInt = (envValue, defaultValue) => {
+  if (!envValue) return defaultValue;
+  const n = Number.parseInt(envValue, 10);
+  if (!Number.isFinite(n) || n <= 0) {
+    throw new Error(
+      `Invalid env value "${envValue}": must be a positive integer`
+    );
+  }
+  return n;
+};
+
+export const getMaxWidth = () =>
+  parsePositiveInt(process.env.MAX_WIDTH, DEFAULT_MAX_DIMENSION);
+
+export const getMaxHeight = () =>
+  parsePositiveInt(process.env.MAX_HEIGHT, DEFAULT_MAX_DIMENSION);
+
+export const getProtocolTimeout = () => {
+  const envValue = process.env.PROTOCOL_TIMEOUT;
+  if (!envValue) return DEFAULT_PROTOCOL_TIMEOUT;
+  const n = Number.parseInt(envValue, 10);
+  if (!Number.isFinite(n) || n <= 0) {
+    throw new Error(
+      `Invalid PROTOCOL_TIMEOUT "${envValue}": must be a positive integer`
+    );
+  }
+  return n;
+};
 
 export const getHeadlessMode = () => {
   const mode = process.env.HEADLESS_MODE?.toLowerCase();
@@ -61,56 +92,68 @@ export const extractBgColor = (query) => {
   }
 };
 
+const parseDimensions = (query) => {
+  let width = null;
+  let height = null;
+  let scale = null;
+
+  if (query?.width) {
+    const parsed = Number.parseInt(query.width, 10);
+    if (Number.isFinite(parsed) && parsed > 0) {
+      width = parsed;
+    }
+  }
+
+  if (query?.height) {
+    const parsed = Number.parseInt(query.height, 10);
+    if (Number.isFinite(parsed) && parsed > 0) {
+      height = parsed;
+    }
+  }
+
+  if (query?.scale) {
+    const parsed = Number.parseFloat(query.scale);
+    if (Number.isFinite(parsed) && parsed >= 1 && parsed <= 3) {
+      scale = Math.round((parsed + Number.EPSILON) * 100) / 100;
+    }
+  }
+
+  return { width, height, scale };
+};
+
 export const extractDimension = (query, options) => {
   if (query == null) {
     return;
   }
 
-  let width = null;
-  let height = null;
-  let scale = 1;
-
-  if (query.width) {
-    const parsedWidth = Number.parseInt(query.width, 10);
-    if (Number.isFinite(parsedWidth)) {
-      width = parsedWidth;
-    }
-  }
-
-  if (query.height) {
-    const parsedHeight = Number.parseInt(query.height, 10);
-    if (Number.isFinite(parsedHeight)) {
-      height = parsedHeight;
-    }
-  }
-
-  if (query.scale && (width || height)) {
-    const parsedScale = Number.parseFloat(query.scale);
-    if (Number.isFinite(parsedScale) && parsedScale >= 1 && parsedScale <= 3) {
-      // round scale to 2 decimal places
-      scale = Math.round((parsedScale + Number.EPSILON) * 100) / 100;
-    }
-  }
+  let { width, height, scale } = parseDimensions(query);
+  scale = scale ?? 1;
 
   if (width) {
-    const scaledWidth = width * scale;
-
-    if (
-      scaledWidth > 0 &&
-      (!options?.maxWidth || scaledWidth <= options.maxWidth)
-    ) {
-      width = scaledWidth;
+    if (options?.maxWidth && width > options.maxWidth) {
+      width = null;
+    } else {
+      const scaledWidth = width * scale;
+      if (
+        scaledWidth > 0 &&
+        (!options?.maxWidth || scaledWidth <= options.maxWidth)
+      ) {
+        width = scaledWidth;
+      }
     }
   }
 
   if (height) {
-    const scaledHeight = height * scale;
-
-    if (
-      scaledHeight > 0 &&
-      (!options?.maxHeight || scaledHeight <= options.maxHeight)
-    ) {
-      height = scaledHeight;
+    if (options?.maxHeight && height > options.maxHeight) {
+      height = null;
+    } else {
+      const scaledHeight = height * scale;
+      if (
+        scaledHeight > 0 &&
+        (!options?.maxHeight || scaledHeight <= options.maxHeight)
+      ) {
+        height = scaledHeight;
+      }
     }
   }
 
@@ -180,50 +223,53 @@ export const isFit = (query) => {
 };
 
 export const validateQuery = (query = {}, state = {}) => {
-  let width;
-  let height;
+  const { maxWidth, maxHeight } = state;
 
   if (query.width) {
-    width = Number.parseInt(query.width, 10);
-    if (!Number.isFinite(width) || width <= 0) {
+    const parsed = Number.parseInt(query.width, 10);
+    if (!Number.isFinite(parsed) || parsed <= 0) {
       throw new Error('invalid width value');
+    }
+    if (maxWidth && parsed > maxWidth) {
+      throw new Error(`width must be between 0 and ${maxWidth}`);
     }
   }
 
   if (query.height) {
-    height = Number.parseInt(query.height, 10);
-    if (!Number.isFinite(height) || height <= 0) {
+    const parsed = Number.parseInt(query.height, 10);
+    if (!Number.isFinite(parsed) || parsed <= 0) {
       throw new Error('invalid height value');
+    }
+    if (maxHeight && parsed > maxHeight) {
+      throw new Error(`height must be between 0 and ${maxHeight}`);
     }
   }
 
   if (query.scale) {
+    const { width, height, scale } = parseDimensions(query);
+
     if (!width && !height) {
       throw new Error(
         'scale can only be set when either width or height is set'
       );
     }
 
-    const scale = Number.parseFloat(query.scale);
-    if (!Number.isFinite(scale) || scale < 1 || scale > 3) {
+    if (scale === null) {
       throw new Error('invalid scale value - must be a number between 1 and 3');
     }
 
-    const scaledWidth = width * scale;
-    if (scaledWidth <= 0 || (state.maxWidth && scaledWidth > state.maxWidth)) {
-      throw new Error(
-        `the scaled width must be between 0 and ${state.maxWidth}`
-      );
+    if (width) {
+      const scaledWidth = width * scale;
+      if (maxWidth && scaledWidth > maxWidth) {
+        throw new Error(`the scaled width must be between 0 and ${maxWidth}`);
+      }
     }
 
-    const scaledHeight = height * scale;
-    if (
-      scaledHeight <= 0 ||
-      (state.maxHeight && scaledHeight > state.maxHeight)
-    ) {
-      throw new Error(
-        `the scaled height must be between 0 and ${state.maxHeight}`
-      );
+    if (height) {
+      const scaledHeight = height * scale;
+      if (maxHeight && scaledHeight > maxHeight) {
+        throw new Error(`the scaled height must be between 0 and ${maxHeight}`);
+      }
     }
   }
 };

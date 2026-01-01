@@ -4,6 +4,7 @@ import createCacheKey, { getQueryKey } from '#@/helpers/createCacheKey.js';
 test('works', () => {
   expect(
     createCacheKey({
+      assetType: 'img',
       encodedCode:
         'pako:eNpVkM1qw0AMhF9F6NRC_AI-BBo7zSWQQHLz5iC8SnZJ9gd5TQm2373r_ECrk9B8MwwasA2ascSLUDRwrJWHPF9NZcR2yVF3gqJYjhtO4ILn-wirj02AzoQYrb98PvnVDEE1bGeMIRnrr9NTqh7-necR6mZLMYV4-qscf8II68buTY7_rxjh7PpuzlSeqWhJoCJ5IbhAx-LI6lx-mG8Kk2HHCsu8apKrQuWnzPVRU-K1tikI5qRbxwukPoXD3bdYJun5DdWW8iPci5p-AUT3W9o',
     }).toString('hex')
@@ -13,6 +14,7 @@ test('works', () => {
 test('works with query', () => {
   expect(
     createCacheKey({
+      assetType: 'img',
       encodedCode:
         'pako:eNpVkM1qw0AMhF9F6NRC_AI-BBo7zSWQQHLz5iC8SnZJ9gd5TQm2373r_ECrk9B8MwwasA2ascSLUDRwrJWHPF9NZcR2yVF3gqJYjhtO4ILn-wirj02AzoQYrb98PvnVDEE1bGeMIRnrr9NTqh7-necR6mZLMYV4-qscf8II68buTY7_rxjh7PpuzlSeqWhJoCJ5IbhAx-LI6lx-mG8Kk2HHCsu8apKrQuWnzPVRU-K1tikI5qRbxwukPoXD3bdYJun5DdWW8iPci5p-AUT3W9o',
       query: {
@@ -25,6 +27,7 @@ test('works with query', () => {
 test('creates 32 bytes result', () => {
   expect(
     createCacheKey({
+      assetType: 'img',
       encodedCode:
         'pako:eNpVkM1qw0AMhF9F6NRC_AI-BBo7zSWQQHLz5iC8SnZJ9gd5TQm2373r_ECrk9B8MwwasA2ascSLUDRwrJWHPF9NZcR2yVF3gqJYjhtO4ILn-wirj02AzoQYrb98PvnVDEE1bGeMIRnrr9NTqh7-necR6mZLMYV4-qscf8II68buTY7_rxjh7PpuzlSeqWhJoCJ5IbhAx-LI6lx-mG8Kk2HHCsu8apKrQuWnzPVRU-K1tikI5qRbxwukPoXD3bdYJun5DdWW8iPci5p-AUT3W9o',
     })
@@ -32,27 +35,32 @@ test('creates 32 bytes result', () => {
 
   expect(
     createCacheKey({
+      assetType: 'img',
       encodedCode: '0',
     })
   ).toHaveLength(32);
 });
 
-test('creates empty output when code is empty', () => {
-  expect(createCacheKey({ encodedCode: '' })).toEqual('');
+test('throws when code is empty', () => {
+  expect(() => createCacheKey({ assetType: 'img', encodedCode: '' })).toThrow(
+    'encodedCode is required to create cache key'
+  );
 });
 
-test('creates empty output when asset type is empty', () => {
-  expect(
+test('throws when asset type is empty', () => {
+  expect(() =>
     createCacheKey({
       assetType: '',
       encodedCode:
         'pako:eNpVkM1qw0AMhF9F6NRC_AI-BBo7zSWQQHLz5iC8SnZJ9gd5TQm2373r_ECrk9B8MwwasA2ascSLUDRwrJWHPF9NZcR2yVF3gqJYjhtO4ILn-wirj02AzoQYrb98PvnVDEE1bGeMIRnrr9NTqh7-necR6mZLMYV4-qscf8II68buTY7_rxjh7PpuzlSeqWhJoCJ5IbhAx-LI6lx-mG8Kk2HHCsu8apKrQuWnzPVRU-K1tikI5qRbxwukPoXD3bdYJun5DdWW8iPci5p-AUT3W9o',
     })
-  ).toEqual('');
+  ).toThrow('assetType is required to create cache key');
 });
 
-test('creates empty output when argument is absent', () => {
-  expect(createCacheKey()).toEqual('');
+test('throws when argument is absent', () => {
+  expect(() => createCacheKey()).toThrow(
+    'assetType is required to create cache key'
+  );
 });
 
 describe('getQueryKey', () => {

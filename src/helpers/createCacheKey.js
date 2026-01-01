@@ -41,13 +41,13 @@ export const getQueryKey = (assetType, query, options) => {
   return queryKey.join(',');
 };
 
-export default ({
-  assetType = 'img',
-  encodedCode = '',
-  query,
-  options,
-} = {}) => {
-  if (!assetType || !encodedCode) return '';
+export default ({ assetType, encodedCode, query, options } = {}) => {
+  if (!assetType) {
+    throw new Error('assetType is required to create cache key');
+  }
+  if (!encodedCode) {
+    throw new Error('encodedCode is required to create cache key');
+  }
 
   let rawData = `${assetType} | ${encodedCode}`;
   const queryKey = getQueryKey(assetType, query, options);

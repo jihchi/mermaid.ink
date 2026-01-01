@@ -11,25 +11,33 @@ import pdf from '#@/views/pdf.js';
 import svg from '#@/views/svg.js';
 import readCacheFromDb from '#@/helpers/readCacheFromDb.js';
 import { connect, disconnect } from '#@/helpers/db.js';
-import { getHeadlessMode, getQueueConcurrency } from '#@/helpers/utils.js';
+import {
+  getHeadlessMode,
+  getQueueConcurrency,
+  getMaxWidth,
+  getMaxHeight,
+  getProtocolTimeout,
+} from '#@/helpers/utils.js';
 
 const debug = createDebug('app:main');
 const app = new Koa();
 
+const maxWidth = getMaxWidth();
+const maxHeight = getMaxHeight();
+const protocolTimeout = getProtocolTimeout();
+
 // Set global config
 app.use(async (ctx, next) => {
   ctx.state.customFontAwesomeCssUrl = process.env.FONT_AWESOME_CSS_URL;
-  ctx.state.maxWidth = process.env.MAX_WIDTH ? process.env.MAX_WIDTH : 10000;
-  ctx.state.maxHeight = process.env.MAX_HEIGHT ? process.env.MAX_HEIGHT : 10000;
+  ctx.state.maxWidth = maxWidth;
+  ctx.state.maxHeight = maxHeight;
   await next();
 });
 
 app.use(
   cors({
     allowMethods: 'GET',
-    origin(ctx) {
-      return ctx.get('Origin') || '*';
-    },
+    origin: '*',
   })
 );
 
@@ -59,7 +67,7 @@ async function setup() {
   debug('launch headless browser instance');
 
   app.context.browser = await puppeteer.launch({
-    protocolTimeout: process.env.PROTOCOL_TIMEOUT,
+    protocolTimeout,
     headless: getHeadlessMode(),
     dumpio: true,
     defaultViewport: {

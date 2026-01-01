@@ -117,13 +117,18 @@ export default (handler, assetType) => async (ctx, encodedCode, next) => {
     } catch (error) {
       const status = error.status ?? error.statusCode;
       if (status >= 400 && status < 500) {
-        debug('caching 4xx error', { status, message: error.message });
+        const MAX_ERROR_LENGTH = 500;
+        const sanitizedMessage = (error.message || 'Bad Request')
+          .slice(0, MAX_ERROR_LENGTH)
+          .replace(/\n/g, ' ');
+
+        debug('caching 4xx error', { status, message: sanitizedMessage });
         try {
           await updateAsset(sql, {
             id: cacheKey,
             statusCode: status,
             mimeType: 'text/plain',
-            blob: Buffer.from(error.message, 'utf-8'),
+            blob: Buffer.from(sanitizedMessage, 'utf-8'),
           });
         } catch (cacheError) {
           debug('failed to cache 4xx error', cacheError);
