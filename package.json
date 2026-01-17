@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "pdf-lib": "^1.17.1",
-    "prettier": "3.7.4",
+    "prettier": "3.8.0",
     "prettier-plugin-sql": "^0.19.2",
     "sharp": "^0.34.5",
     "sort-package-json": "3.6.0",
