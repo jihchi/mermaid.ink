@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@fortawesome/fontawesome-free':
-        specifier: ^6.7.2
-        version: 6.7.2
+        specifier: ^7.2.0
+        version: 7.2.0
       '@koa/cors':
         specifier: ^5.0.0
         version: 5.0.0
@@ -297,8 +297,8 @@ packages:
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
 
-  '@fortawesome/fontawesome-free@6.7.2':
-    resolution: {integrity: sha512-JUOtgFW6k9u4Y+xeIaEiLr3+cjoUPiAuLXoyKOJSia6Duzb7pq+A76P9ZdPDoAoxHdHzq6gE9/jKBGXlZT8FbA==}
+  '@fortawesome/fontawesome-free@7.2.0':
+    resolution: {integrity: sha512-3DguDv/oUE+7vjMeTSOjCSG+KeawgVQOHrKRnvUuqYh1mfArrh7s+s8hXW3e4RerBA1+Wh+hBqf8sJNpqNrBWg==}
     engines: {node: '>=6'}
 
   '@headlessui/react@2.2.9':
@@ -2646,7 +2646,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.10': {}
 
-  '@fortawesome/fontawesome-free@6.7.2': {}
+  '@fortawesome/fontawesome-free@7.2.0': {}
 
   '@headlessui/react@2.2.9(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
