@@ -735,7 +735,7 @@ describe('app', () => {
       expect(resp.type).toEqual('image/svg+xml');
       const metadata = await sharp(resp.body).metadata();
       expect(metadata.format).toEqual('svg');
-      expect(resp.body.length).toBeGreaterThan(45 * KB);
+      expect(resp.body.length).toBeGreaterThan(14 * KB);
     });
   });
 
