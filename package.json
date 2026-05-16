@@ -47,7 +47,7 @@
     "pako": "^2.1.0",
     "postgres": "^3.4.7",
     "postgres-shift": "^0.1.0",
-    "puppeteer": "^24.33.0"
+    "puppeteer": "^25.0.2"
   },
   "devDependencies": {
     "pdf-lib": "^1.17.1",
