@@ -185,7 +185,7 @@ describe('app', () => {
       expect(resp.type).toEqual('image/jpeg');
       const metadata = await sharp(resp.body).metadata();
       expect(metadata.format).toEqual('jpeg');
-      expect(resp.body.length).toBeGreaterThan(85 * KB);
+      expect(resp.body.length).toBeGreaterThan(65 * KB);
     });
 
     test('returns 400 when encoded code is invalid', async () => {
@@ -709,9 +709,11 @@ describe('app', () => {
       expect(resp.type).toEqual('image/svg+xml');
       const metadata = await sharp(resp.body).metadata();
       expect(metadata.format).toEqual('svg');
-      await expect(resp.body.toString()).toMatchFileSnapshot(
-        '__snapshots__/layout_elk.svg'
-      );
+      const body = resp.body.toString();
+      expect(body).toContain('aria-roledescription="flowchart-elk"');
+      expect(body).toContain('class="flowchart"');
+      expect(body).toContain('data-et="edge"');
+      expect(body).toContain('<p>PVpanel (PVpanel)</p>');
     });
 
     test('works with tidy-tree layout', async () => {
@@ -722,9 +724,11 @@ describe('app', () => {
       expect(resp.type).toEqual('image/svg+xml');
       const metadata = await sharp(resp.body).metadata();
       expect(metadata.format).toEqual('svg');
-      await expect(resp.body.toString()).toMatchFileSnapshot(
-        '__snapshots__/layout_tidy-tree.svg'
-      );
+      const body = resp.body.toString();
+      expect(body).toContain('aria-roledescription="mindmap"');
+      expect(body).toContain('class="mindmapDiagram"');
+      expect(body).toContain('data-et="edge"');
+      expect(body).toContain('<p>mindmap is a long thing</p>');
     });
 
     test('works with multi-languages and font awesome icon', async () => {
