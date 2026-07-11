@@ -44,7 +44,7 @@
     "koa-route": "^4.0.1",
     "mermaid": "^11.12.2",
     "p-queue": "^9.0.1",
-    "pako": "^2.1.0",
+    "pako": "^3.0.1",
     "postgres": "^3.4.7",
     "postgres-shift": "^0.1.0",
     "puppeteer": "^25.0.2"
