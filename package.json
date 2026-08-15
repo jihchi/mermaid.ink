@@ -46,7 +46,7 @@
     "p-queue": "^9.0.1",
     "pako": "^2.1.0",
     "postgres": "^3.4.7",
-    "postgres-shift": "^0.1.0",
+    "postgres-shift": "^1.0.1",
     "puppeteer": "^25.0.2"
   },
   "devDependencies": {

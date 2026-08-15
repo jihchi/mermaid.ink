@@ -48,8 +48,8 @@ importers:
         specifier: ^3.4.7
         version: 3.4.9
       postgres-shift:
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^1.0.1
+        version: 1.0.1
       puppeteer:
         specifier: ^25.0.2
         version: 25.5.0
@@ -1862,8 +1862,8 @@ packages:
     resolution: {integrity: sha512-u82N74LFzG8ca+dD8puPnplTXoGH4fTPpVGuIbt36G3qvNlkvfD0lEAZSxaly3KX8TS/L1A1gsCEmvKmBcVbkQ==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postgres-shift@0.1.0:
-    resolution: {integrity: sha512-/375iG0Kveh1Spk3kFtaTdGT9FUxtXYDDabGw/9/Jkk3f93dYM2R8ZgQzbknCG+ZpfoR114gZ71oR+lRr6XY3A==}
+  postgres-shift@1.0.1:
+    resolution: {integrity: sha512-pbM9URM7NxIhWPErzji/Cs1Iv6oJ6wwCJYHmza00+Pd/0b90b2inHgsYtaJ8+2jfj4hnmzNp2pXDZcRTeFKnrw==}
 
   postgres@3.4.9:
     resolution: {integrity: sha512-GD3qdB0x1z9xgFI6cdRD6xu2Sp2WCOEoe3mtnyB5Ee0XrrL5Pe+e4CCnJrRMnL1zYtRDZmQQVbvOttLnKDLnaw==}
@@ -3929,7 +3929,7 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  postgres-shift@0.1.0: {}
+  postgres-shift@1.0.1: {}
 
   postgres@3.4.9: {}
 
