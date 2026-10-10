@@ -18,8 +18,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.3(mermaid@11.17.2)
       '@mermaid-js/layout-tidy-tree':
-        specifier: ^0.2.0
-        version: 0.2.2(mermaid@11.17.2)
+        specifier: ^1.0.1
+        version: 1.0.1(mermaid@11.17.2)
       '@mermaid-js/mermaid-zenuml':
         specifier: ^0.2.2
         version: 0.2.3(mermaid@11.17.2)
@@ -493,10 +493,11 @@ packages:
     peerDependencies:
       mermaid: ^11.0.2
 
-  '@mermaid-js/layout-tidy-tree@0.2.2':
-    resolution: {integrity: sha512-8RmjDXjKJBxqTS1mICStm8zWRM45fSzs0SOrkp28+KsOGS2YEMFMVTwwRU8CsC6M1L+pDYZVjf1m9AC1c9Wndg==}
+  '@mermaid-js/layout-tidy-tree@1.0.1':
+    resolution: {integrity: sha512-suZgFgQQHYuAxiEiNVgPJwOoXi/keXV6DghCL3rT4K9DmX7xYQ2XZI2suiBVs/fj1gn/OoXIWB2DFSmeY7trvw==}
+    engines: {node: '>=22.12.0'}
     peerDependencies:
-      mermaid: ^11.0.2
+      mermaid: ^11.0.2 || ^12.0.0
 
   '@mermaid-js/mermaid-zenuml@0.2.3':
     resolution: {integrity: sha512-RGBtgL6fc+5Y2Jm9odOH9HRJ80BP4l6atBYnAK5bBzEowF0PU3UtvZRRcbFxImPGPuLIzqZq31ur8lVO0AoF3Q==}
@@ -2617,7 +2618,7 @@ snapshots:
       elkjs: 0.9.3
       mermaid: 11.17.2
 
-  '@mermaid-js/layout-tidy-tree@0.2.2(mermaid@11.17.2)':
+  '@mermaid-js/layout-tidy-tree@1.0.1(mermaid@11.17.2)':
     dependencies:
       d3: 7.9.0
       mermaid: 11.17.2
