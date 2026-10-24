@@ -54,7 +54,7 @@
     "prettier": "3.9.10",
     "prettier-plugin-sql": "^0.20.0",
     "sharp": "^0.35.1",
-    "sort-package-json": "4.0.0",
+    "sort-package-json": "4.1.0",
     "supertest": "^7.1.4",
     "vitest": "^5.0.0"
   },
