@@ -42,7 +42,7 @@
     "koa": "^3.1.1",
     "koa-route": "^4.0.1",
     "mermaid": "^12.2.0",
-    "p-queue": "^9.0.1",
+    "p-queue": "^10.0.0",
     "pako": "^3.0.3",
     "postgres": "^3.4.7",
     "postgres-shift": "^1.0.1",
