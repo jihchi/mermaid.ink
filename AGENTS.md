@@ -68,7 +68,7 @@ Vitest. `global-setup.js` disables DEBUG/DB. `kitchensink.test.js` = integration
 
 **Cache key:** SHA256 of `assetType | encodedCode | queryKey` (bgColor, width, height, scale, theme, paper, landscape, fit, imageType)
 
-**Supported:** Mermaid native (flowchart, sequence, class, state, ER, Gantt, pie), ELK/tidy-tree layouts, ZenUML
+**Supported:** Mermaid native (flowchart, sequence, class, state, ER, Gantt, pie), ELK (bundled with Mermaid 12)/tidy-tree layouts, ZenUML
 
 ## Gotchas
 

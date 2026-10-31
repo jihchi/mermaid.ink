@@ -1,12 +1,12 @@
 import mermaid from '../../node_modules/mermaid/dist/mermaid.esm.min.mjs';
-import elkLayouts from '../../node_modules/@mermaid-js/layout-elk/dist/mermaid-layout-elk.esm.min.mjs';
 import tidyTreeLayouts from '../../node_modules/@mermaid-js/layout-tidy-tree/dist/mermaid-layout-tidy-tree.esm.mjs';
 import zenuml from '../../node_modules/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs';
 
 let registrationPromise = null;
 
 async function registerLayoutAndExternalDiagrams() {
-  mermaid.registerLayoutLoaders([...elkLayouts, ...tidyTreeLayouts]);
+  // ELK ships bundled with Mermaid 12 and is registered automatically, as in mermaid-live-editor.
+  mermaid.registerLayoutLoaders(tidyTreeLayouts);
   await mermaid.registerExternalDiagrams([zenuml]);
 }
 

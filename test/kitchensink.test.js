@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import { PDFDocument, PageSizes } from 'pdf-lib';
 import createApp from '../src/app.js';
 
-const FA_VERSION = '6.7.2';
+const FA_VERSION = '7.2.0';
 const KB = 1024;
 
 describe('app', () => {
@@ -710,10 +710,33 @@ describe('app', () => {
       const metadata = await sharp(resp.body).metadata();
       expect(metadata.format).toEqual('svg');
       const body = resp.body.toString();
-      expect(body).toContain('aria-roledescription="flowchart-elk"');
+      // Mermaid 12 ignores defaultRenderer and detects graph/flowchart as flowchart-v2.
+      expect(body).toContain('aria-roledescription="flowchart-v2"');
       expect(body).toContain('class="flowchart"');
       expect(body).toContain('data-et="edge"');
       expect(body).toContain('<p>PVpanel (PVpanel)</p>');
+    });
+
+    test('works with flowchart-elk keyword (ELK bundled in Mermaid 12)', async () => {
+      const resp = await request.get(
+        '/svg/pako:eJyrVkrOT0lVslJKy8kvT85ILCrRTc3JVvAJislz1NW1c4rJcwJSzhCes5KOUm5qUW5iZgpQR3WtUi0AiUQTvg'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/svg+xml');
+      expect(resp.body.toString()).toContain(
+        'aria-roledescription="flowchart-elk"'
+      );
+    });
+
+    test('renders \\n in node labels as line breaks (#701)', async () => {
+      const resp = await request.get(
+        '/svg/pako:eJwljkEKwjAQRa8yZG0v4EKwiuBacZNkEZrRDE6SkkypUnp3o_7d48PjLWrIHtVW3TnPQ3BF4Ho0Cdr2-iKNLXTdDnp9w_IGzukBgi8xJklwAmeY88QemJ4IkqGOTN-TUoM4sdDI2JgpYbV_cf8zHvSJEtVg1UZFLNGRbxnLqtYPnSsyJw'
+      );
+      expect(resp.status).toEqual(200);
+      expect(resp.type).toEqual('image/svg+xml');
+      expect(resp.body.toString()).toContain(
+        '<p>Very long text<br />that I would like to split<br />into multiple<br />lines</p>'
+      );
     });
 
     test('works with tidy-tree layout', async () => {
