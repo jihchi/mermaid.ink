@@ -17,6 +17,12 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # Keep rendering in sync with mermaid-live-editor (https://mermaid.live):
+    # update these by hand to the versions the editor ships.
+    ignore:
+      - dependency-name: 'mermaid'
+      - dependency-name: '@mermaid-js/*'
+      - dependency-name: '@fortawesome/fontawesome-free'
     groups:
       minor-and-patch:
         applies-to: version-updates
