@@ -54,7 +54,7 @@ const deserializeState = (state) => {
 const deserializers = {
   pako: (state) => {
     const data = toUint8Array(state);
-    return inflate(data, { to: 'string' });
+    return inflate(data, { toText: true });
   },
   base64: (state) => {
     return fromBase64(state);
