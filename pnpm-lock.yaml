@@ -42,8 +42,8 @@ importers:
         specifier: ^3.0.3
         version: 3.0.3
       postgres:
-        specifier: ^3.4.7
-        version: 3.4.9
+        specifier: ^4.0.0
+        version: 4.0.0
       postgres-shift:
         specifier: ^1.0.1
         version: 1.0.2
@@ -1876,9 +1876,9 @@ packages:
   postgres-shift@1.0.2:
     resolution: {integrity: sha512-b8NiyzsIye1X4mvdt9VLRBkPd1j3R1MkygHPma8CdGeiJAUCll7wWNOmXbNm1jebTcsbXHD3bZoF3/oPwXaGCA==}
 
-  postgres@3.4.9:
-    resolution: {integrity: sha512-GD3qdB0x1z9xgFI6cdRD6xu2Sp2WCOEoe3mtnyB5Ee0XrrL5Pe+e4CCnJrRMnL1zYtRDZmQQVbvOttLnKDLnaw==}
-    engines: {node: '>=12'}
+  postgres@4.0.0:
+    resolution: {integrity: sha512-kBh8qXtcvvIAc00DftQyOxz7M/3Zxww1tRMXZPLzipNXXl5PIzHml+9zB3Mrge2U8ldc0WF1ZdLp1iYQi7Kh3A==}
+    engines: {node: '>=20'}
 
   prettier-plugin-sql@0.20.0:
     resolution: {integrity: sha512-7GRuduJIbWd10bFfYdFuymZdcVF37ZCukiuVi2a4c5ccqjAxHQtKbK7zSKyqGrFjCOBLQVVz4BStKWV7YvxAFA==}
@@ -3891,7 +3891,7 @@ snapshots:
 
   postgres-shift@1.0.2: {}
 
-  postgres@3.4.9: {}
+  postgres@4.0.0: {}
 
   prettier-plugin-sql@0.20.0(prettier@3.9.10):
     dependencies:

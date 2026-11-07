@@ -44,7 +44,7 @@
     "mermaid": "^12.2.0",
     "p-queue": "^10.0.0",
     "pako": "^3.0.3",
-    "postgres": "^3.4.7",
+    "postgres": "^4.0.0",
     "postgres-shift": "^1.0.1",
     "puppeteer": "^25.0.2"
   },
