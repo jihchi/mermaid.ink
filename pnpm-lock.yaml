@@ -42,8 +42,8 @@ importers:
         specifier: ^3.0.3
         version: 3.0.3
       postgres:
-        specifier: ^3.4.7
-        version: 3.4.9
+        specifier: ^4.1.1
+        version: 4.1.1
       postgres-shift:
         specifier: ^1.0.1
         version: 1.0.2
@@ -899,6 +899,9 @@ packages:
 
   '@types/estree@1.0.10':
     resolution: {integrity: sha512-lTyOMnOcmRBzdCv6/4zUZCrEhV0xrqQiUZBZtVcbmLHBXKLnN8q89v/wKRF/Q0HbwVsqbIG3o5HDoFl9sduM+g==}
+
+  '@types/estree@1.0.11':
+    resolution: {integrity: sha512-YBdNe5JcjYR0sPhJW1QIeRCmI11YhYvaRuGCs9+WCeTTb+Yhb2BE2XMe5/wAqF10FK5g3+q1PDhQABfT7aX0gg==}
 
   '@types/geojson@7946.0.16':
     resolution: {integrity: sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg==}
@@ -1873,9 +1876,9 @@ packages:
   postgres-shift@1.0.2:
     resolution: {integrity: sha512-b8NiyzsIye1X4mvdt9VLRBkPd1j3R1MkygHPma8CdGeiJAUCll7wWNOmXbNm1jebTcsbXHD3bZoF3/oPwXaGCA==}
 
-  postgres@3.4.9:
-    resolution: {integrity: sha512-GD3qdB0x1z9xgFI6cdRD6xu2Sp2WCOEoe3mtnyB5Ee0XrrL5Pe+e4CCnJrRMnL1zYtRDZmQQVbvOttLnKDLnaw==}
-    engines: {node: '>=12'}
+  postgres@4.1.1:
+    resolution: {integrity: sha512-1kJDojqNZC+iTHHXh6eif0J98LUtyLAePe/qkW1GK35eh2JixlsAiIKq3FGI+xqI+SUGTNodzf7TScVeIIyUug==}
+    engines: {node: '>=18'}
 
   prettier-plugin-sql@0.20.0:
     resolution: {integrity: sha512-7GRuduJIbWd10bFfYdFuymZdcVF37ZCukiuVi2a4c5ccqjAxHQtKbK7zSKyqGrFjCOBLQVVz4BStKWV7YvxAFA==}
@@ -2949,6 +2952,8 @@ snapshots:
 
   '@types/estree@1.0.10': {}
 
+  '@types/estree@1.0.11': {}
+
   '@types/geojson@7946.0.16': {}
 
   '@types/node@25.6.2':
@@ -3895,7 +3900,7 @@ snapshots:
 
   postgres-shift@1.0.2: {}
 
-  postgres@3.4.9: {}
+  postgres@4.1.1: {}
 
   prettier-plugin-sql@0.20.0(prettier@3.10.1):
     dependencies:
@@ -4019,7 +4024,7 @@ snapshots:
 
   rollup@4.68.8:
     dependencies:
-      '@types/estree': 1.0.10
+      '@types/estree': 1.0.11
     optionalDependencies:
       '@rollup/rollup-android-arm-eabi': 4.68.8
       '@rollup/rollup-android-arm64': 4.68.8
